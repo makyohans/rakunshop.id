@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rakun Shop ID - Toko Pulsa & Paket Data</title>
+    <style>
+        /* Inline Tailwind-like CSS for faster loading */
+        .container { max-width: 1200px; margin: 0 auto; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+        .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+        .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+        .p-2 { padding: 0.5rem; }
+        .p-3 { padding: 0.75rem; }
+        .p-4 { padding: 1rem; }
+        .p-6 { padding: 1.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 0.75rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-3 { margin-top: 0.75rem; }
+        .mr-1 { margin-right: 0.25rem; }
+        .mr-2 { margin-right: 0.5rem; }
+        .mr-3 { margin-right: 0.75rem; }
+        .ml-2 { margin-left: 0.5rem; }
+        .flex { display: flex; }
+        .grid { display: grid; }
+        .hidden { display: none; }
+        .block { display: block; }
+        .inline-block { display: inline-block; }
+        .w-full { width: 100%; }
+        .w-4 { width: 1rem; }
+        .w-5 { width: 1.25rem; }
+        .w-6 { width: 1.5rem; }
+        .w-8 { width: 2rem; }
+        .w-32 { width: 8rem; }
+        .h-4 { height: 1rem; }
+        .h-5 { height: 1.25rem; }
+        .h-6 { height: 1.5rem; }
+        .h-8 { height: 2rem; }
+        .h-32 { height: 8rem; }
+        .h-64 { height: 16rem; }
+        .min-h-screen { min-height: 100vh; }
+        .text-xs { font-size: 0.75rem; }
+        .text-sm { font-size: 0.875rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-3xl { font-size: 1.875rem; }
+        .text-4xl { font-size: 2.25rem; }
+        .font-medium { font-weight: 500; }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-white { color: white; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-gray-500 { color: #6b7280; }
+        .text-gray-600 { color: #4b5563; }
+        .text-gray-700 { color: #374151; }
+        .text-gray-800 { color: #1f2937; }
+        .text-blue-600 { color: #2563eb; }
+        .text-blue-700 { color: #1d4ed8; }
+        .text-green-500 { color: #10b981; }
+        .text-green-600 { color: #059669; }
+        .text-green-700 { color: #047857; }
+        .text-green-800 { color: #065f46; }
+        .text-red-500 { color: #ef4444; }
+        .text-purple-600 { color: #9333ea; }
+        .text-purple-700 { color: #7c3aed; }
+        .text-yellow-700 { color: #a16207; }
+        .text-yellow-800 { color: #92400e; }
+        .text-orange-500 { color: #f97316; }
+        .bg-white { background-color: white; }
+        .bg-gray-50 { background-color: #f9fafb; }
+        .bg-gray-100 { background-color: #f3f4f6; }
+        .bg-gray-500 { background-color: #6b7280; }
+        .bg-blue-50 { background-color: #eff6ff; }
+        .bg-blue-100 { background-color: #dbeafe; }
+        .bg-blue-500 { background-color: #3b82f6; }
+        .bg-blue-600 { background-color: #2563eb; }
+        .bg-green-50 { background-color: #f0fdf4; }
+        .bg-green-100 { background-color: #dcfce7; }
+        .bg-green-500 { background-color: #22c55e; }
+        .bg-green-600 { background-color: #16a34a; }
+        .bg-red-500 { background-color: #ef4444; }
+        .bg-red-600 { background-color: #dc2626; }
+        .bg-orange-500 { background-color: #f97316; }
+        .bg-orange-600 { background-color: #ea580c; }
+        .bg-purple-50 { background-color: #faf5ff; }
+        .bg-purple-100 { background-color: #e9d5ff; }
+        .bg-purple-200 { background-color: #ddd6fe; }
+        .bg-purple-300 { background-color: #c4b5fd; }
+        .bg-purple-500 { background-color: #8b5cf6; }
+        .bg-purple-600 { background-color: #7c3aed; }
+        .bg-pink-500 { background-color: #ec4899; }
+        .bg-pink-600 { background-color: #db2777; }
+        .bg-yellow-50 { background-color: #fefce8; }
+        .bg-yellow-100 { background-color: #fef3c7; }
+        .bg-yellow-200 { background-color: #fde68a; }
+        .bg-yellow-400 { background-color: #facc15; }
+        .bg-yellow-500 { background-color: #eab308; }
+        .bg-yellow-600 { background-color: #ca8a04; }
+        .rounded { border-radius: 0.25rem; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-full { border-radius: 9999px; }
+        .border { border-width: 1px; }
+        .border-t { border-top-width: 1px; }
+        .border-2 { border-width: 2px; }
+        .border-gray-100 { border-color: #f3f4f6; }
+        .border-gray-200 { border-color: #e5e7eb; }
+        .border-blue-200 { border-color: #bfdbfe; }
+        .border-green-200 { border-color: #bbf7d0; }
+        .border-purple-200 { border-color: #ddd6fe; }
+        .border-purple-300 { border-color: #c4b5fd; }
+        .border-yellow-200 { border-color: #fde68a; }
+        .border-solid { border-style: solid; }
+        .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .hover\:shadow-xl:hover { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        .hover\:bg-gray-50:hover { background-color: #f9fafb; }
+        .hover\:bg-gray-600:hover { background-color: #4b5563; }
+        .hover\:bg-gray-700:hover { background-color: #374151; }
+        .hover\:bg-blue-50:hover { background-color: #eff6ff; }
+        .hover\:bg-blue-600:hover { background-color: #2563eb; }
+        .hover\:bg-blue-700:hover { background-color: #1d4ed8; }
+        .hover\:bg-green-50:hover { background-color: #f0fdf4; }
+        .hover\:bg-green-600:hover { background-color: #16a34a; }
+        .hover\:bg-green-700:hover { background-color: #15803d; }
+        .hover\:bg-red-600:hover { background-color: #dc2626; }
+        .hover\:bg-orange-600:hover { background-color: #ea580c; }
+        .hover\:bg-purple-600:hover { background-color: #7c3aed; }
+        .hover\:bg-pink-600:hover { background-color: #db2777; }
+        .hover\:bg-yellow-600:hover { background-color: #ca8a04; }
+        .hover\:text-blue-600:hover { color: #2563eb; }
+        .hover\:text-gray-700:hover { color: #374151; }
+        .cursor-pointer { cursor: pointer; }
+        .items-center { align-items: center; }
+        .items-start { align-items: flex-start; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .justify-around { justify-content: space-around; }
+        .space-x-2 > * + * { margin-left: 0.5rem; }
+        .space-y-1 > * + * { margin-top: 0.25rem; }
+        .space-y-2 > * + * { margin-top: 0.5rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .flex-1 { flex: 1 1 0%; }
+        .flex-col { flex-direction: column; }
+        .sticky { position: sticky; }
+        .fixed { position: fixed; }
+        .absolute { position: absolute; }
+        .relative { position: relative; }
+        .top-0 { top: 0; }
+        .top-2 { top: 0.5rem; }
+        .right-0 { right: 0; }
+        .right-2 { right: 0.5rem; }
+        .bottom-0 { bottom: 0; }
+        .left-0 { left: 0; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .z-50 { z-index: 50; }
+        .overflow-hidden { overflow: hidden; }
+        .whitespace-nowrap { white-space: nowrap; }
+        .line-through { text-decoration: line-through; }
+        .opacity-90 { opacity: 0.9; }
+        .transform { transform: translateX(var(--tw-translate-x, 0)) translateY(var(--tw-translate-y, 0)) rotate(var(--tw-rotate, 0)) skewX(var(--tw-skew-x, 0)) skewY(var(--tw-skew-y, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1)); }
+        .hover\:scale-105:hover { --tw-scale-x: 1.05; --tw-scale-y: 1.05; }
+        .rotate-12 { --tw-rotate: 12deg; }
+        .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .transition-colors { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .duration-300 { transition-duration: 300ms; }
+        .pb-20 { padding-bottom: 5rem; }
+        .max-w-md { max-width: 28rem; }
+        .max-w-xs { max-width: 20rem; }
+        .mx-4 { margin-left: 1rem; margin-right: 1rem; }
+        .font-mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace; }
+        .min-h-[2\.5rem] { min-height: 2.5rem; }
+        
+        /* Grid responsive */
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        @media (min-width: 768px) {
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+        }
+        
+        /* Background gradients */
+        .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+        .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+        .from-blue-50 { --tw-gradient-from: #eff6ff; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(239, 246, 255, 0)); }
+        .to-indigo-100 { --tw-gradient-to: #e0e7ff; }
+        .from-blue-500 { --tw-gradient-from: #3b82f6; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0)); }
+        .to-purple-600 { --tw-gradient-to: #9333ea; }
+        .from-green-500 { --tw-gradient-from: #22c55e; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(34, 197, 94, 0)); }
+        .to-blue-600 { --tw-gradient-to: #2563eb; }
+        .from-purple-500 { --tw-gradient-from: #8b5cf6; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(139, 92, 246, 0)); }
+        .to-pink-600 { --tw-gradient-to: #db2777; }
+        .from-yellow-400 { --tw-gradient-from: #facc15; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(250, 204, 21, 0)); }
+        .to-orange-500 { --tw-gradient-to: #f97316; }
+        .from-blue-600 { --tw-gradient-from: #2563eb; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(37, 99, 235, 0)); }
+        .to-blue-700 { --tw-gradient-to: #1d4ed8; }
+        .from-green-600 { --tw-gradient-from: #16a34a; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(22, 163, 74, 0)); }
+        .to-green-700 { --tw-gradient-to: #15803d; }
+        .from-purple-50 { --tw-gradient-from: #faf5ff; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(250, 245, 255, 0)); }
+        .to-blue-50 { --tw-gradient-to: #eff6ff; }
+        .hover\:from-blue-600:hover { --tw-gradient-from: #2563eb; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(37, 99, 235, 0)); }
+        .hover\:to-blue-700:hover { --tw-gradient-to: #1d4ed8; }
+        .hover\:from-green-600:hover { --tw-gradient-from: #16a34a; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(22, 163, 74, 0)); }
+        .hover\:to-green-700:hover { --tw-gradient-to: #15803d; }
+        .hover\:shadow-green-200:hover { --tw-shadow-color: #bbf7d0; box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow); }
+    </style>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .slider {
+            animation: slide 8s infinite;
+        }
+        
+        @keyframes slide {
+            0%, 30% { transform: translateX(0); }
+            33%, 63% { transform: translateX(-100%); }
+            66%, 96% { transform: translateX(-200%); }
+            100% { transform: translateX(0); }
+        }
+        
+        .marquee {
+            animation: marquee 12s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Preload optimization */
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .fast-load {
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+        
+        .contact-menu {
+            transform: translateY(-10px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">RAKUN SHOP ID</h1>
+            <div class="relative">
+                <button id="contactBtn" class="bg-green-500 hover:bg-green-600 text-white p-2 rounded-full transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                    </svg>
+                </button>
+                <div id="contactMenu" class="contact-menu absolute right-0 mt-2 bg-white rounded-lg shadow-xl p-4 w-48">
+                    <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-green-50 rounded-lg mb-2">
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.516"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium">WhatsApp</span>
+                    </a>
+                    <a href="https://t.me/massboy1922" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-blue-50 rounded-lg">
+                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium">Telegram</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Image Slider -->
+    <div class="relative overflow-hidden bg-white shadow-md">
+        <div class="flex slider" style="width: 300%;">
+            <div class="w-1/3 h-64 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                <div class="text-center text-white">
+                    <h2 class="text-3xl font-bold mb-2">RAKUN SHOP ID</h2>
+                    <p class="text-lg">Pulsa & Paket Data Termurah</p>
+                </div>
+            </div>
+            <div class="w-1/3 h-64 bg-gradient-to-r from-green-500 to-blue-600 flex items-center justify-center">
+                <div class="text-center text-white">
+                    <h2 class="text-3xl font-bold mb-2">PROMO SPESIAL</h2>
+                    <p class="text-lg">Dapatkan Bonus Poin Setiap Pembelian</p>
+                </div>
+            </div>
+            <div class="w-1/3 h-64 bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
+                <div class="text-center text-white">
+                    <h2 class="text-3xl font-bold mb-2">24/7 SERVICE</h2>
+                    <p class="text-lg">Pelayanan Terbaik Untuk Anda</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Running Text -->
+    <div class="bg-red-500 text-white py-2 overflow-hidden">
+        <div class="marquee whitespace-nowrap">
+            <span class="text-lg font-semibold">🔥 WEBSITE ABSENSI RAKUN SHOP ID - Kelola Absensi Karyawan dengan Mudah dan Efisien! Hubungi Kami Untuk Info Lebih Lanjut 🔥</span>
+        </div>
+    </div>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <div id="breadcrumb" class="flex items-center space-x-2 text-sm text-gray-600">
+                <button onclick="showSection('home')" class="hover:text-blue-600">HOME</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 pb-20">
+        <!-- Home Section -->
+        <div id="homeSection" class="section">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pulsa Card -->
+                <div onclick="showSubSection('pulsa')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">💰</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">PULSA</h3>
+                        <p class="text-gray-600 text-sm">Pulsa semua operator</p>
+                    </div>
+                </div>
+
+                <!-- Paket Data Card -->
+                <div onclick="showSubSection('paket-data')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">📱</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">PAKET DATA</h3>
+                        <p class="text-gray-600 text-sm">Paket internet murah</p>
+                    </div>
+                </div>
+
+                <!-- HiFi Air Card -->
+                <div onclick="showSubSection('hifi-air')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">🚀</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">HIFI AIR</h3>
+                        <p class="text-gray-600 text-sm">Paket unlimited</p>
+                    </div>
+                </div>
+
+                <!-- Coins Card -->
+                <div onclick="showSubSection('coins-seller')" class="bg-white rounded-lg shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all transform hover:scale-105">
+                    <div class="text-center">
+                        <div class="text-4xl mb-4">⭐</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">COINS</h3>
+                        <p class="text-gray-600 text-sm">Coin game online</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pulsa Section -->
+        <div id="pulsaSection" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">💰 PULSA</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <button onclick="showPulsaCategory('masa_aktif')" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-6 rounded-lg font-semibold text-lg transition-all transform hover:scale-105">
+                        <div class="text-center">
+                            <div class="text-2xl mb-2">⏰</div>
+                            <div>PULSA MASA AKTIF</div>
+                            <div class="text-sm opacity-90 mt-1">+Rp 1.000 admin</div>
+                        </div>
+                    </button>
+                    <button onclick="showPulsaCategory('tanpa_masa_aktif')" class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white p-6 rounded-lg font-semibold text-lg transition-all transform hover:scale-105">
+                        <div class="text-center">
+                            <div class="text-2xl mb-2">🚀</div>
+                            <div>PULSA TANPA MASA AKTIF</div>
+                            <div class="text-sm opacity-90 mt-1">Harga lebih murah</div>
+                        </div>
+                    </button>
+                </div>
+                <div id="pulsaContent" class="hidden">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 id="pulsaTitle" class="text-lg font-semibold"></h3>
+                        <button onclick="hidePulsaCategory()" class="text-gray-500 hover:text-gray-700">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="pulsaList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Paket Data Section -->
+        <div id="paketDataSection" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📱 PAKET DATA</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6">
+                    <button onclick="showPaketData('telkomsel')" class="provider-btn bg-red-500 hover:bg-red-600 text-white p-4 rounded-lg font-semibold">TELKOMSEL</button>
+                    <button onclick="showPaketData('tri')" class="provider-btn bg-orange-500 hover:bg-orange-600 text-white p-4 rounded-lg font-semibold">TRI</button>
+                    <button onclick="showPaketData('axis')" class="provider-btn bg-purple-500 hover:bg-purple-600 text-white p-4 rounded-lg font-semibold">AXIS</button>
+                    <button onclick="showPaketData('smartfren')" class="provider-btn bg-pink-500 hover:bg-pink-600 text-white p-4 rounded-lg font-semibold">SMARTFREN</button>
+                    <button onclick="showPaketData('indosat')" class="provider-btn bg-yellow-500 hover:bg-yellow-600 text-white p-4 rounded-lg font-semibold">INDOSAT</button>
+                </div>
+                <div id="paketDataContent" class="hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="paketDataList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HiFi Air Section -->
+        <div id="hifiAirSection" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🚀 PAKET HIFI AIR INDOSAT / TRI</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="hifiAirList"></div>
+            </div>
+        </div>
+
+        <!-- Coins Seller Section -->
+        <div id="coinsSellerSection" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">⭐ COIN SELLER FAYA STAR</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="coinsList"></div>
+            </div>
+        </div>
+
+        <!-- Data Section -->
+        <div id="dataSection" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">📊 DATA PEMBELIAN</h2>
+                <div id="purchaseHistory" class="space-y-4">
+                    <p class="text-gray-500 text-center py-8">Belum ada data pembelian</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coins Section -->
+        <div id="coinsSection" class="section hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">🪙 SISTEM POIN</h2>
+                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-lg p-6 mb-6 text-white">
+                    <h3 class="text-xl font-bold mb-2">Poin Anda: <span id="userPoints">0</span></h3>
+                    <p class="text-sm opacity-90">Setiap pembelian produk = 3 poin</p>
+                </div>
+                
+                <h3 class="text-lg font-semibold mb-4">Tukar Poin (Minimal 10.000 poin)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border rounded-lg p-4 text-center">
+                        <h4 class="font-semibold text-blue-600">Paket Data 5GB</h4>
+                        <p class="text-2xl font-bold text-orange-500">10.000 Poin</p>
+                        <button onclick="redeemPoints('data5gb', 10000)" class="mt-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Tukar</button>
+                    </div>
+                    <div class="border rounded-lg p-4 text-center">
+                        <h4 class="font-semibold text-green-600">Pulsa Rp 10.000</h4>
+                        <p class="text-2xl font-bold text-orange-500">10.000 Poin</p>
+                        <button onclick="redeemPoints('pulsa10k', 10000)" class="mt-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg">Tukar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t z-50">
+        <div class="flex justify-around items-center py-2">
+            <button onclick="showSection('home')" class="bottom-nav-btn flex flex-col items-center py-2 px-4 text-blue-600">
+                <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                </svg>
+                <span class="text-xs font-medium">HOME</span>
+            </button>
+            
+            <button onclick="showSection('data')" class="bottom-nav-btn flex flex-col items-center py-2 px-4 text-gray-500">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span class="text-xs font-medium">DATA</span>
+            </button>
+            
+            <button onclick="showSection('coins')" class="bottom-nav-btn flex flex-col items-center py-2 px-4 text-gray-500">
+                <svg class="w-6 h-6 mb-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                </svg>
+                <span class="text-xs font-medium">COINS</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 class="text-xl font-bold mb-4">Form Pembelian</h3>
+            <form id="purchaseForm" onsubmit="processPurchase(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Nomor HP</label>
+                    <input type="tel" id="phoneNumber" class="w-full border rounded-lg px-3 py-2" placeholder="08xxxxxxxxxx" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Produk</label>
+                    <input type="text" id="selectedProduct" class="w-full border rounded-lg px-3 py-2" readonly>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Metode Pembayaran</label>
+                    <select id="paymentMethod" class="w-full border rounded-lg px-3 py-2" required onchange="showPaymentOptions()">
+                        <option value="">Pilih Metode</option>
+                        <option value="bank">Transfer Bank</option>
+                        <option value="ewallet">E-Wallet</option>
+                        <option value="qris">QRIS</option>
+                    </select>
+                </div>
+                
+                <!-- Bank Options -->
+                <div id="bankOptions" class="mb-4 hidden">
+                    <label class="block text-sm font-medium mb-2">Pilih Bank</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="bankChoice" value="seabank" class="mr-3">
+                            <div>
+                                <div class="font-semibold text-blue-600">BANK SEABANK</div>
+                                <div class="text-sm text-gray-600">901711939465 - WINORO HADI MUKTI</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="bankChoice" value="aladin" class="mr-3">
+                            <div>
+                                <div class="font-semibold text-green-600">BANK ALADIN</div>
+                                <div class="text-sm text-gray-600">50682991909 - WINORO HADI MUKTI</div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="bankChoice" value="jago" class="mr-3">
+                            <div>
+                                <div class="font-semibold text-purple-600">BANK JAGO</div>
+                                <div class="text-sm text-gray-600">102850087054 - WINORO HADI MUKTI</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- E-Wallet Options -->
+                <div id="ewalletOptions" class="mb-4 hidden">
+                    <label class="block text-sm font-medium mb-2">Pilih E-Wallet</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="ewalletChoice" value="dana" class="mr-3">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                                    <span class="text-white font-bold text-xs">D</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-blue-600">DANA</div>
+                                    <div class="text-sm text-gray-600">WINORO HADI MUKTI</div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="flex items-center p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="ewalletChoice" value="gopay" class="mr-3">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                    <span class="text-white font-bold text-xs">G</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-green-600">GOPAY</div>
+                                    <div class="text-sm text-gray-600">WINORO HADI MUKTI</div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- QRIS Options -->
+                <div id="qrisOptions" class="mb-4 hidden">
+                    <label class="block text-sm font-medium mb-2">QRIS Payment</label>
+                    <div class="p-4 border rounded-lg bg-gradient-to-r from-purple-50 to-blue-50">
+                        <div class="text-center">
+                            <img src="https://i.ibb.co/8Lx2nrw4/IMG-20251005-WA0000.jpg" alt="QRIS Code" class="w-32 h-32 mx-auto rounded-lg mb-2" onerror="this.src=''; this.alt='Gambar QRIS gagal dimuat'; this.style.display='none';">
+                            <div class="font-semibold text-purple-600">QRIS PAY</div>
+                            <div class="text-sm text-gray-600 mt-1">Scan QR Code untuk pembayaran</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closePurchaseModal()" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-lg">Batal</button>
+                    <button type="submit" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg">Beli</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Confirmation Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 class="text-xl font-bold mb-4">Konfirmasi Pembayaran</h3>
+            <div id="paymentInfo" class="mb-4 p-4 bg-gray-50 rounded-lg"></div>
+            <form id="confirmationForm" onsubmit="confirmPayment(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2">Pilih Metode Konfirmasi</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="confirmMethod" value="id" class="mr-2">
+                            <span>ID Transaksi</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="confirmMethod" value="image" class="mr-2">
+                            <span>Upload Bukti Pembayaran</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="idInput" class="mb-4 hidden">
+                    <label class="block text-sm font-medium mb-2">ID Transaksi</label>
+                    <input type="text" id="transactionId" class="w-full border rounded-lg px-3 py-2" placeholder="Masukkan ID transaksi">
+                </div>
+                <div id="imageInput" class="mb-4 hidden">
+                    <label class="block text-sm font-medium mb-2">Bukti Pembayaran</label>
+                    <input type="file" id="paymentProof" class="w-full border rounded-lg px-3 py-2" accept="image/*">
+                </div>
+                <div class="flex gap-3">
+                    <button type="button" onclick="closePaymentModal()" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-lg">Batal</button>
+                    <button type="submit" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg">Konfirmasi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentProduct = {};
+        let userPoints = 0;
+        let purchaseHistory = [];
+
+        // Initialize page immediately for faster loading
+        function initializePage() {
+            generateHifiAirProducts();
+            generateCoinsProducts();
+            updatePointsDisplay();
+        }
+        
+        // Run immediately without waiting for DOMContentLoaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            initializePage();
+        }
+
+        // Contact menu toggle
+        document.getElementById('contactBtn').addEventListener('click', function() {
+            const menu = document.getElementById('contactMenu');
+            menu.classList.toggle('show');
+        });
+
+        // Close contact menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const btn = document.getElementById('contactBtn');
+            const menu = document.getElementById('contactMenu');
+            if (!btn.contains(event.target) && !menu.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
+        // Navigation
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            
+            // Show selected section
+            document.getElementById(section + 'Section').classList.remove('hidden');
+            
+            // Update bottom nav buttons
+            document.querySelectorAll('.bottom-nav-btn').forEach(btn => {
+                btn.classList.remove('text-blue-600');
+                btn.classList.add('text-gray-500');
+            });
+            
+            if (event && event.target) {
+                // Find the button that was clicked
+                const clickedBtn = event.target.closest('.bottom-nav-btn');
+                if (clickedBtn) {
+                    clickedBtn.classList.remove('text-gray-500');
+                    clickedBtn.classList.add('text-blue-600');
+                }
+            } else {
+                // If called programmatically, find the correct button
+                const targetBtn = document.querySelector(`[onclick="showSection('${section}')"]`);
+                if (targetBtn && targetBtn.classList.contains('bottom-nav-btn')) {
+                    targetBtn.classList.remove('text-gray-500');
+                    targetBtn.classList.add('text-blue-600');
+                }
+            }
+            
+            // Update breadcrumb
+            updateBreadcrumb([{text: section.toUpperCase(), action: `showSection('${section}')`}]);
+        }
+
+        // Show sub section
+        function showSubSection(subSection) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            
+            // Show specific sub section
+            let sectionId = '';
+            let breadcrumbText = '';
+            
+            switch(subSection) {
+                case 'pulsa':
+                    sectionId = 'pulsaSection';
+                    breadcrumbText = 'PULSA';
+                    break;
+                case 'paket-data':
+                    sectionId = 'paketDataSection';
+                    breadcrumbText = 'PAKET DATA';
+                    break;
+                case 'hifi-air':
+                    sectionId = 'hifiAirSection';
+                    breadcrumbText = 'HIFI AIR';
+                    break;
+                case 'coins-seller':
+                    sectionId = 'coinsSellerSection';
+                    breadcrumbText = 'COINS';
+                    break;
+            }
+            
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Update breadcrumb
+            updateBreadcrumb([
+                {text: 'HOME', action: "showSection('home')"},
+                {text: breadcrumbText, action: `showSubSection('${subSection}')`}
+            ]);
+        }
+
+        // Update breadcrumb
+        function updateBreadcrumb(items) {
+            const breadcrumb = document.getElementById('breadcrumb');
+            breadcrumb.innerHTML = items.map((item, index) => {
+                if (index === items.length - 1) {
+                    return `<span class="text-blue-600 font-semibold">${item.text}</span>`;
+                } else {
+                    return `<button onclick="${item.action}" class="hover:text-blue-600">${item.text}</button>
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>`;
+                }
+            }).join('');
+        }
+
+        // Show pulsa category
+        function showPulsaCategory(category) {
+            const content = document.getElementById('pulsaContent');
+            const title = document.getElementById('pulsaTitle');
+            const list = document.getElementById('pulsaList');
+            
+            content.classList.remove('hidden');
+            list.innerHTML = '';
+            
+            if (category === 'masa_aktif') {
+                title.textContent = 'Pulsa Masa Aktif';
+                title.className = 'text-lg font-semibold text-blue-600';
+                
+                // Pulsa Masa Aktif (5k-1000k, +1000 admin fee)
+                const masaAktifValues = [5000, 10000, 15000, 20000, 25000, 50000, 100000, 200000, 500000, 1000000];
+                masaAktifValues.forEach(value => {
+                    const price = value + 1000;
+                    const btn = createProductButton(`Pulsa ${formatRupiah(value)}`, `Rp ${formatRupiah(price)}`, 'pulsa_masa_aktif', value, price);
+                    list.appendChild(btn);
+                });
+            } else {
+                title.textContent = 'Pulsa Tanpa Masa Aktif';
+                title.className = 'text-lg font-semibold text-green-600';
+                
+                // Pulsa Tanpa Masa Aktif
+                const tanpaMasaAktifValues = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 60000, 70000, 80000, 90000, 100000];
+                tanpaMasaAktifValues.forEach(value => {
+                    let price;
+                    if (value < 50000) {
+                        price = value - 1000;
+                    } else {
+                        price = value - 2000;
+                    }
+                    const btn = createProductButton(`Pulsa ${formatRupiah(value)}`, `Rp ${formatRupiah(price)}`, 'pulsa_tanpa_masa_aktif', value, price);
+                    list.appendChild(btn);
+                });
+            }
+        }
+        
+        // Hide pulsa category
+        function hidePulsaCategory() {
+            document.getElementById('pulsaContent').classList.add('hidden');
+        }
+
+        // Generate HiFi Air products
+        function generateHifiAirProducts() {
+            const hifiAirList = document.getElementById('hifiAirList');
+            const hifiProducts = [
+                { name: '500GB Aktif 30H', price: 250000 },
+                { name: '200GB Aktif 30H', price: 150000 },
+                { name: '125GB Aktif 30H', price: 100000 },
+                { name: '75GB Aktif 30H', price: 75000 },
+                { name: '50GB Aktif 30H', price: 50000 },
+                { name: '25GB Aktif 30H', price: 35000 },
+                { name: '15GB Aktif 30H', price: 25000 },
+                { name: '10GB Aktif 30H', price: 20000 },
+                { name: 'PROMO 150GB Nasional + 150 JAM 01/06 + 10GB Bonus TikTok 30H', price: 300000 },
+                { name: 'UNLIMITED 7 Hari', price: 45000 },
+                { name: 'UNLIMITED 15 Hari', price: 85000 },
+                { name: 'UNLIMITED 30 Hari', price: 150000 }
+            ];
+            
+            hifiProducts.forEach(product => {
+                const btn = createProductButton(product.name, `Rp ${formatRupiah(product.price)}`, 'hifi_air', product.name, product.price);
+                hifiAirList.appendChild(btn);
+            });
+        }
+
+        // Generate coins products
+        function generateCoinsProducts() {
+            const coinsList = document.getElementById('coinsList');
+            const coinsProducts = [
+                { coins: 1000, price: 15000, game: 'Mobile Legends' },
+                { coins: 2000, price: 28000, game: 'Mobile Legends' },
+                { coins: 5000, price: 70000, game: 'Mobile Legends' },
+                { coins: 10000, price: 140000, game: 'Mobile Legends' },
+                { coins: 20000, price: 280000, game: 'Mobile Legends' },
+                { coins: 50000, price: 700000, game: 'Mobile Legends' },
+                { coins: 100, price: 12000, game: 'Free Fire' },
+                { coins: 500, price: 55000, game: 'Free Fire' },
+                { coins: 1000, price: 110000, game: 'Free Fire' },
+                { coins: 2000, price: 220000, game: 'Free Fire' },
+                { coins: 5000, price: 550000, game: 'Free Fire' },
+                { coins: 60, price: 10000, game: 'PUBG Mobile' },
+                { coins: 325, price: 50000, game: 'PUBG Mobile' },
+                { coins: 660, price: 100000, game: 'PUBG Mobile' },
+                { coins: 1800, price: 250000, game: 'PUBG Mobile' },
+                { coins: 3850, price: 500000, game: 'PUBG Mobile' }
+            ];
+            
+            coinsProducts.forEach(product => {
+                const btn = createProductButton(`${product.game} - ${product.coins} Coins`, `Rp ${formatRupiah(product.price)}`, 'coins', product.coins, product.price);
+                coinsList.appendChild(btn);
+            });
+        }
+
+        // Show paket data
+        function showPaketData(provider) {
+            const content = document.getElementById('paketDataContent');
+            const list = document.getElementById('paketDataList');
+            
+            content.classList.remove('hidden');
+            list.innerHTML = '';
+            
+            const packages = {
+                telkomsel: [
+                    { name: '1GB 7H', price: 15000 },
+                    { name: '2GB 7H', price: 25000 },
+                    { name: '5GB 30H', price: 50000 },
+                    { name: '10GB 30H', price: 85000 },
+                    { name: '20GB 30H', price: 150000 },
+                    { name: '3GB 30H', price: 35000 },
+                    { name: '8GB 30H', price: 65000 },
+                    { name: '15GB 30H', price: 120000 }
+                ],
+                tri: [
+                    { name: '1GB 7H', price: 12000 },
+                    { name: '3GB 30H', price: 20000 },
+                    { name: '8GB 30H', price: 35000 },
+                    { name: '16GB 30H', price: 60000 },
+                    { name: '32GB 30H', price: 100000 },
+                    { name: '2GB 7H', price: 15000 },
+                    { name: '5GB 30H', price: 28000 },
+                    { name: '12GB 30H', price: 45000 }
+                ],
+                axis: [
+                    { name: '1GB 7H', price: 10000 },
+                    { name: '2GB 30H', price: 18000 },
+                    { name: '5GB 30H', price: 35000 },
+                    { name: '12GB 30H', price: 55000 },
+                    { name: '24GB 30H', price: 85000 },
+                    { name: '3GB 30H', price: 25000 },
+                    { name: '8GB 30H', price: 42000 },
+                    { name: '16GB 30H', price: 68000 }
+                ],
+                smartfren: [
+                    { name: '1GB 7H', price: 13000 },
+                    { name: '3GB 30H', price: 22000 },
+                    { name: '8GB 30H', price: 40000 },
+                    { name: '20GB 30H', price: 70000 },
+                    { name: '45GB 30H', price: 120000 },
+                    { name: '2GB 7H', price: 18000 },
+                    { name: '5GB 30H', price: 30000 },
+                    { name: '12GB 30H', price: 52000 }
+                ],
+                indosat: [
+                    { name: '1GB 7H', price: 14000 },
+                    { name: '2GB 30H', price: 23000 },
+                    { name: '6GB 30H', price: 42000 },
+                    { name: '14GB 30H', price: 65000 },
+                    { name: '30GB 30H', price: 95000 },
+                    { name: '3GB 30H', price: 28000 },
+                    { name: '10GB 30H', price: 55000 },
+                    { name: '25GB 30H', price: 85000 }
+                ]
+            };
+            
+            packages[provider].forEach(pkg => {
+                const btn = createProductButton(`${provider.toUpperCase()} ${pkg.name}`, `Rp ${formatRupiah(pkg.price)}`, 'paket_data', pkg.name, pkg.price);
+                list.appendChild(btn);
+            });
+        }
+
+        // Create product button
+        function createProductButton(name, price, type, value, priceValue) {
+            const btn = document.createElement('div');
+            btn.className = 'bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-gray-100 overflow-hidden group';
+            
+            // Determine icon and color based on product type
+            let icon = '📱';
+            let gradientClass = 'from-blue-500 to-purple-600';
+            let badgeColor = 'bg-blue-100 text-blue-800';
+            
+            if (type.includes('pulsa')) {
+                icon = '💰';
+                gradientClass = 'from-green-500 to-emerald-600';
+                badgeColor = 'bg-green-100 text-green-800';
+            } else if (type === 'hifi_air') {
+                icon = '🚀';
+                gradientClass = 'from-purple-500 to-pink-600';
+                badgeColor = 'bg-purple-100 text-purple-800';
+            } else if (type === 'coins') {
+                icon = '⭐';
+                gradientClass = 'from-yellow-500 to-orange-600';
+                badgeColor = 'bg-yellow-100 text-yellow-800';
+            }
+            
+            btn.innerHTML = `
+                <div class="relative">
+                    <!-- Header with icon -->
+                    <div class="bg-gradient-to-r ${gradientClass} p-4 text-center">
+                        <div class="text-3xl mb-2">${icon}</div>
+                        <div class="text-white font-bold text-sm opacity-90">PRODUK TERLARIS</div>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="p-4">
+                        <div class="mb-3">
+                            <h3 class="font-bold text-gray-800 text-sm mb-2 line-clamp-2 min-h-[2.5rem]">${name}</h3>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs px-2 py-1 rounded-full ${badgeColor} font-medium">PROMO</span>
+                                <div class="text-right">
+                                    <div class="text-lg font-bold text-gray-800">${price}</div>
+                                    <div class="text-xs text-gray-500 line-through">Rp ${formatRupiah(priceValue + 5000)}</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Features -->
+                        <div class="mb-4 space-y-1">
+                            <div class="flex items-center text-xs text-gray-600">
+                                <svg class="w-3 h-3 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Proses Otomatis
+                            </div>
+                            <div class="flex items-center text-xs text-gray-600">
+                                <svg class="w-3 h-3 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                24/7 Support
+                            </div>
+                            <div class="flex items-center text-xs text-gray-600">
+                                <svg class="w-3 h-3 text-green-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Garansi Uang Kembali
+                            </div>
+                        </div>
+                        
+                        <!-- Buy Button -->
+                        <button onclick="openPurchaseModal('${name}', '${price}', '${type}', '${value}', ${priceValue})" 
+                                class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group-hover:shadow-green-200">
+                            <div class="flex items-center justify-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"></path>
+                                </svg>
+                                BELI SEKARANG
+                            </div>
+                        </button>
+                        
+                        <!-- Rating -->
+                        <div class="flex items-center justify-center mt-2 text-xs text-gray-500">
+                            <div class="flex text-yellow-400 mr-1">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                            <span>(4.9) • 1.2k terjual</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Sale Badge -->
+                    <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full transform rotate-12">
+                        SALE!
+                    </div>
+                </div>
+            `;
+            return btn;
+        }
+
+        // Open purchase modal
+        function openPurchaseModal(name, price, type, value, priceValue) {
+            currentProduct = { name, price, type, value, priceValue };
+            document.getElementById('selectedProduct').value = `${name} - ${price}`;
+            document.getElementById('purchaseModal').classList.remove('hidden');
+            document.getElementById('purchaseModal').classList.add('flex');
+        }
+
+        // Close purchase modal
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').classList.add('hidden');
+            document.getElementById('purchaseModal').classList.remove('flex');
+            document.getElementById('purchaseForm').reset();
+            
+            // Hide all payment options
+            document.getElementById('bankOptions').classList.add('hidden');
+            document.getElementById('ewalletOptions').classList.add('hidden');
+            document.getElementById('qrisOptions').classList.add('hidden');
+        }
+
+        // Show payment options based on selected method
+        function showPaymentOptions() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const bankOptions = document.getElementById('bankOptions');
+            const ewalletOptions = document.getElementById('ewalletOptions');
+            const qrisOptions = document.getElementById('qrisOptions');
+            
+            // Hide all options first
+            bankOptions.classList.add('hidden');
+            ewalletOptions.classList.add('hidden');
+            qrisOptions.classList.add('hidden');
+            
+            // Show relevant options
+            if (paymentMethod === 'bank') {
+                bankOptions.classList.remove('hidden');
+            } else if (paymentMethod === 'ewallet') {
+                ewalletOptions.classList.remove('hidden');
+            } else if (paymentMethod === 'qris') {
+                qrisOptions.classList.remove('hidden');
+            }
+        }
+
+        // Process purchase
+        function processPurchase(event) {
+            event.preventDefault();
+            
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            
+            if (!phoneNumber || !paymentMethod) {
+                alert('Mohon lengkapi semua data!');
+                return;
+            }
+            
+            // Check if specific payment option is selected
+            let selectedPaymentDetail = '';
+            if (paymentMethod === 'bank') {
+                const bankChoice = document.querySelector('input[name="bankChoice"]:checked');
+                if (!bankChoice) {
+                    alert('Pilih bank untuk transfer!');
+                    return;
+                }
+                selectedPaymentDetail = bankChoice.value;
+            } else if (paymentMethod === 'ewallet') {
+                const ewalletChoice = document.querySelector('input[name="ewalletChoice"]:checked');
+                if (!ewalletChoice) {
+                    alert('Pilih e-wallet untuk pembayaran!');
+                    return;
+                }
+                selectedPaymentDetail = ewalletChoice.value;
+            }
+            
+            closePurchaseModal();
+            showPaymentInfo(phoneNumber, paymentMethod, selectedPaymentDetail);
+        }
+
+        // Show payment info
+        function showPaymentInfo(phoneNumber, paymentMethod, selectedPaymentDetail) {
+            const paymentInfo = document.getElementById('paymentInfo');
+            const transactionId = 'TRX' + Date.now();
+            
+            let paymentDetails = '';
+            switch(paymentMethod) {
+                case 'bank':
+                    let bankInfo = '';
+                    switch(selectedPaymentDetail) {
+                        case 'seabank':
+                            bankInfo = `
+                                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                    <div class="font-bold text-blue-700 text-lg">BANK SEABANK</div>
+                                    <div class="text-lg font-mono font-bold text-gray-800">901711939465</div>
+                                    <div class="text-sm text-gray-600">A.n: WINORO HADI MUKTI</div>
+                                </div>
+                            `;
+                            break;
+                        case 'aladin':
+                            bankInfo = `
+                                <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                                    <div class="font-bold text-green-700 text-lg">BANK ALADIN</div>
+                                    <div class="text-lg font-mono font-bold text-gray-800">50682991909</div>
+                                    <div class="text-sm text-gray-600">A.n: WINORO HADI MUKTI</div>
+                                </div>
+                            `;
+                            break;
+                        case 'jago':
+                            bankInfo = `
+                                <div class="p-4 bg-purple-50 rounded-lg border border-purple-200">
+                                    <div class="font-bold text-purple-700 text-lg">BANK JAGO</div>
+                                    <div class="text-lg font-mono font-bold text-gray-800">102850087054</div>
+                                    <div class="text-sm text-gray-600">A.n: WINORO HADI MUKTI</div>
+                                </div>
+                            `;
+                            break;
+                    }
+                    paymentDetails = `
+                        <strong>Transfer Bank:</strong><br>
+                        ${bankInfo}
+                        <div class="mt-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                            <div class="font-bold text-yellow-800">Jumlah Transfer: ${currentProduct.price}</div>
+                            <div class="text-sm text-yellow-700 mt-1">⚠️ Transfer sesuai nominal exact untuk verifikasi otomatis</div>
+                        </div>
+                    `;
+                    break;
+                case 'ewallet':
+                    let ewalletInfo = '';
+                    switch(selectedPaymentDetail) {
+                        case 'dana':
+                            ewalletInfo = `
+                                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200 text-center">
+                                    <div class="text-4xl mb-2">💙</div>
+                                    <div class="font-bold text-blue-700 text-lg">DANA</div>
+                                    <div class="text-sm text-gray-600">Transfer ke: WINORO HADI MUKTI</div>
+                                    <div class="text-xs text-gray-500 mt-2">Scan QR atau cari nama penerima</div>
+                                </div>
+                            `;
+                            break;
+                        case 'gopay':
+                            ewalletInfo = `
+                                <div class="p-4 bg-green-50 rounded-lg border border-green-200 text-center">
+                                    <div class="text-4xl mb-2">💚</div>
+                                    <div class="font-bold text-green-700 text-lg">GOPAY</div>
+                                    <div class="text-sm text-gray-600">Transfer ke: WINORO HADI MUKTI</div>
+                                    <div class="text-xs text-gray-500 mt-2">Scan QR atau cari nama penerima</div>
+                                </div>
+                            `;
+                            break;
+                    }
+                    paymentDetails = `
+                        <strong>E-Wallet Payment:</strong><br>
+                        ${ewalletInfo}
+                        <div class="mt-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                            <div class="font-bold text-yellow-800">Jumlah Transfer: ${currentProduct.price}</div>
+                        </div>
+                    `;
+                    break;
+                case 'qris':
+                    paymentDetails = `
+                        <strong>QRIS Payment:</strong><br>
+                        <div class="mt-3 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200 text-center">
+                            <div class="font-bold text-purple-700 text-lg mb-3">QRIS PAY</div>
+                            <div class="text-sm text-gray-600 mb-3">Scan QR Code untuk pembayaran</div>
+                            <div class="p-4 bg-white rounded-lg border-2 border-solid border-purple-300">
+                                <img src="https://i.ibb.co/8Lx2nrw4/IMG-20251005-WA0000.jpg" alt="QRIS Code" class="w-full max-w-xs mx-auto rounded-lg" onerror="this.src=''; this.alt='Gambar QRIS gagal dimuat'; this.style.display='none';">
+                                <div class="text-sm font-semibold text-purple-600 mt-2">QR CODE QRIS</div>
+                                <div class="text-xs text-gray-500 mt-1">Buka aplikasi e-wallet dan scan</div>
+                            </div>
+                            <div class="mt-3 p-2 bg-yellow-100 rounded text-yellow-800 text-sm font-semibold">
+                                Jumlah: ${currentProduct.price}
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            paymentInfo.innerHTML = `
+                <div class="text-sm">
+                    <div class="mb-4 p-3 bg-gray-100 rounded-lg">
+                        <strong>ID Transaksi:</strong> ${transactionId}<br>
+                        <strong>Produk:</strong> ${currentProduct.name}<br>
+                        <strong>Nomor HP:</strong> ${phoneNumber}<br>
+                        <strong>Harga:</strong> ${currentProduct.price}
+                    </div>
+                    ${paymentDetails}
+                </div>
+            `;
+            
+            currentProduct.transactionId = transactionId;
+            currentProduct.phoneNumber = phoneNumber;
+            currentProduct.paymentMethod = paymentMethod;
+            currentProduct.selectedPaymentDetail = selectedPaymentDetail;
+            
+            document.getElementById('paymentModal').classList.remove('hidden');
+            document.getElementById('paymentModal').classList.add('flex');
+        }
+
+        // Close payment modal
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+            document.getElementById('paymentModal').classList.remove('flex');
+            document.getElementById('confirmationForm').reset();
+        }
+
+        // Handle confirmation method change
+        document.addEventListener('change', function(event) {
+            if (event.target.name === 'confirmMethod') {
+                const idInput = document.getElementById('idInput');
+                const imageInput = document.getElementById('imageInput');
+                
+                if (event.target.value === 'id') {
+                    idInput.classList.remove('hidden');
+                    imageInput.classList.add('hidden');
+                } else {
+                    idInput.classList.add('hidden');
+                    imageInput.classList.remove('hidden');
+                }
+            }
+        });
+
+        // Confirm payment
+        function confirmPayment(event) {
+            event.preventDefault();
+            
+            const confirmMethod = document.querySelector('input[name="confirmMethod"]:checked');
+            if (!confirmMethod) {
+                alert('Pilih metode konfirmasi!');
+                return;
+            }
+            
+            if (confirmMethod.value === 'id') {
+                const transactionId = document.getElementById('transactionId').value;
+                if (!transactionId) {
+                    alert('Masukkan ID transaksi!');
+                    return;
+                }
+            } else {
+                const paymentProof = document.getElementById('paymentProof').files[0];
+                if (!paymentProof) {
+                    alert('Upload bukti pembayaran!');
+                    return;
+                }
+            }
+            
+            // Add to purchase history
+            const purchase = {
+                id: currentProduct.transactionId,
+                date: new Date().toLocaleString('id-ID'),
+                product: currentProduct.name,
+                phone: currentProduct.phoneNumber,
+                price: currentProduct.price,
+                status: 'Menunggu Verifikasi'
+            };
+            
+            purchaseHistory.unshift(purchase);
+            updatePurchaseHistory();
+            
+            // Add points (3 points per purchase)
+            userPoints += 3;
+            updatePointsDisplay();
+            
+            closePaymentModal();
+            alert('Pembayaran berhasil dikonfirmasi! Transaksi sedang diproses.');
+        }
+
+        // Update purchase history
+        function updatePurchaseHistory() {
+            const historyContainer = document.getElementById('purchaseHistory');
+            
+            if (purchaseHistory.length === 0) {
+                historyContainer.innerHTML = '<p class="text-gray-500 text-center py-8">Belum ada data pembelian</p>';
+                return;
+            }
+            
+            historyContainer.innerHTML = purchaseHistory.map(purchase => `
+                <div class="border rounded-lg p-4 bg-gray-50">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h4 class="font-semibold">${purchase.product}</h4>
+                            <p class="text-sm text-gray-600">ID: ${purchase.id}</p>
+                            <p class="text-sm text-gray-600">HP: ${purchase.phone}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-semibold text-blue-600">${purchase.price}</p>
+                            <p class="text-xs text-gray-500">${purchase.date}</p>
+                        </div>
+                    </div>
+                    <span class="inline-block px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">${purchase.status}</span>
+                </div>
+            `).join('');
+        }
+
+        // Update points display
+        function updatePointsDisplay() {
+            document.getElementById('userPoints').textContent = userPoints.toLocaleString('id-ID');
+        }
+
+        // Redeem points
+        function redeemPoints(type, requiredPoints) {
+            if (userPoints < requiredPoints) {
+                alert(`Poin tidak cukup! Anda membutuhkan ${requiredPoints.toLocaleString('id-ID')} poin.`);
+                return;
+            }
+            
+            const productName = type === 'data5gb' ? 'Paket Data 5GB' : 'Pulsa Rp 10.000';
+            
+            if (confirm(`Tukar ${requiredPoints.toLocaleString('id-ID')} poin dengan ${productName}?`)) {
+                userPoints -= requiredPoints;
+                updatePointsDisplay();
+                
+                // Add to purchase history
+                const purchase = {
+                    id: 'POIN' + Date.now(),
+                    date: new Date().toLocaleString('id-ID'),
+                    product: `${productName} (Tukar Poin)`,
+                    phone: '-',
+                    price: 'GRATIS',
+                    status: 'Berhasil'
+                };
+                
+                purchaseHistory.unshift(purchase);
+                updatePurchaseHistory();
+                
+                alert(`Berhasil menukar poin dengan ${productName}!`);
+            }
+        }
+
+        // Format rupiah
+        function formatRupiah(amount) {
+            return amount.toLocaleString('id-ID');
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a0cb738496fd0e',t:'MTc1OTcwNzk0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
