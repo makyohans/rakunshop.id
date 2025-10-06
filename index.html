@@ -267,7 +267,7 @@
                     </select>
                 </div>
                 <div id="qrisSection" class="hidden">
-                    <img src="https://i.ibb.co.com/8Lx2nrw4/IMG-20251005-WA0000.jpg" alt="QRIS Code" class="w-full max-w-xs mx-auto" onerror="this.src=''; this.alt='QRIS gagal dimuat'; this.style.display='none';">
+                    <img src="https://i.ibb.co/8Lx2nrw/IMG-20251005-WA0000.jpg" alt="QRIS Code" class="w-full max-w-xs mx-auto" onerror="this.src=''; this.alt='QRIS gagal dimuat'; this.style.display='none';">
                 </div>
                 <div>
                     <label class="block text-sm font-medium mb-1">Nama Pemilik Bank</label>
@@ -285,7 +285,7 @@
                             <input type="radio" id="useImage" name="proofType" value="image">
                             <label for="useImage" class="ml-2">Upload Gambar</label>
                         </div>
-                        <input type="file" id="proofImage" class="w-full p-2 border rounded-lg" accept="image/*" disabled>
+                        <input type="file" id="proofImage" class="w-full p-2 border rounded-lg" accept="image/*" capture="environment" disabled>
                     </div>
                 </div>
                 <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600">
@@ -581,12 +581,38 @@
             console.log('Telegram message:', message);
         }
 
-        // Show section
-        function showSection(section) {
-            // Hide all sections
+        // Show product page
+        function showProductPage(productType) {
+            // Hide all sections and pages
+            hideAllSections();
+            
+            // Show specific product page
+            if (productType === 'pulsa') {
+                document.getElementById('pulsaPage').classList.remove('hidden');
+            } else if (productType === 'paket-data') {
+                document.getElementById('paketDataPage').classList.remove('hidden');
+            } else if (productType === 'hifi-air') {
+                document.getElementById('hifiAirPage').classList.remove('hidden');
+            } else if (productType === 'coin-faya') {
+                document.getElementById('coinFayaPage').classList.remove('hidden');
+            }
+        }
+
+        // Hide all sections and pages
+        function hideAllSections() {
             document.getElementById('homeSection').classList.add('hidden');
             document.getElementById('dataSection').classList.add('hidden');
             document.getElementById('coinsSection').classList.add('hidden');
+            document.getElementById('pulsaPage').classList.add('hidden');
+            document.getElementById('paketDataPage').classList.add('hidden');
+            document.getElementById('hifiAirPage').classList.add('hidden');
+            document.getElementById('coinFayaPage').classList.add('hidden');
+        }
+
+        // Show section
+        function showSection(section) {
+            // Hide all sections and pages
+            hideAllSections();
             
             // Reset button colors
             document.getElementById('homeBtn').className = 'flex flex-col items-center p-2 text-gray-500';
@@ -736,5 +762,5 @@ Terima kasih telah berbelanja di Hadi Ponsel!
             updatePointsDisplay();
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a14189b37087a7',t:'MTc1OTcxMjc4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a14d7996936034',t:'MTc1OTcxMzI3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
