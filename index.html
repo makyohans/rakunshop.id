@@ -363,19 +363,19 @@
                 <div id="qrisSection" class="hidden">
                     <div class="text-center p-4 bg-gray-50 rounded-lg">
                         <div class="text-lg font-bold mb-2">📱 QRIS Payment</div>
-                        <div class="w-48 h-48 bg-white border-2 border-gray-300 rounded-lg mx-auto flex items-center justify-center mb-2">
-                            <div class="text-center">
-                                <div class="text-4xl mb-2">📱</div>
-                                <div class="text-sm text-gray-600">Scan QRIS Code</div>
-                                <div class="text-xs text-gray-500 mt-1">a.n WINORO HADI MUKTI</div>
-                            </div>
+                        <div class="w-48 h-48 bg-white border-2 border-gray-300 rounded-lg mx-auto flex items-center justify-center mb-2 overflow-hidden">
+                            <img src="https://i.ibb.co/H6GJMzN/IMG-20251005-WA0000-2.jpg" 
+                                 alt="QRIS Code" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                         </div>
+                        <div class="text-xs text-gray-500 mt-1">a.n RAKUNSHOP ID</div>
                         <p class="text-sm text-gray-600">Scan kode QR di atas untuk pembayaran</p>
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium mb-1">Nama Pemilik Bank</label>
-                    <input type="text" value="WINORO HADI MUKTI" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+                    <input type="text" value="RAKUNSHOP ID" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
                 </div>
                 <div>
                     <label class="block text-sm font-medium mb-1">Bukti Pembayaran</label>
@@ -842,7 +842,7 @@
             `).join('');
         }
 
-        // Download purchase data as image
+        // Download purchase data as image with QRIS
         function downloadPurchaseData(purchaseId) {
             const purchase = purchaseHistory.find(p => p.id === purchaseId);
             if (!purchase) return;
@@ -851,9 +851,9 @@
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             
-            // Set canvas size
+            // Set canvas size (increased height for QRIS)
             canvas.width = 400;
-            canvas.height = 500;
+            canvas.height = 700;
             
             // Background
             ctx.fillStyle = '#ffffff';
@@ -911,11 +911,90 @@
                 y += lineHeight + 5;
             });
             
+            // Add separator line
+            y += 20;
+            ctx.strokeStyle = '#E5E7EB';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(20, y);
+            ctx.lineTo(380, y);
+            ctx.stroke();
+            
+            // QRIS Section
+            y += 30;
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🔲 QRIS DETAIL PRODUK', canvas.width / 2, y);
+            
+            // QRIS Box
+            y += 20;
+            const qrisSize = 120;
+            const qrisX = (canvas.width - qrisSize) / 2;
+            
+            // QRIS background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(qrisX - 10, y - 10, qrisSize + 20, qrisSize + 20);
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(qrisX - 10, y - 10, qrisSize + 20, qrisSize + 20);
+            
+            // Generate simple QR pattern with product ID
+            ctx.fillStyle = '#000000';
+            const cellSize = 4;
+            const qrData = purchase.id; // Use product ID as QR data
+            
+            // Create a simple pattern based on product ID
+            for (let i = 0; i < qrisSize / cellSize; i++) {
+                for (let j = 0; j < qrisSize / cellSize; j++) {
+                    // Create pattern based on product ID hash
+                    const hash = (qrData.charCodeAt((i + j) % qrData.length) + i * j) % 4;
+                    if (hash > 1) {
+                        ctx.fillRect(qrisX + i * cellSize, y + j * cellSize, cellSize, cellSize);
+                    }
+                }
+            }
+            
+            // Add corner squares (typical QR code markers)
+            const cornerSize = 20;
+            // Top-left corner
+            ctx.fillRect(qrisX, y, cornerSize, cornerSize);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(qrisX + 4, y + 4, cornerSize - 8, cornerSize - 8);
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(qrisX + 8, y + 8, cornerSize - 16, cornerSize - 16);
+            
+            // Top-right corner
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(qrisX + qrisSize - cornerSize, y, cornerSize, cornerSize);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(qrisX + qrisSize - cornerSize + 4, y + 4, cornerSize - 8, cornerSize - 8);
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(qrisX + qrisSize - cornerSize + 8, y + 8, cornerSize - 16, cornerSize - 16);
+            
+            // Bottom-left corner
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(qrisX, y + qrisSize - cornerSize, cornerSize, cornerSize);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(qrisX + 4, y + qrisSize - cornerSize + 4, cornerSize - 8, cornerSize - 8);
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(qrisX + 8, y + qrisSize - cornerSize + 8, cornerSize - 16, cornerSize - 16);
+            
+            // QRIS Info
+            y += qrisSize + 30;
+            ctx.fillStyle = '#374151';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(`ID Produk: ${purchase.id}`, canvas.width / 2, y);
+            ctx.fillText('Scan untuk detail produk', canvas.width / 2, y + 15);
+            ctx.fillText('a.n RAKUNSHOP ID', canvas.width / 2, y + 30);
+            
             // Footer
+            y += 60;
             ctx.fillStyle = '#6B7280';
             ctx.font = '12px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('Terima kasih telah berbelanja di Hadi Ponsel!', canvas.width / 2, y + 40);
+            ctx.fillText('Terima kasih telah berbelanja di Hadi Ponsel!', canvas.width / 2, y);
             
             // Download image
             canvas.toBlob(function(blob) {
@@ -928,7 +1007,7 @@
             });
         }
 
-        // Send purchase to Telegram with image
+        // Send purchase to Telegram as text
         async function sendPurchaseToTelegram(purchaseId) {
             const purchase = purchaseHistory.find(p => p.id === purchaseId);
             if (!purchase) return;
@@ -936,99 +1015,57 @@
             const botToken = '8397986161:AAEPRy85hQJh8bJOZTXdGba1dYNubh0RiIs';
             const chatId = '-1002413031067';
             
-            // Create canvas for image generation
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
+            // Determine proof type
+            let proofText = '';
+            if (purchase.proof.includes('Gambar') || purchase.proof.includes('IMG')) {
+                proofText = 'Bukti Pembayaran: IMG (Gambar terupload)';
+            } else {
+                proofText = `ID Pembayaran: ${purchase.proof}`;
+            }
             
-            // Set canvas size
-            canvas.width = 400;
-            canvas.height = 500;
-            
-            // Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Header background
-            ctx.fillStyle = '#3B82F6';
-            ctx.fillRect(0, 0, canvas.width, 80);
-            
-            // Header text
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 20px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('📱 HADI PONSEL', canvas.width / 2, 30);
-            ctx.font = '14px Arial';
-            ctx.fillText('Data Pembelian', canvas.width / 2, 55);
-            
-            // Content
-            ctx.fillStyle = '#000000';
-            ctx.font = '14px Arial';
-            ctx.textAlign = 'left';
-            
-            let y = 120;
-            const lineHeight = 25;
-            
-            const data = [
-                `ID Produk: ${purchase.id}`,
-                `Nomor HP: ${purchase.phone}`,
-                `Produk: ${purchase.product}`,
-                `Harga: Rp ${purchase.price.toLocaleString()}`,
-                `Pembayaran: ${purchase.paymentMethod}`,
-                `Bukti: ${purchase.proof}`,
-                `Tanggal: ${purchase.date}`
-            ];
-            
-            data.forEach(line => {
-                // Wrap long text
-                const words = line.split(' ');
-                let currentLine = '';
-                
-                words.forEach(word => {
-                    const testLine = currentLine + word + ' ';
-                    const metrics = ctx.measureText(testLine);
-                    
-                    if (metrics.width > 360 && currentLine !== '') {
-                        ctx.fillText(currentLine, 20, y);
-                        currentLine = word + ' ';
-                        y += lineHeight;
-                    } else {
-                        currentLine = testLine;
-                    }
+            const message = `🛒 DATA PEMBELIAN LENGKAP - HADI PONSEL
+
+═══════════════════════════════════
+📱 ID PRODUK: ${purchase.id}
+📞 NOMOR HP: ${purchase.phone}
+🛍️ PRODUK: ${purchase.product}
+💰 HARGA: Rp ${purchase.price.toLocaleString()}
+💳 METODE PEMBAYARAN: ${purchase.paymentMethod}
+📄 ${proofText}
+📅 TANGGAL PEMBELIAN: ${purchase.date}
+🏪 TOKO: HADI PONSEL
+═══════════════════════════════════
+
+✅ Status: Menunggu Konfirmasi
+⏰ Estimasi Proses: 1-5 Menit
+
+Terima kasih telah berbelanja di Hadi Ponsel!
+Untuk informasi lebih lanjut hubungi admin.
+
+#HadiPonsel #DataPembelian #${purchase.id}`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
                 });
-                
-                ctx.fillText(currentLine, 20, y);
-                y += lineHeight + 5;
-            });
-            
-            // Footer
-            ctx.fillStyle = '#6B7280';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Terima kasih telah berbelanja di Hadi Ponsel!', canvas.width / 2, y + 40);
-            
-            // Convert canvas to blob and send to Telegram
-            canvas.toBlob(async function(blob) {
-                const formData = new FormData();
-                formData.append('chat_id', chatId);
-                formData.append('photo', blob, `HadiPonsel_${purchaseId}.png`);
-                formData.append('caption', `🛒 BUKTI PEMBELIAN - HADI PONSEL\n\n📱 ID: ${purchase.id}\n📞 HP: ${purchase.phone}\n🛍️ Produk: ${purchase.product}\n💰 Harga: Rp ${purchase.price.toLocaleString()}\n\n#HadiPonsel #BuktiPembelian`);
-                
-                try {
-                    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
-                        method: 'POST',
-                        body: formData
-                    });
-                    
-                    if (response.ok) {
-                        alert('Bukti pembelian berhasil dikirim ke Telegram!');
-                    } else {
-                        alert('Gagal mengirim ke Telegram. Silakan coba lagi.');
-                    }
-                } catch (error) {
-                    console.error('Error sending to Telegram:', error);
-                    alert('Terjadi kesalahan saat mengirim ke Telegram.');
+
+                if (response.ok) {
+                    alert('Data pembelian lengkap berhasil dikirim ke Telegram!');
+                } else {
+                    alert('Gagal mengirim ke Telegram. Silakan coba lagi.');
                 }
-            });
+            } catch (error) {
+                console.error('Error sending to Telegram:', error);
+                alert('Terjadi kesalahan saat mengirim ke Telegram.');
+            }
         }
 
         // Update points display
@@ -1088,5 +1125,5 @@
             updatePointsDisplay();
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a17155e224445e',t:'MTc1OTcxNDc0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a1841d61d1ff8b',t:'MTc1OTcxNTUxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
