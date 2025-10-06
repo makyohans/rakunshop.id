@@ -822,9 +822,9 @@
         // Send to Telegram (improved implementation)
         async function sendToTelegram(purchase) {
             const botToken = '8397986161:AAF9zfvsS1XX3PwuGChpJ6TZ5cJf2CrugX8';
-            const chatId = '-1002413031067'; // Group ID
+            const chatId = '1087968824'; // Group ID
             
-            const message = `🛒 PEMBELIAN BARU - HADI PONSEL
+            const message = `🛒 PESANAN - HADI PONSEL
 
 ═══════════════════════════════════
 📱 ID PRODUK: ${purchase.id}
@@ -961,30 +961,83 @@
             const historyDiv = document.getElementById('purchaseHistory');
             
             if (purchaseHistory.length === 0) {
-                historyDiv.innerHTML = '<p class="text-gray-500 text-center">Belum ada data pembelian</p>';
+                historyDiv.innerHTML = '<p class="text-gray-500 text-center py-8">Belum ada data pembelian</p>';
                 return;
             }
             
-            historyDiv.innerHTML = purchaseHistory.map(purchase => `
-                <div class="bg-gray-50 p-4 rounded-lg border">
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="font-bold text-blue-600">${purchase.id}</div>
-                        <div class="text-sm text-gray-500">${purchase.date}</div>
-                    </div>
-                    <div class="space-y-1 text-sm">
-                        <div><strong>Nomor HP:</strong> ${purchase.phone}</div>
-                        <div><strong>Produk:</strong> ${purchase.product}</div>
-                        <div><strong>Harga:</strong> Rp ${purchase.price.toLocaleString()}</div>
-                        <div><strong>Pembayaran:</strong> ${purchase.paymentMethod}</div>
-                        <div><strong>Bukti:</strong> ${purchase.proof}</div>
-                    </div>
-                    <div class="mt-3">
-                        <button onclick="downloadPurchaseData('${purchase.id}')" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
-                            📥 Download Data
-                        </button>
+            // Sort by date (newest first)
+            const sortedHistory = [...purchaseHistory].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            historyDiv.innerHTML = `
+                <div class="mb-4 p-3 bg-blue-50 rounded-lg">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-blue-600">${purchaseHistory.length}</div>
+                        <div class="text-sm text-gray-600">Total Transaksi</div>
                     </div>
                 </div>
-            `).join('');
+                ${sortedHistory.map((purchase, index) => `
+                    <div class="bg-white border-2 border-gray-200 p-4 rounded-xl shadow-lg mb-4 hover:shadow-xl transition-all duration-300">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">#${index + 1}</span>
+                                <div class="font-bold text-lg text-blue-600">${purchase.id}</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500">${purchase.date}</div>
+                                <div class="text-xs px-2 py-1 rounded-full ${purchase.type === 'redemption' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}">
+                                    ${purchase.type === 'redemption' ? '🎁 Penukaran' : '🛒 Pembelian'}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm mb-4">
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-blue-500">📱</span>
+                                    <span class="font-medium">Nomor HP:</span>
+                                    <span class="text-gray-700">${purchase.phone}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-green-500">🛍️</span>
+                                    <span class="font-medium">Produk:</span>
+                                    <span class="text-gray-700">${purchase.product}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-yellow-500">💰</span>
+                                    <span class="font-medium">Harga:</span>
+                                    <span class="font-bold text-green-600">Rp ${purchase.price.toLocaleString()}</span>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-purple-500">💳</span>
+                                    <span class="font-medium">Pembayaran:</span>
+                                    <span class="text-gray-700">${purchase.paymentMethod}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-orange-500">📄</span>
+                                    <span class="font-medium">Bukti:</span>
+                                    <span class="text-gray-700">${purchase.proof}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-red-500">📊</span>
+                                    <span class="font-medium">Status:</span>
+                                    <span class="text-green-600 font-medium">✅ Berhasil</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-2 pt-3 border-t border-gray-200">
+                            <button onclick="downloadPurchaseData('${purchase.id}')" class="flex-1 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center gap-2">
+                                📥 Download Data
+                            </button>
+                            <button onclick="sharePurchaseData('${purchase.id}')" class="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition-colors duration-300 flex items-center justify-center gap-2">
+                                📤 Share
+                            </button>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
         }
 
         // Download purchase data as image with QRIS
@@ -1195,6 +1248,48 @@
             localStorage.setItem('hadiPonselHistory', JSON.stringify(purchaseHistory));
         }
 
+        // Share purchase data
+        function sharePurchaseData(purchaseId) {
+            const purchase = purchaseHistory.find(p => p.id === purchaseId);
+            if (!purchase) return;
+            
+            const shareText = `🛒 HADI PONSEL - Data Pembelian
+
+📱 ID: ${purchase.id}
+📞 HP: ${purchase.phone}
+🛍️ Produk: ${purchase.product}
+💰 Harga: Rp ${purchase.price.toLocaleString()}
+💳 Pembayaran: ${purchase.paymentMethod}
+📅 Tanggal: ${purchase.date}
+
+✅ Status: Berhasil
+🏪 Toko: HADI PONSEL - Terpercaya Sejak 2020`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Data Pembelian Hadi Ponsel',
+                    text: shareText
+                });
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('Data berhasil disalin ke clipboard!');
+                }).catch(() => {
+                    // Show modal with text to copy manually
+                    const modal = document.createElement('div');
+                    modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4';
+                    modal.innerHTML = `
+                        <div class="bg-white rounded-lg max-w-md w-full p-4">
+                            <h3 class="font-bold mb-2">Salin Data Pembelian</h3>
+                            <textarea class="w-full h-40 p-2 border rounded text-sm" readonly>${shareText}</textarea>
+                            <button onclick="this.parentElement.parentElement.remove()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">Tutup</button>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                });
+            }
+        }
+
         // Load user data
         function loadUserData() {
             const savedPoints = localStorage.getItem('hadiPonselPoints');
@@ -1205,11 +1300,20 @@
             }
             
             if (savedHistory) {
-                purchaseHistory = JSON.parse(savedHistory);
+                try {
+                    purchaseHistory = JSON.parse(savedHistory);
+                    // Ensure purchaseHistory is an array
+                    if (!Array.isArray(purchaseHistory)) {
+                        purchaseHistory = [];
+                    }
+                } catch (error) {
+                    console.error('Error parsing purchase history:', error);
+                    purchaseHistory = [];
+                }
             }
             
             updatePointsDisplay();
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a1b2e7a66a411c',t:'MTc1OTcxNzQyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a1c36cd742ff8b',t:'MTc1OTcxODEwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
