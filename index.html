@@ -66,7 +66,7 @@
                 💬
             </button>
             <div id="contactMenu" class="contact-menu absolute right-0 top-16 bg-white shadow-xl rounded-lg p-4 w-48">
-                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-green-50 rounded mb-2">
+                <a href="https://wa.me/6289646775883" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-green-50 rounded mb-2">
                     <span class="text-green-500">📱</span> WhatsApp
                 </a>
                 <a href="https://t.me/massboy1922" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-blue-50 rounded">
@@ -111,61 +111,155 @@
     <main class="p-4 pb-20">
         <!-- Home Section -->
         <div id="homeSection" class="space-y-6">
-            <!-- Pulsa Section -->
+            <!-- Menu Kategori -->
             <div class="bg-white rounded-lg shadow-lg p-4">
                 <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    📞 PULSA & PULSA TANPA MASA AKTIF
+                    🛍️ KATEGORI PRODUK
                 </h3>
                 <div class="grid grid-cols-2 gap-4">
+                    <button onclick="showProductPage('pulsa')" class="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 rounded-lg hover:from-green-600 hover:to-green-700 flex flex-col items-center">
+                        <span class="text-2xl mb-2">📞</span>
+                        <span class="font-bold">PULSA</span>
+                        <span class="text-sm">Masa Aktif & Tanpa Masa Aktif</span>
+                    </button>
+                    <button onclick="showProductPage('paket-data')" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-lg hover:from-blue-600 hover:to-blue-700 flex flex-col items-center">
+                        <span class="text-2xl mb-2">📶</span>
+                        <span class="font-bold">PAKET DATA</span>
+                        <span class="text-sm">Semua Provider</span>
+                    </button>
+                    <button onclick="showProductPage('hifi-air')" class="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white p-4 rounded-lg hover:from-cyan-600 hover:to-cyan-700 flex flex-col items-center">
+                        <span class="text-2xl mb-2">🌐</span>
+                        <span class="font-bold">HIFI AIR</span>
+                        <span class="text-sm">Indosat/Tri</span>
+                    </button>
+                    <button onclick="showProductPage('coin-faya')" class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white p-4 rounded-lg hover:from-yellow-600 hover:to-orange-600 flex flex-col items-center">
+                        <span class="text-2xl mb-2">⭐</span>
+                        <span class="font-bold">COIN FAYA</span>
+                        <span class="text-sm">Seller Star</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    ℹ️ INFORMASI TOKO
+                </h3>
+                <div class="space-y-3 text-sm text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <span class="text-green-500">✅</span>
+                        <span>Proses cepat dalam hitungan detik</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-blue-500">💰</span>
+                        <span>Harga terjangkau dan kompetitif</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-purple-500">🔒</span>
+                        <span>Transaksi aman dan terpercaya</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-orange-500">⭐</span>
+                        <span>Dapatkan poin setiap pembelian</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cara Pembelian -->
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    📋 CARA PEMBELIAN
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex gap-3">
+                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">1</div>
+                        <span class="text-sm text-gray-700">Pilih kategori produk yang diinginkan</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">2</div>
+                        <span class="text-sm text-gray-700">Klik tombol "Beli" pada produk pilihan</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">3</div>
+                        <span class="text-sm text-gray-700">Isi form pembelian dengan lengkap</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">4</div>
+                        <span class="text-sm text-gray-700">Lakukan pembayaran dan kirim bukti</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">5</div>
+                        <span class="text-sm text-gray-700">Produk akan diproses otomatis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pulsa Page -->
+        <div id="pulsaPage" class="hidden space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                        📞 PULSA & PULSA TANPA MASA AKTIF
+                    </h3>
+                    <button onclick="showSection('home')" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">← Kembali</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <h4 class="font-semibold text-green-600 mb-2">Pulsa Masa Aktif</h4>
-                        <div class="space-y-2" id="pulsaMasaAktif"></div>
+                        <h4 class="font-semibold text-green-600 mb-3">Pulsa Masa Aktif</h4>
+                        <div class="space-y-2" id="pulsaMasaAktifPage"></div>
                     </div>
                     <div>
-                        <h4 class="font-semibold text-blue-600 mb-2">Pulsa Tanpa Masa Aktif</h4>
-                        <div class="space-y-2" id="pulsaTanpaMasaAktif"></div>
+                        <h4 class="font-semibold text-blue-600 mb-3">Pulsa Tanpa Masa Aktif</h4>
+                        <div class="space-y-2" id="pulsaTanpaMasaAktifPage"></div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Paket Data -->
+        <!-- Paket Data Page -->
+        <div id="paketDataPage" class="hidden space-y-6">
             <div class="bg-white rounded-lg shadow-lg p-4">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    📶 PAKET DATA
-                </h3>
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
-                    <button onclick="showPaketData('telkomsel')" class="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600">Telkomsel</button>
-                    <button onclick="showPaketData('tri')" class="bg-orange-500 text-white p-3 rounded-lg hover:bg-orange-600">Tri</button>
-                    <button onclick="showPaketData('axis')" class="bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600">Axis</button>
-                    <button onclick="showPaketData('smartfren')" class="bg-pink-500 text-white p-3 rounded-lg hover:bg-pink-600">Smartfren</button>
-                    <button onclick="showPaketData('indosat')" class="bg-yellow-500 text-white p-3 rounded-lg hover:bg-yellow-600">Indosat</button>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                        📶 PAKET DATA
+                    </h3>
+                    <button onclick="showSection('home')" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">← Kembali</button>
                 </div>
-                <div id="paketDataContent" class="mt-4 hidden">
-                    <div class="product-grid" id="paketDataList"></div>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-4">
+                    <button onclick="showPaketDataPage('telkomsel')" class="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600">Telkomsel</button>
+                    <button onclick="showPaketDataPage('tri')" class="bg-orange-500 text-white p-3 rounded-lg hover:bg-orange-600">Tri</button>
+                    <button onclick="showPaketDataPage('axis')" class="bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600">Axis</button>
+                    <button onclick="showPaketDataPage('smartfren')" class="bg-pink-500 text-white p-3 rounded-lg hover:bg-pink-600">Smartfren</button>
+                    <button onclick="showPaketDataPage('indosat')" class="bg-yellow-500 text-white p-3 rounded-lg hover:bg-yellow-600">Indosat</button>
                 </div>
+                <div id="paketDataPageContent" class="product-grid"></div>
             </div>
+        </div>
 
-            <!-- Paket HiFi Air -->
+        <!-- HiFi Air Page -->
+        <div id="hifiAirPage" class="hidden space-y-6">
             <div class="bg-white rounded-lg shadow-lg p-4">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    🌐 PAKET HIFI AIR INDOSAT/TRI
-                </h3>
-                <div class="product-grid" id="hifiAirList"></div>
-            </div>
-
-            <!-- Coin Seller Faya Star -->
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    ⭐ COIN SELLER FAYA STAR
-                </h3>
-                <div class="product-grid">
-                    <div class="bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg text-white text-center">
-                        <div class="text-2xl mb-2">🌟</div>
-                        <div class="font-bold">1000 Coins</div>
-                        <div class="text-sm">Rp 50.000</div>
-                        <button onclick="buyProduct('coin', '1000 Coins', 50000)" class="bg-white text-orange-500 px-4 py-2 rounded mt-2 hover:bg-gray-100">Beli</button>
-                    </div>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                        🌐 PAKET HIFI AIR INDOSAT/TRI
+                    </h3>
+                    <button onclick="showSection('home')" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">← Kembali</button>
                 </div>
+                <div class="product-grid" id="hifiAirPageList"></div>
+            </div>
+        </div>
+
+        <!-- Coin Faya Page -->
+        <div id="coinFayaPage" class="hidden space-y-6">
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                        ⭐ COIN SELLER FAYA STAR
+                    </h3>
+                    <button onclick="showSection('home')" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">← Kembali</button>
+                </div>
+                <div class="product-grid" id="coinFayaPageList"></div>
             </div>
         </div>
 
@@ -267,7 +361,17 @@
                     </select>
                 </div>
                 <div id="qrisSection" class="hidden">
-                    <img src="https://i.ibb.co/8Lx2nrw/IMG-20251005-WA0000.jpg" alt="QRIS Code" class="w-full max-w-xs mx-auto" onerror="this.src=''; this.alt='QRIS gagal dimuat'; this.style.display='none';">
+                    <div class="text-center p-4 bg-gray-50 rounded-lg">
+                        <div class="text-lg font-bold mb-2">📱 QRIS Payment</div>
+                        <div class="w-48 h-48 bg-white border-2 border-gray-300 rounded-lg mx-auto flex items-center justify-center mb-2">
+                            <div class="text-center">
+                                <div class="text-4xl mb-2">📱</div>
+                                <div class="text-sm text-gray-600">Scan QRIS Code</div>
+                                <div class="text-xs text-gray-500 mt-1">a.n WINORO HADI MUKTI</div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">Scan kode QR di atas untuk pembayaran</p>
+                    </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium mb-1">Nama Pemilik Bank</label>
@@ -305,8 +409,9 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            generatePulsaProducts();
-            generateHifiAirProducts();
+            generatePulsaPageProducts();
+            generateHifiAirPageProducts();
+            generateCoinFayaPageProducts();
             loadUserData();
             
             // Contact menu toggle
@@ -359,24 +464,28 @@
             });
         });
 
-        // Generate pulsa products
-        function generatePulsaProducts() {
-            const pulsaMasaAktif = document.getElementById('pulsaMasaAktif');
-            const pulsaTanpaMasaAktif = document.getElementById('pulsaTanpaMasaAktif');
+
+
+        // Generate Pulsa Page products
+        function generatePulsaPageProducts() {
+            const pulsaMasaAktifPage = document.getElementById('pulsaMasaAktifPage');
+            const pulsaTanpaMasaAktifPage = document.getElementById('pulsaTanpaMasaAktifPage');
             
-            // Pulsa Masa Aktif (5.000 - 1.000.000 dengan admin 1.000)
+            // Pulsa Masa Aktif
             const denomsMasaAktif = [5000, 10000, 15000, 20000, 25000, 50000, 100000, 200000, 500000, 1000000];
             denomsMasaAktif.forEach(denom => {
                 const price = denom + 1000;
                 const div = document.createElement('div');
-                div.className = 'bg-green-50 p-2 rounded border';
+                div.className = 'bg-green-50 p-3 rounded-lg border flex justify-between items-center';
                 div.innerHTML = `
-                    <div class="text-sm font-medium">Rp ${denom.toLocaleString()}</div>
-                    <div class="text-xs text-gray-600">Rp ${price.toLocaleString()}</div>
+                    <div>
+                        <div class="font-medium text-green-800">Rp ${denom.toLocaleString()}</div>
+                        <div class="text-sm text-gray-600">Harga: Rp ${price.toLocaleString()}</div>
+                    </div>
                     <button onclick="buyProduct('pulsa-masa-aktif', 'Pulsa ${denom.toLocaleString()}', ${price})" 
-                            class="bg-green-500 text-white px-2 py-1 rounded text-xs mt-1 hover:bg-green-600">Beli</button>
+                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Beli</button>
                 `;
-                pulsaMasaAktif.appendChild(div);
+                pulsaMasaAktifPage.appendChild(div);
             });
 
             // Pulsa Tanpa Masa Aktif
@@ -390,79 +499,121 @@
                 }
                 
                 const div = document.createElement('div');
-                div.className = 'bg-blue-50 p-2 rounded border';
+                div.className = 'bg-blue-50 p-3 rounded-lg border flex justify-between items-center';
                 div.innerHTML = `
-                    <div class="text-sm font-medium">Rp ${denom.toLocaleString()}</div>
-                    <div class="text-xs text-gray-600">Rp ${price.toLocaleString()}</div>
+                    <div>
+                        <div class="font-medium text-blue-800">Rp ${denom.toLocaleString()}</div>
+                        <div class="text-sm text-gray-600">Harga: Rp ${price.toLocaleString()}</div>
+                    </div>
                     <button onclick="buyProduct('pulsa-tanpa-masa-aktif', 'Pulsa ${denom.toLocaleString()}', ${price})" 
-                            class="bg-blue-500 text-white px-2 py-1 rounded text-xs mt-1 hover:bg-blue-600">Beli</button>
+                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Beli</button>
                 `;
-                pulsaTanpaMasaAktif.appendChild(div);
+                pulsaTanpaMasaAktifPage.appendChild(div);
             });
         }
 
-        // Generate HiFi Air products
-        function generateHifiAirProducts() {
-            const hifiAirList = document.getElementById('hifiAirList');
+        // Generate HiFi Air Page products
+        function generateHifiAirPageProducts() {
+            const hifiAirPageList = document.getElementById('hifiAirPageList');
             const products = [
                 { name: '500GB Aktif 30H', price: 250000 },
                 { name: '200GB Aktif 30H', price: 150000 },
                 { name: '125GB Aktif 30H', price: 100000 },
                 { name: '75GB Aktif 30H', price: 75000 },
-                { name: 'Promo 150GB Nasional + 150 JAM 01/06 + 10GB Bonus TikTok 30H', price: 300000 }
+                { name: 'Promo 150GB Nasional + 150 JAM 01/06 + 10GB Bonus TikTok 30H', price: 300000 },
+                { name: '50GB Aktif 30H', price: 50000 },
+                { name: '25GB Aktif 30H', price: 35000 },
+                { name: '15GB Aktif 30H', price: 25000 },
+                { name: '10GB Aktif 30H', price: 20000 },
+                { name: '5GB Aktif 30H', price: 15000 }
             ];
 
             products.forEach(product => {
                 const div = document.createElement('div');
-                div.className = 'bg-gradient-to-r from-cyan-400 to-blue-500 p-4 rounded-lg text-white';
+                div.className = 'bg-gradient-to-r from-cyan-400 to-blue-500 p-4 rounded-lg text-white text-center';
                 div.innerHTML = `
                     <div class="text-sm font-medium mb-2">${product.name}</div>
-                    <div class="text-lg font-bold mb-2">Rp ${product.price.toLocaleString()}</div>
+                    <div class="text-lg font-bold mb-3">Rp ${product.price.toLocaleString()}</div>
                     <button onclick="buyProduct('hifi-air', '${product.name}', ${product.price})" 
-                            class="bg-white text-blue-500 px-4 py-2 rounded hover:bg-gray-100">Beli</button>
+                            class="bg-white text-blue-500 px-4 py-2 rounded hover:bg-gray-100 w-full">Beli</button>
                 `;
-                hifiAirList.appendChild(div);
+                hifiAirPageList.appendChild(div);
             });
         }
 
-        // Show paket data
-        function showPaketData(provider) {
-            const content = document.getElementById('paketDataContent');
-            const list = document.getElementById('paketDataList');
-            
-            content.classList.remove('hidden');
-            list.innerHTML = '';
+        // Generate Coin Faya Page products
+        function generateCoinFayaPageProducts() {
+            const coinFayaPageList = document.getElementById('coinFayaPageList');
+            const products = [
+                { name: '1000 Coins', price: 50000 },
+                { name: '2000 Coins', price: 95000 },
+                { name: '5000 Coins', price: 225000 },
+                { name: '10000 Coins', price: 450000 },
+                { name: '20000 Coins', price: 850000 },
+                { name: '50000 Coins', price: 2000000 }
+            ];
+
+            products.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg text-white text-center';
+                div.innerHTML = `
+                    <div class="text-2xl mb-2">🌟</div>
+                    <div class="font-bold mb-1">${product.name}</div>
+                    <div class="text-lg font-bold mb-3">Rp ${product.price.toLocaleString()}</div>
+                    <button onclick="buyProduct('coin', '${product.name}', ${product.price})" 
+                            class="bg-white text-orange-500 px-4 py-2 rounded hover:bg-gray-100 w-full">Beli</button>
+                `;
+                coinFayaPageList.appendChild(div);
+            });
+        }
+
+
+
+        // Show paket data page
+        function showPaketDataPage(provider) {
+            const content = document.getElementById('paketDataPageContent');
+            content.innerHTML = '';
 
             const packages = {
                 telkomsel: [
                     { name: '1GB 7 Hari', price: 15000 },
                     { name: '3GB 30 Hari', price: 35000 },
                     { name: '8GB 30 Hari', price: 65000 },
-                    { name: '17GB 30 Hari', price: 95000 }
+                    { name: '17GB 30 Hari', price: 95000 },
+                    { name: '25GB 30 Hari', price: 125000 },
+                    { name: '40GB 30 Hari', price: 175000 }
                 ],
                 tri: [
                     { name: '2GB 7 Hari', price: 12000 },
                     { name: '6GB 30 Hari', price: 28000 },
                     { name: '12GB 30 Hari', price: 48000 },
-                    { name: '24GB 30 Hari', price: 78000 }
+                    { name: '24GB 30 Hari', price: 78000 },
+                    { name: '36GB 30 Hari', price: 108000 },
+                    { name: '50GB 30 Hari', price: 138000 }
                 ],
                 axis: [
                     { name: '1GB 7 Hari', price: 10000 },
                     { name: '3GB 30 Hari', price: 25000 },
                     { name: '8GB 30 Hari', price: 45000 },
-                    { name: '16GB 30 Hari', price: 75000 }
+                    { name: '16GB 30 Hari', price: 75000 },
+                    { name: '30GB 30 Hari', price: 105000 },
+                    { name: '45GB 30 Hari', price: 135000 }
                 ],
                 smartfren: [
                     { name: '2GB 7 Hari', price: 13000 },
                     { name: '5GB 30 Hari', price: 30000 },
                     { name: '10GB 30 Hari', price: 55000 },
-                    { name: '20GB 30 Hari', price: 85000 }
+                    { name: '20GB 30 Hari', price: 85000 },
+                    { name: '35GB 30 Hari', price: 115000 },
+                    { name: '60GB 30 Hari', price: 155000 }
                 ],
                 indosat: [
                     { name: '1GB 7 Hari', price: 14000 },
                     { name: '4GB 30 Hari', price: 32000 },
                     { name: '9GB 30 Hari', price: 58000 },
-                    { name: '18GB 30 Hari', price: 88000 }
+                    { name: '18GB 30 Hari', price: 88000 },
+                    { name: '30GB 30 Hari', price: 118000 },
+                    { name: '50GB 30 Hari', price: 158000 }
                 ]
             };
 
@@ -476,14 +627,15 @@
 
             packages[provider].forEach(pkg => {
                 const div = document.createElement('div');
-                div.className = `bg-gradient-to-r ${providerColors[provider]} p-4 rounded-lg text-white`;
+                div.className = `bg-gradient-to-r ${providerColors[provider]} p-4 rounded-lg text-white text-center`;
                 div.innerHTML = `
-                    <div class="text-sm font-medium mb-2">${pkg.name}</div>
-                    <div class="text-lg font-bold mb-2">Rp ${pkg.price.toLocaleString()}</div>
+                    <div class="text-sm font-medium mb-2">${provider.toUpperCase()}</div>
+                    <div class="text-lg font-bold mb-1">${pkg.name}</div>
+                    <div class="text-xl font-bold mb-3">Rp ${pkg.price.toLocaleString()}</div>
                     <button onclick="buyProduct('paket-data', '${provider.toUpperCase()} ${pkg.name}', ${pkg.price})" 
-                            class="bg-white text-gray-800 px-4 py-2 rounded hover:bg-gray-100">Beli</button>
+                            class="bg-white text-gray-800 px-4 py-2 rounded hover:bg-gray-100 w-full">Beli</button>
                 `;
-                list.appendChild(div);
+                content.appendChild(div);
             });
         }
 
@@ -762,5 +914,5 @@ Terima kasih telah berbelanja di Hadi Ponsel!
             updatePointsDisplay();
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a14d7996936034',t:'MTc1OTcxMzI3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a15ff40203f8d6',t:'MTc1OTcxNDAzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
