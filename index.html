@@ -66,7 +66,7 @@
                 💬
             </button>
             <div id="contactMenu" class="contact-menu absolute right-0 top-16 bg-white shadow-xl rounded-lg p-4 w-48">
-                <a href="https://wa.me/6289646775883" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-green-50 rounded mb-2">
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-green-50 rounded mb-2">
                     <span class="text-green-500">📱</span> WhatsApp
                 </a>
                 <a href="https://t.me/massboy1922" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-blue-50 rounded">
@@ -715,10 +715,12 @@
             updatePurchaseHistory();
         }
 
-        // Send to Telegram (simulated)
-        function sendToTelegram(purchase) {
-            const message = `
-🛒 PEMBELIAN BARU - HADI PONSEL
+        // Send to Telegram (real implementation)
+        async function sendToTelegram(purchase) {
+            const botToken = '8397986161:AAEPRy85hQJh8bJOZTXdGba1dYNubh0RiIs';
+            const chatId = '-1002413031067'; // Group ID
+            
+            const message = `🛒 PEMBELIAN BARU - HADI PONSEL
 
 📱 ID Produk: ${purchase.id}
 📞 Nomor HP: ${purchase.phone}
@@ -727,10 +729,30 @@
 💳 Pembayaran: ${purchase.paymentMethod}
 📄 Bukti: ${purchase.proof}
 📅 Tanggal: ${purchase.date}
-            `;
-            
-            // In real implementation, you would send this to Telegram Bot API
-            console.log('Telegram message:', message);
+
+#HadiPonsel #Pembelian`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                if (response.ok) {
+                    console.log('Message sent to Telegram successfully');
+                } else {
+                    console.error('Failed to send message to Telegram');
+                }
+            } catch (error) {
+                console.error('Error sending to Telegram:', error);
+            }
         }
 
         // Show product page
@@ -820,41 +842,193 @@
             `).join('');
         }
 
-        // Download purchase data
+        // Download purchase data as image
         function downloadPurchaseData(purchaseId) {
             const purchase = purchaseHistory.find(p => p.id === purchaseId);
             if (!purchase) return;
             
-            const data = `
-HADI PONSEL - DATA PEMBELIAN
-
-ID Produk: ${purchase.id}
-Nomor HP: ${purchase.phone}
-Produk: ${purchase.product}
-Harga: Rp ${purchase.price.toLocaleString()}
-Metode Pembayaran: ${purchase.paymentMethod}
-Bukti Pembayaran: ${purchase.proof}
-Tanggal: ${purchase.date}
-
-Terima kasih telah berbelanja di Hadi Ponsel!
-            `;
+            // Create canvas for image generation
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
             
-            const blob = new Blob([data], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `HadiPonsel_${purchaseId}.txt`;
-            a.click();
-            URL.revokeObjectURL(url);
+            // Set canvas size
+            canvas.width = 400;
+            canvas.height = 500;
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Header background
+            ctx.fillStyle = '#3B82F6';
+            ctx.fillRect(0, 0, canvas.width, 80);
+            
+            // Header text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('📱 HADI PONSEL', canvas.width / 2, 30);
+            ctx.font = '14px Arial';
+            ctx.fillText('Data Pembelian', canvas.width / 2, 55);
+            
+            // Content
+            ctx.fillStyle = '#000000';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'left';
+            
+            let y = 120;
+            const lineHeight = 25;
+            
+            const data = [
+                `ID Produk: ${purchase.id}`,
+                `Nomor HP: ${purchase.phone}`,
+                `Produk: ${purchase.product}`,
+                `Harga: Rp ${purchase.price.toLocaleString()}`,
+                `Pembayaran: ${purchase.paymentMethod}`,
+                `Bukti: ${purchase.proof}`,
+                `Tanggal: ${purchase.date}`
+            ];
+            
+            data.forEach(line => {
+                // Wrap long text
+                const words = line.split(' ');
+                let currentLine = '';
+                
+                words.forEach(word => {
+                    const testLine = currentLine + word + ' ';
+                    const metrics = ctx.measureText(testLine);
+                    
+                    if (metrics.width > 360 && currentLine !== '') {
+                        ctx.fillText(currentLine, 20, y);
+                        currentLine = word + ' ';
+                        y += lineHeight;
+                    } else {
+                        currentLine = testLine;
+                    }
+                });
+                
+                ctx.fillText(currentLine, 20, y);
+                y += lineHeight + 5;
+            });
+            
+            // Footer
+            ctx.fillStyle = '#6B7280';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Terima kasih telah berbelanja di Hadi Ponsel!', canvas.width / 2, y + 40);
+            
+            // Download image
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `HadiPonsel_${purchaseId}.png`;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
         }
 
-        // Send purchase to Telegram
-        function sendPurchaseToTelegram(purchaseId) {
+        // Send purchase to Telegram with image
+        async function sendPurchaseToTelegram(purchaseId) {
             const purchase = purchaseHistory.find(p => p.id === purchaseId);
             if (!purchase) return;
             
-            sendToTelegram(purchase);
-            alert('Data pembelian telah dikirim ke Telegram!');
+            const botToken = '8397986161:AAEPRy85hQJh8bJOZTXdGba1dYNubh0RiIs';
+            const chatId = '-1002413031067';
+            
+            // Create canvas for image generation
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = 400;
+            canvas.height = 500;
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Header background
+            ctx.fillStyle = '#3B82F6';
+            ctx.fillRect(0, 0, canvas.width, 80);
+            
+            // Header text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('📱 HADI PONSEL', canvas.width / 2, 30);
+            ctx.font = '14px Arial';
+            ctx.fillText('Data Pembelian', canvas.width / 2, 55);
+            
+            // Content
+            ctx.fillStyle = '#000000';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'left';
+            
+            let y = 120;
+            const lineHeight = 25;
+            
+            const data = [
+                `ID Produk: ${purchase.id}`,
+                `Nomor HP: ${purchase.phone}`,
+                `Produk: ${purchase.product}`,
+                `Harga: Rp ${purchase.price.toLocaleString()}`,
+                `Pembayaran: ${purchase.paymentMethod}`,
+                `Bukti: ${purchase.proof}`,
+                `Tanggal: ${purchase.date}`
+            ];
+            
+            data.forEach(line => {
+                // Wrap long text
+                const words = line.split(' ');
+                let currentLine = '';
+                
+                words.forEach(word => {
+                    const testLine = currentLine + word + ' ';
+                    const metrics = ctx.measureText(testLine);
+                    
+                    if (metrics.width > 360 && currentLine !== '') {
+                        ctx.fillText(currentLine, 20, y);
+                        currentLine = word + ' ';
+                        y += lineHeight;
+                    } else {
+                        currentLine = testLine;
+                    }
+                });
+                
+                ctx.fillText(currentLine, 20, y);
+                y += lineHeight + 5;
+            });
+            
+            // Footer
+            ctx.fillStyle = '#6B7280';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Terima kasih telah berbelanja di Hadi Ponsel!', canvas.width / 2, y + 40);
+            
+            // Convert canvas to blob and send to Telegram
+            canvas.toBlob(async function(blob) {
+                const formData = new FormData();
+                formData.append('chat_id', chatId);
+                formData.append('photo', blob, `HadiPonsel_${purchaseId}.png`);
+                formData.append('caption', `🛒 BUKTI PEMBELIAN - HADI PONSEL\n\n📱 ID: ${purchase.id}\n📞 HP: ${purchase.phone}\n🛍️ Produk: ${purchase.product}\n💰 Harga: Rp ${purchase.price.toLocaleString()}\n\n#HadiPonsel #BuktiPembelian`);
+                
+                try {
+                    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (response.ok) {
+                        alert('Bukti pembelian berhasil dikirim ke Telegram!');
+                    } else {
+                        alert('Gagal mengirim ke Telegram. Silakan coba lagi.');
+                    }
+                } catch (error) {
+                    console.error('Error sending to Telegram:', error);
+                    alert('Terjadi kesalahan saat mengirim ke Telegram.');
+                }
+            });
         }
 
         // Update points display
@@ -914,5 +1088,5 @@ Terima kasih telah berbelanja di Hadi Ponsel!
             updatePointsDisplay();
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a15ff40203f8d6',t:'MTc1OTcxNDAzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a17155e224445e',t:'MTc1OTcxNDc0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
