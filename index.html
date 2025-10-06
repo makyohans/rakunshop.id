@@ -98,85 +98,148 @@
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md mt-4 mx-4 rounded-lg">
-        <div class="flex justify-center">
-            <button onclick="showSection('home')" class="nav-btn px-6 py-3 font-semibold text-blue-600 border-b-2 border-blue-600">🏠 HOME</button>
-            <button onclick="showSection('data')" class="nav-btn px-6 py-3 font-semibold text-gray-600 hover:text-blue-600">📊 DATA</button>
-            <button onclick="showSection('coins')" class="nav-btn px-6 py-3 font-semibold text-gray-600 hover:text-blue-600">🪙 COINS</button>
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t z-40">
+        <div class="flex justify-around">
+            <button onclick="showSection('home')" class="nav-btn flex flex-col items-center py-2 px-4 text-blue-600">
+                <span class="text-xl mb-1">🏠</span>
+                <span class="text-xs font-medium">HOME</span>
+            </button>
+            <button onclick="showSection('data')" class="nav-btn flex flex-col items-center py-2 px-4 text-gray-600 hover:text-blue-600">
+                <span class="text-xl mb-1">📊</span>
+                <span class="text-xs font-medium">DATA</span>
+            </button>
+            <button onclick="showSection('coins')" class="nav-btn flex flex-col items-center py-2 px-4 text-gray-600 hover:text-blue-600">
+                <span class="text-xl mb-1">🪙</span>
+                <span class="text-xs font-medium">COINS</span>
+            </button>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-6">
+    <main class="container mx-auto px-4 py-6 pb-20">
         <!-- Home Section -->
         <div id="homeSection" class="section">
-            <!-- Pulsa Section -->
-            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h2 class="text-2xl font-bold text-center mb-6 text-blue-600">💰 PULSA</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Pulsa Masa Aktif -->
-                    <div class="border rounded-lg p-4">
-                        <h3 class="text-lg font-semibold mb-4 text-green-600">📅 Pulsa Masa Aktif</h3>
-                        <div class="space-y-2 max-h-64 overflow-y-auto" id="pulsaMasaAktif"></div>
+            <!-- Product Categories -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                <button onclick="showCategory('pulsa')" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">💰</div>
+                        <h3 class="text-xl font-bold">PULSA</h3>
+                        <p class="text-sm opacity-90">Pulsa Reguler & Tanpa Masa Aktif</p>
                     </div>
-                    <!-- Pulsa Tanpa Masa Aktif -->
-                    <div class="border rounded-lg p-4">
-                        <h3 class="text-lg font-semibold mb-4 text-orange-600">⏰ Pulsa Tanpa Masa Aktif</h3>
-                        <div class="space-y-2 max-h-64 overflow-y-auto" id="pulsaTanpaMasaAktif"></div>
+                </button>
+                <button onclick="showCategory('paket-data')" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">📶</div>
+                        <h3 class="text-xl font-bold">PAKET DATA</h3>
+                        <p class="text-sm opacity-90">Semua Provider</p>
                     </div>
+                </button>
+                <button onclick="showCategory('hifi-air')" class="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🌊</div>
+                        <h3 class="text-xl font-bold">HIFI AIR</h3>
+                        <p class="text-sm opacity-90">Paket Internet Unlimited</p>
+                    </div>
+                </button>
+                <button onclick="showCategory('coin-seller')" class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">⭐</div>
+                        <h3 class="text-xl font-bold">COIN SELLER</h3>
+                        <p class="text-sm opacity-90">Faya Star Diamonds</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Pulsa Category -->
+        <div id="pulsaCategory" class="section hidden">
+            <div class="flex items-center mb-4">
+                <button onclick="showSection('home')" class="text-blue-600 hover:text-blue-800 mr-3">
+                    <span class="text-xl">←</span>
+                </button>
+                <h2 class="text-2xl font-bold text-blue-600">💰 PULSA</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Pulsa Masa Aktif -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-green-600">📅 Pulsa Masa Aktif</h3>
+                    <div class="space-y-2 max-h-96 overflow-y-auto" id="pulsaMasaAktif"></div>
+                </div>
+                <!-- Pulsa Tanpa Masa Aktif -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-orange-600">⏰ Pulsa Tanpa Masa Aktif</h3>
+                    <div class="space-y-2 max-h-96 overflow-y-auto" id="pulsaTanpaMasaAktif"></div>
                 </div>
             </div>
+        </div>
 
-            <!-- Paket Data -->
-            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h2 class="text-2xl font-bold text-center mb-6 text-purple-600">📶 PAKET DATA</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="border rounded-lg p-4">
-                        <h3 class="font-semibold mb-3 text-red-600">📱 TELKOMSEL</h3>
-                        <div class="space-y-2" id="telkomselData"></div>
-                    </div>
-                    <div class="border rounded-lg p-4">
-                        <h3 class="font-semibold mb-3 text-orange-600">🔺 TRI</h3>
-                        <div class="space-y-2" id="triData"></div>
-                    </div>
-                    <div class="border rounded-lg p-4">
-                        <h3 class="font-semibold mb-3 text-blue-600">📡 AXIS</h3>
-                        <div class="space-y-2" id="axisData"></div>
-                    </div>
-                    <div class="border rounded-lg p-4">
-                        <h3 class="font-semibold mb-3 text-green-600">📶 SMARTFREN</h3>
-                        <div class="space-y-2" id="smartfrenData"></div>
-                    </div>
-                    <div class="border rounded-lg p-4">
-                        <h3 class="font-semibold mb-3 text-yellow-600">🌟 INDOSAT</h3>
-                        <div class="space-y-2" id="indosatData"></div>
-                    </div>
-                    <div class="border rounded-lg p-4">
-                        <h3 class="font-semibold mb-3 text-purple-600">💜 BY.U</h3>
-                        <div class="space-y-2" id="byuData"></div>
-                    </div>
+        <!-- Paket Data Category -->
+        <div id="paket-dataCategory" class="section hidden">
+            <div class="flex items-center mb-4">
+                <button onclick="showSection('home')" class="text-blue-600 hover:text-blue-800 mr-3">
+                    <span class="text-xl">←</span>
+                </button>
+                <h2 class="text-2xl font-bold text-purple-600">📶 PAKET DATA</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <h3 class="font-semibold mb-3 text-red-600">📱 TELKOMSEL</h3>
+                    <div class="space-y-2" id="telkomselData"></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <h3 class="font-semibold mb-3 text-orange-600">🔺 TRI</h3>
+                    <div class="space-y-2" id="triData"></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <h3 class="font-semibold mb-3 text-blue-600">📡 AXIS</h3>
+                    <div class="space-y-2" id="axisData"></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <h3 class="font-semibold mb-3 text-green-600">📶 SMARTFREN</h3>
+                    <div class="space-y-2" id="smartfrenData"></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <h3 class="font-semibold mb-3 text-yellow-600">🌟 INDOSAT</h3>
+                    <div class="space-y-2" id="indosatData"></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <h3 class="font-semibold mb-3 text-purple-600">💜 BY.U</h3>
+                    <div class="space-y-2" id="byuData"></div>
                 </div>
             </div>
+        </div>
 
-            <!-- HiFi Air -->
-            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h2 class="text-2xl font-bold text-center mb-6 text-indigo-600">🌊 PAKET HIFI AIR</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="border rounded-lg p-4">
-                        <h3 class="text-lg font-semibold mb-4 text-yellow-600">📡 INDOSAT HIFI AIR</h3>
-                        <div class="space-y-2" id="indosatHifi"></div>
-                    </div>
-                    <div class="border rounded-lg p-4">
-                        <h3 class="text-lg font-semibold mb-4 text-orange-600">🔺 TRI HIFI AIR</h3>
-                        <div class="space-y-2" id="triHifi"></div>
-                    </div>
+        <!-- HiFi Air Category -->
+        <div id="hifi-airCategory" class="section hidden">
+            <div class="flex items-center mb-4">
+                <button onclick="showSection('home')" class="text-blue-600 hover:text-blue-800 mr-3">
+                    <span class="text-xl">←</span>
+                </button>
+                <h2 class="text-2xl font-bold text-indigo-600">🌊 PAKET HIFI AIR</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-yellow-600">📡 INDOSAT HIFI AIR</h3>
+                    <div class="space-y-2" id="indosatHifi"></div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold mb-4 text-orange-600">🔺 TRI HIFI AIR</h3>
+                    <div class="space-y-2" id="triHifi"></div>
                 </div>
             </div>
+        </div>
 
-            <!-- Coin Seller -->
-            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-                <h2 class="text-2xl font-bold text-center mb-6 text-yellow-600">⭐ COIN SELLER FAYA STAR</h2>
+        <!-- Coin Seller Category -->
+        <div id="coin-sellerCategory" class="section hidden">
+            <div class="flex items-center mb-4">
+                <button onclick="showSection('home')" class="text-blue-600 hover:text-blue-800 mr-3">
+                    <span class="text-xl">←</span>
+                </button>
+                <h2 class="text-2xl font-bold text-yellow-600">⭐ COIN SELLER FAYA STAR</h2>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6">
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="coinSeller"></div>
             </div>
         </div>
@@ -448,19 +511,30 @@
         function showSection(section) {
             document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600');
+                btn.classList.remove('text-blue-600');
                 btn.classList.add('text-gray-600');
             });
 
             document.getElementById(section + 'Section').classList.remove('hidden');
-            event.target.classList.remove('text-gray-600');
-            event.target.classList.add('text-blue-600', 'border-b-2', 'border-blue-600');
+            
+            // Update active nav button
+            const activeBtn = document.querySelector(`[onclick="showSection('${section}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-gray-600');
+                activeBtn.classList.add('text-blue-600');
+            }
 
             if (section === 'coins') {
                 document.getElementById('userPoints').textContent = userPoints;
             } else if (section === 'data') {
                 updatePurchaseHistory();
             }
+        }
+
+        // Category Navigation
+        function showCategory(category) {
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(category + 'Category').classList.remove('hidden');
         }
 
         // Contact dropdown
@@ -613,5 +687,5 @@
             initializeProducts();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a0f953e59ffd89',t:'MTc1OTcwOTgyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a1020d97ffcb36',t:'MTc1OTcxMDE4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
