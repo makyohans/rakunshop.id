@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadi Ponsel - Toko Online Pulsa & Paket Data</title>
+    <title>Hadi Ponsel - Toko Pulsa & Paket Data</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -29,260 +29,181 @@
             100% { transform: translateX(-100%); }
         }
         
-        .contact-dropdown {
-            transform: translateY(-10px);
+        .contact-menu {
+            transform: translateY(-100%);
             opacity: 0;
-            visibility: hidden;
             transition: all 0.3s ease;
         }
         
-        .contact-dropdown.show {
+        .contact-menu.show {
             transform: translateY(0);
             opacity: 1;
-            visibility: visible;
         }
+        
+        .nav-fixed {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .hidden { display: none; }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+<body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen">
     <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-blue-600">📱 HADI PONSEL</h1>
-            <div class="relative">
-                <button id="contactBtn" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full flex items-center gap-2 transition-colors">
-                    <span>💬</span>
-                    <span>Hubungi Kami</span>
-                </button>
-                <div id="contactDropdown" class="contact-dropdown absolute right-0 mt-2 bg-white rounded-lg shadow-xl p-4 min-w-48">
-                    <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-green-50 rounded-lg mb-2">
-                        <span class="text-green-500 text-xl">📱</span>
-                        <span class="font-medium">WhatsApp</span>
-                    </a>
-                    <a href="https://t.me/massboy1922" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 p-2 hover:bg-blue-50 rounded-lg">
-                        <span class="text-blue-500 text-xl">✈️</span>
-                        <span class="font-medium">Telegram</span>
-                    </a>
-                </div>
+    <header class="bg-white shadow-lg p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-blue-600">📱 HADI PONSEL</h1>
+        <div class="relative">
+            <button id="contactBtn" class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full transition-colors">
+                💬
+            </button>
+            <div id="contactMenu" class="contact-menu absolute right-0 top-16 bg-white shadow-xl rounded-lg p-4 w-48">
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-green-50 rounded mb-2">
+                    <span class="text-green-500">📱</span> WhatsApp
+                </a>
+                <a href="https://t.me/massboy1922" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-blue-50 rounded">
+                    <span class="text-blue-500">✈️</span> Telegram
+                </a>
             </div>
         </div>
     </header>
 
     <!-- Image Slider -->
-    <div class="relative overflow-hidden bg-white mx-4 mt-4 rounded-lg shadow-lg">
-        <div class="flex slider" style="width: 300%;">
-            <div class="w-1/3 h-64 bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold mb-2">HADI PONSEL</h2>
-                    <p class="text-lg">Pulsa & Paket Data Termurah</p>
+    <div class="relative overflow-hidden h-48 bg-gradient-to-r from-blue-500 to-purple-600 mx-4 mt-4 rounded-lg">
+        <div class="slider flex w-[300%] h-full">
+            <div class="w-1/3 flex items-center justify-center text-white text-center">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2">🏪 HADI PONSEL</h2>
+                    <p>Terpercaya Sejak 2020</p>
                 </div>
             </div>
-            <div class="w-1/3 h-64 bg-gradient-to-r from-green-500 to-teal-600 flex items-center justify-center text-white">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold mb-2">PROMO SPESIAL</h2>
-                    <p class="text-lg">Dapatkan Bonus Poin Setiap Pembelian</p>
+            <div class="w-1/3 flex items-center justify-center text-white text-center">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2">⚡ PROSES CEPAT</h2>
+                    <p>Transaksi Dalam Hitungan Detik</p>
                 </div>
             </div>
-            <div class="w-1/3 h-64 bg-gradient-to-r from-orange-500 to-red-600 flex items-center justify-center text-white">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold mb-2">24/7 SERVICE</h2>
-                    <p class="text-lg">Pelayanan Terbaik Untuk Anda</p>
+            <div class="w-1/3 flex items-center justify-center text-white text-center">
+                <div>
+                    <h2 class="text-2xl font-bold mb-2">💰 HARGA TERBAIK</h2>
+                    <p>Dapatkan Harga Termurah</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Running Text -->
-    <div class="bg-yellow-400 text-black py-2 mt-4 overflow-hidden">
+    <div class="bg-yellow-400 text-black py-2 mx-4 mt-4 rounded overflow-hidden">
         <div class="marquee whitespace-nowrap">
-            <span class="text-lg font-semibold">🎉 SELAMAT DATANG DI WEBSITE ABSENSI HADI PONSEL - PULSA TERMURAH SE-INDONESIA - DAPATKAN POIN SETIAP PEMBELIAN 🎉</span>
+            🌟 WEBSITE ABSENSI HADI PONSEL - Kelola Karyawan Dengan Mudah - Sistem Terintegrasi 🌟
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t z-40">
-        <div class="flex justify-around">
-            <button onclick="showSection('home')" class="nav-btn flex flex-col items-center py-2 px-4 text-blue-600">
-                <span class="text-xl mb-1">🏠</span>
-                <span class="text-xs font-medium">HOME</span>
-            </button>
-            <button onclick="showSection('data')" class="nav-btn flex flex-col items-center py-2 px-4 text-gray-600 hover:text-blue-600">
-                <span class="text-xl mb-1">📊</span>
-                <span class="text-xs font-medium">DATA</span>
-            </button>
-            <button onclick="showSection('coins')" class="nav-btn flex flex-col items-center py-2 px-4 text-gray-600 hover:text-blue-600">
-                <span class="text-xl mb-1">🪙</span>
-                <span class="text-xs font-medium">COINS</span>
-            </button>
-        </div>
-    </nav>
-
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-6 pb-20">
+    <main class="p-4 pb-20">
         <!-- Home Section -->
-        <div id="homeSection" class="section">
-            <!-- Product Categories -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                <button onclick="showCategory('pulsa')" class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
-                    <div class="text-center">
-                        <div class="text-4xl mb-2">💰</div>
-                        <h3 class="text-xl font-bold">PULSA</h3>
-                        <p class="text-sm opacity-90">Pulsa Reguler & Tanpa Masa Aktif</p>
+        <div id="homeSection" class="space-y-6">
+            <!-- Pulsa Section -->
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    📞 PULSA & PULSA TANPA MASA AKTIF
+                </h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-green-600 mb-2">Pulsa Masa Aktif</h4>
+                        <div class="space-y-2" id="pulsaMasaAktif"></div>
                     </div>
-                </button>
-                <button onclick="showCategory('paket-data')" class="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
-                    <div class="text-center">
-                        <div class="text-4xl mb-2">📶</div>
-                        <h3 class="text-xl font-bold">PAKET DATA</h3>
-                        <p class="text-sm opacity-90">Semua Provider</p>
+                    <div>
+                        <h4 class="font-semibold text-blue-600 mb-2">Pulsa Tanpa Masa Aktif</h4>
+                        <div class="space-y-2" id="pulsaTanpaMasaAktif"></div>
                     </div>
-                </button>
-                <button onclick="showCategory('hifi-air')" class="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
-                    <div class="text-center">
-                        <div class="text-4xl mb-2">🌊</div>
-                        <h3 class="text-xl font-bold">HIFI AIR</h3>
-                        <p class="text-sm opacity-90">Paket Internet Unlimited</p>
+                </div>
+            </div>
+
+            <!-- Paket Data -->
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    📶 PAKET DATA
+                </h3>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
+                    <button onclick="showPaketData('telkomsel')" class="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600">Telkomsel</button>
+                    <button onclick="showPaketData('tri')" class="bg-orange-500 text-white p-3 rounded-lg hover:bg-orange-600">Tri</button>
+                    <button onclick="showPaketData('axis')" class="bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600">Axis</button>
+                    <button onclick="showPaketData('smartfren')" class="bg-pink-500 text-white p-3 rounded-lg hover:bg-pink-600">Smartfren</button>
+                    <button onclick="showPaketData('indosat')" class="bg-yellow-500 text-white p-3 rounded-lg hover:bg-yellow-600">Indosat</button>
+                </div>
+                <div id="paketDataContent" class="mt-4 hidden">
+                    <div class="product-grid" id="paketDataList"></div>
+                </div>
+            </div>
+
+            <!-- Paket HiFi Air -->
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    🌐 PAKET HIFI AIR INDOSAT/TRI
+                </h3>
+                <div class="product-grid" id="hifiAirList"></div>
+            </div>
+
+            <!-- Coin Seller Faya Star -->
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    ⭐ COIN SELLER FAYA STAR
+                </h3>
+                <div class="product-grid">
+                    <div class="bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg text-white text-center">
+                        <div class="text-2xl mb-2">🌟</div>
+                        <div class="font-bold">1000 Coins</div>
+                        <div class="text-sm">Rp 50.000</div>
+                        <button onclick="buyProduct('coin', '1000 Coins', 50000)" class="bg-white text-orange-500 px-4 py-2 rounded mt-2 hover:bg-gray-100">Beli</button>
                     </div>
-                </button>
-                <button onclick="showCategory('coin-seller')" class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all">
-                    <div class="text-center">
-                        <div class="text-4xl mb-2">⭐</div>
-                        <h3 class="text-xl font-bold">COIN SELLER</h3>
-                        <p class="text-sm opacity-90">Faya Star Diamonds</p>
-                    </div>
-                </button>
-            </div>
-        </div>
-
-        <!-- Pulsa Category -->
-        <div id="pulsaCategory" class="section hidden">
-            <div class="flex items-center mb-4">
-                <button onclick="showSection('home')" class="text-blue-600 hover:text-blue-800 mr-3">
-                    <span class="text-xl">←</span>
-                </button>
-                <h2 class="text-2xl font-bold text-blue-600">💰 PULSA</h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Pulsa Masa Aktif -->
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-lg font-semibold mb-4 text-green-600">📅 Pulsa Masa Aktif</h3>
-                    <div class="space-y-2 max-h-96 overflow-y-auto" id="pulsaMasaAktif"></div>
                 </div>
-                <!-- Pulsa Tanpa Masa Aktif -->
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-lg font-semibold mb-4 text-orange-600">⏰ Pulsa Tanpa Masa Aktif</h3>
-                    <div class="space-y-2 max-h-96 overflow-y-auto" id="pulsaTanpaMasaAktif"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Paket Data Category -->
-        <div id="paket-dataCategory" class="section hidden">
-            <div class="flex items-center mb-4">
-                <button onclick="showSection('home')" class="text-blue-600 hover:text-blue-800 mr-3">
-                    <span class="text-xl">←</span>
-                </button>
-                <h2 class="text-2xl font-bold text-purple-600">📶 PAKET DATA</h2>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                    <h3 class="font-semibold mb-3 text-red-600">📱 TELKOMSEL</h3>
-                    <div class="space-y-2" id="telkomselData"></div>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                    <h3 class="font-semibold mb-3 text-orange-600">🔺 TRI</h3>
-                    <div class="space-y-2" id="triData"></div>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                    <h3 class="font-semibold mb-3 text-blue-600">📡 AXIS</h3>
-                    <div class="space-y-2" id="axisData"></div>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                    <h3 class="font-semibold mb-3 text-green-600">📶 SMARTFREN</h3>
-                    <div class="space-y-2" id="smartfrenData"></div>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                    <h3 class="font-semibold mb-3 text-yellow-600">🌟 INDOSAT</h3>
-                    <div class="space-y-2" id="indosatData"></div>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                    <h3 class="font-semibold mb-3 text-purple-600">💜 BY.U</h3>
-                    <div class="space-y-2" id="byuData"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- HiFi Air Category -->
-        <div id="hifi-airCategory" class="section hidden">
-            <div class="flex items-center mb-4">
-                <button onclick="showSection('home')" class="text-blue-600 hover:text-blue-800 mr-3">
-                    <span class="text-xl">←</span>
-                </button>
-                <h2 class="text-2xl font-bold text-indigo-600">🌊 PAKET HIFI AIR</h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-lg font-semibold mb-4 text-yellow-600">📡 INDOSAT HIFI AIR</h3>
-                    <div class="space-y-2" id="indosatHifi"></div>
-                </div>
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-lg font-semibold mb-4 text-orange-600">🔺 TRI HIFI AIR</h3>
-                    <div class="space-y-2" id="triHifi"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Coin Seller Category -->
-        <div id="coin-sellerCategory" class="section hidden">
-            <div class="flex items-center mb-4">
-                <button onclick="showSection('home')" class="text-blue-600 hover:text-blue-800 mr-3">
-                    <span class="text-xl">←</span>
-                </button>
-                <h2 class="text-2xl font-bold text-yellow-600">⭐ COIN SELLER FAYA STAR</h2>
-            </div>
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="coinSeller"></div>
             </div>
         </div>
 
         <!-- Data Section -->
-        <div id="dataSection" class="section hidden">
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center mb-6 text-blue-600">📊 DATA PEMBELIAN</h2>
+        <div id="dataSection" class="hidden">
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">📊 DATA PEMBELIAN</h3>
                 <div id="purchaseHistory" class="space-y-4">
-                    <p class="text-center text-gray-500">Belum ada data pembelian</p>
+                    <p class="text-gray-500 text-center">Belum ada data pembelian</p>
                 </div>
             </div>
         </div>
 
         <!-- Coins Section -->
-        <div id="coinsSection" class="section hidden">
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center mb-6 text-yellow-600">🪙 SISTEM POIN</h2>
-                <div class="text-center mb-6">
-                    <div class="bg-yellow-100 rounded-lg p-4 inline-block">
-                        <h3 class="text-xl font-bold text-yellow-800">Poin Anda: <span id="userPoints">0</span></h3>
+        <div id="coinsSection" class="hidden">
+            <div class="bg-white rounded-lg shadow-lg p-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">🪙 SISTEM POIN</h3>
+                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg text-white mb-4">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold" id="userPoints">0</div>
+                        <div class="text-sm">Total Poin Anda</div>
                     </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="border rounded-lg p-4">
-                        <h3 class="text-lg font-semibold mb-4 text-green-600">💡 Cara Mendapat Poin</h3>
-                        <ul class="space-y-2 text-sm">
-                            <li>• Setiap pembelian produk = 3 poin</li>
-                            <li>• Poin akan otomatis masuk setelah pembayaran</li>
-                            <li>• Kumpulkan poin untuk ditukar dengan hadiah</li>
-                        </ul>
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-gray-800 mb-2">📋 Cara Mendapat Poin:</h4>
+                        <p class="text-sm text-gray-600">• Setiap pembelian produk = 3 poin</p>
+                        <p class="text-sm text-gray-600">• Minimal penukaran 10.000 poin</p>
                     </div>
-                    <div class="border rounded-lg p-4">
-                        <h3 class="text-lg font-semibold mb-4 text-purple-600">🎁 Tukar Poin</h3>
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
-                                <span>Paket Data 5GB</span>
-                                <button onclick="redeemPoints(10000, 'Paket Data 5GB')" class="bg-purple-500 text-white px-3 py-1 rounded text-sm">10.000 Poin</button>
-                            </div>
-                            <div class="flex justify-between items-center p-2 bg-gray-50 rounded">
-                                <span>Pulsa 10.000</span>
-                                <button onclick="redeemPoints(10000, 'Pulsa 10.000')" class="bg-purple-500 text-white px-3 py-1 rounded text-sm">10.000 Poin</button>
-                            </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-800 mb-2">🎁 Tukar Poin:</h4>
+                        <div class="space-y-2">
+                            <button onclick="redeemPoints(10000, 'Paket Data 5GB')" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
+                                10.000 Poin → Paket Data 5GB
+                            </button>
+                            <button onclick="redeemPoints(10000, 'Pulsa 10.000')" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+                                10.000 Poin → Pulsa Rp 10.000
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -290,546 +211,530 @@
         </div>
     </main>
 
+    <!-- Bottom Navigation -->
+    <nav class="nav-fixed bg-white shadow-lg border-t">
+        <div class="flex justify-around py-2">
+            <button onclick="showSection('home')" id="homeBtn" class="flex flex-col items-center p-2 text-blue-500">
+                <span class="text-xl">🏠</span>
+                <span class="text-xs">HOME</span>
+            </button>
+            <button onclick="showSection('data')" id="dataBtn" class="flex flex-col items-center p-2 text-gray-500">
+                <span class="text-xl">📊</span>
+                <span class="text-xs">DATA</span>
+            </button>
+            <button onclick="showSection('coins')" id="coinsBtn" class="flex flex-col items-center p-2 text-gray-500">
+                <span class="text-xl">🪙</span>
+                <span class="text-xs">COINS</span>
+            </button>
+        </div>
+    </nav>
+
     <!-- Purchase Modal -->
-    <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-6 m-4 max-w-md w-full max-h-96 overflow-y-auto">
-            <h3 class="text-xl font-bold mb-4" id="modalTitle">Pembelian</h3>
-            <form id="purchaseForm">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-2">Nomor HP</label>
-                    <input type="tel" id="phoneNumber" class="w-full border rounded-lg px-3 py-2" placeholder="08xxxxxxxxxx" required>
+    <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-4 border-b">
+                <h3 class="text-lg font-bold">Form Pembelian</h3>
+                <button onclick="closePurchaseModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">✕</button>
+            </div>
+            <form id="purchaseForm" class="p-4 space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nomor HP</label>
+                    <input type="tel" id="phoneNumber" class="w-full p-2 border rounded-lg" placeholder="08xxxxxxxxxx" required>
                 </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-2">Produk</label>
-                    <input type="text" id="selectedProduct" class="w-full border rounded-lg px-3 py-2" readonly>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Produk</label>
+                    <input type="text" id="selectedProduct" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
                 </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium mb-2">Metode Pembayaran</label>
-                    <select id="paymentMethod" class="w-full border rounded-lg px-3 py-2" required>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Harga</label>
+                    <input type="text" id="productPrice" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Metode Pembayaran</label>
+                    <select id="paymentMethod" class="w-full p-2 border rounded-lg" required>
                         <option value="">Pilih Metode</option>
                         <optgroup label="Bank">
-                            <option value="seabank">SEABANK - 901711939465</option>
-                            <option value="aladin">ALADIN - 50682991909</option>
-                            <option value="jago">JAGO - 102850087054</option>
+                            <option value="SEABANK - 901711939465">SEABANK - 901711939465</option>
+                            <option value="ALADIN - 50682991909">ALADIN - 50682991909</option>
+                            <option value="JAGO - 102850087054">JAGO - 102850087054</option>
                         </optgroup>
                         <optgroup label="E-Wallet">
-                            <option value="dana">DANA - 089646775883</option>
-                            <option value="gopay">GOPAY - 089646775883</option>
-                            <option value="shoppy">SHOPPY - 089646775883</option>
+                            <option value="DANA - 089646775883">DANA - 089646775883</option>
+                            <option value="GOPAY - 089646775883">GOPAY - 089646775883</option>
+                            <option value="SHOPEE PAY - 089646775883">SHOPEE PAY - 089646775883</option>
                         </optgroup>
+                        <option value="QRIS">QRIS</option>
                     </select>
                 </div>
-                <div id="paymentDetails" class="mb-4 hidden">
-                    <div class="bg-blue-50 p-3 rounded-lg">
-                        <p class="text-sm font-medium">Transfer ke:</p>
-                        <p class="font-bold" id="accountDetails"></p>
-                        <p class="text-sm">a.n. WINORO HADI MUKTI</p>
+                <div id="qrisSection" class="hidden">
+                    <img src="https://i.ibb.co.com/8Lx2nrw4/IMG-20251005-WA0000.jpg" alt="QRIS Code" class="w-full max-w-xs mx-auto" onerror="this.src=''; this.alt='QRIS gagal dimuat'; this.style.display='none';">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nama Pemilik Bank</label>
+                    <input type="text" value="WINORO HADI MUKTI" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Bukti Pembayaran</label>
+                    <div class="space-y-2">
+                        <div>
+                            <input type="radio" id="useTransactionId" name="proofType" value="id" checked>
+                            <label for="useTransactionId" class="ml-2">ID Transaksi</label>
+                        </div>
+                        <input type="text" id="transactionId" class="w-full p-2 border rounded-lg" placeholder="Masukkan ID Transaksi">
+                        <div>
+                            <input type="radio" id="useImage" name="proofType" value="image">
+                            <label for="useImage" class="ml-2">Upload Gambar</label>
+                        </div>
+                        <input type="file" id="proofImage" class="w-full p-2 border rounded-lg" accept="image/*" disabled>
                     </div>
                 </div>
-
-                <div class="flex gap-2">
-                    <button type="button" onclick="closeModal()" class="flex-1 bg-gray-500 text-white py-2 rounded-lg">Batal</button>
-                    <button type="submit" class="flex-1 bg-blue-500 text-white py-2 rounded-lg">Lanjut</button>
-                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600">
+                    Konfirmasi Pembelian
+                </button>
             </form>
-        </div>
-    </div>
-
-    <!-- Confirmation Modal -->
-    <div id="confirmationModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-6 m-4 max-w-md w-full">
-            <h3 class="text-xl font-bold mb-4">Konfirmasi Pembayaran</h3>
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">Pilih Metode Konfirmasi</label>
-                <div class="space-y-2">
-                    <label class="flex items-center">
-                        <input type="radio" name="confirmMethod" value="id" class="mr-2">
-                        <span>ID Transaksi</span>
-                    </label>
-                    <label class="flex items-center">
-                        <input type="radio" name="confirmMethod" value="image" class="mr-2">
-                        <span>Upload Bukti Pembayaran</span>
-                    </label>
-                </div>
-            </div>
-            <div id="transactionIdSection" class="mb-4 hidden">
-                <label class="block text-sm font-medium mb-2">ID Transaksi</label>
-                <input type="text" id="transactionId" class="w-full border rounded-lg px-3 py-2" placeholder="Masukkan ID Transaksi">
-            </div>
-            <div id="imageUploadSection" class="mb-4 hidden">
-                <label class="block text-sm font-medium mb-2">Bukti Pembayaran</label>
-                <input type="file" id="paymentProof" class="w-full border rounded-lg px-3 py-2" accept="image/*">
-            </div>
-            <div class="flex gap-2">
-                <button type="button" onclick="closeConfirmationModal()" class="flex-1 bg-gray-500 text-white py-2 rounded-lg">Batal</button>
-                <button type="button" onclick="submitConfirmation()" class="flex-1 bg-green-500 text-white py-2 rounded-lg">Kirim</button>
-            </div>
         </div>
     </div>
 
     <script>
         // Global variables
-        let currentPurchase = {};
         let userPoints = 0;
         let purchaseHistory = [];
+        let currentProductType = '';
+        let currentProductName = '';
+        let currentProductPrice = 0;
 
-        // Initialize products
-        function initializeProducts() {
-            // Pulsa Masa Aktif
-            const pulsaMasaAktifContainer = document.getElementById('pulsaMasaAktif');
-            for (let i = 5000; i <= 1000000; i += 5000) {
-                const price = i + 1000;
-                const button = createProductButton(`Pulsa ${formatRupiah(i)}`, `Rp ${formatRupiah(price)}`, 'pulsa-masa-aktif');
-                pulsaMasaAktifContainer.appendChild(button);
-            }
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            generatePulsaProducts();
+            generateHifiAirProducts();
+            loadUserData();
+            
+            // Contact menu toggle
+            document.getElementById('contactBtn').addEventListener('click', function() {
+                const menu = document.getElementById('contactMenu');
+                menu.classList.toggle('show');
+            });
+
+            // Close contact menu when clicking outside
+            document.addEventListener('click', function(e) {
+                const btn = document.getElementById('contactBtn');
+                const menu = document.getElementById('contactMenu');
+                if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                    menu.classList.remove('show');
+                }
+            });
+
+            // Payment method change
+            document.getElementById('paymentMethod').addEventListener('change', function() {
+                const qrisSection = document.getElementById('qrisSection');
+                if (this.value === 'QRIS') {
+                    qrisSection.classList.remove('hidden');
+                } else {
+                    qrisSection.classList.add('hidden');
+                }
+            });
+
+            // Proof type change
+            document.querySelectorAll('input[name="proofType"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const transactionId = document.getElementById('transactionId');
+                    const proofImage = document.getElementById('proofImage');
+                    
+                    if (this.value === 'id') {
+                        transactionId.disabled = false;
+                        proofImage.disabled = true;
+                        proofImage.value = '';
+                    } else {
+                        transactionId.disabled = true;
+                        transactionId.value = '';
+                        proofImage.disabled = false;
+                    }
+                });
+            });
+
+            // Purchase form submit
+            document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                processPurchase();
+            });
+        });
+
+        // Generate pulsa products
+        function generatePulsaProducts() {
+            const pulsaMasaAktif = document.getElementById('pulsaMasaAktif');
+            const pulsaTanpaMasaAktif = document.getElementById('pulsaTanpaMasaAktif');
+            
+            // Pulsa Masa Aktif (5.000 - 1.000.000 dengan admin 1.000)
+            const denomsMasaAktif = [5000, 10000, 15000, 20000, 25000, 50000, 100000, 200000, 500000, 1000000];
+            denomsMasaAktif.forEach(denom => {
+                const price = denom + 1000;
+                const div = document.createElement('div');
+                div.className = 'bg-green-50 p-2 rounded border';
+                div.innerHTML = `
+                    <div class="text-sm font-medium">Rp ${denom.toLocaleString()}</div>
+                    <div class="text-xs text-gray-600">Rp ${price.toLocaleString()}</div>
+                    <button onclick="buyProduct('pulsa-masa-aktif', 'Pulsa ${denom.toLocaleString()}', ${price})" 
+                            class="bg-green-500 text-white px-2 py-1 rounded text-xs mt-1 hover:bg-green-600">Beli</button>
+                `;
+                pulsaMasaAktif.appendChild(div);
+            });
 
             // Pulsa Tanpa Masa Aktif
-            const pulsaTanpaMasaAktifContainer = document.getElementById('pulsaTanpaMasaAktif');
-            for (let i = 5000; i <= 45000; i += 5000) {
-                const price = i - 1000;
-                const button = createProductButton(`Pulsa ${formatRupiah(i)}`, `Rp ${formatRupiah(price)}`, 'pulsa-tanpa-masa-aktif');
-                pulsaTanpaMasaAktifContainer.appendChild(button);
-            }
-            for (let i = 50000; i <= 100000; i += 10000) {
-                const price = i - 2000;
-                const button = createProductButton(`Pulsa ${formatRupiah(i)}`, `Rp ${formatRupiah(price)}`, 'pulsa-tanpa-masa-aktif');
-                pulsaTanpaMasaAktifContainer.appendChild(button);
-            }
+            const denomsTanpaMasaAktif = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 60000, 70000, 80000, 90000, 100000];
+            denomsTanpaMasaAktif.forEach(denom => {
+                let price;
+                if (denom < 50000) {
+                    price = denom - 1000;
+                } else {
+                    price = denom - 2000;
+                }
+                
+                const div = document.createElement('div');
+                div.className = 'bg-blue-50 p-2 rounded border';
+                div.innerHTML = `
+                    <div class="text-sm font-medium">Rp ${denom.toLocaleString()}</div>
+                    <div class="text-xs text-gray-600">Rp ${price.toLocaleString()}</div>
+                    <button onclick="buyProduct('pulsa-tanpa-masa-aktif', 'Pulsa ${denom.toLocaleString()}', ${price})" 
+                            class="bg-blue-500 text-white px-2 py-1 rounded text-xs mt-1 hover:bg-blue-600">Beli</button>
+                `;
+                pulsaTanpaMasaAktif.appendChild(div);
+            });
+        }
 
-            // Paket Data
-            const dataPackages = {
-                telkomselData: [
+        // Generate HiFi Air products
+        function generateHifiAirProducts() {
+            const hifiAirList = document.getElementById('hifiAirList');
+            const products = [
+                { name: '500GB Aktif 30H', price: 250000 },
+                { name: '200GB Aktif 30H', price: 150000 },
+                { name: '125GB Aktif 30H', price: 100000 },
+                { name: '75GB Aktif 30H', price: 75000 },
+                { name: 'Promo 150GB Nasional + 150 JAM 01/06 + 10GB Bonus TikTok 30H', price: 300000 }
+            ];
+
+            products.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'bg-gradient-to-r from-cyan-400 to-blue-500 p-4 rounded-lg text-white';
+                div.innerHTML = `
+                    <div class="text-sm font-medium mb-2">${product.name}</div>
+                    <div class="text-lg font-bold mb-2">Rp ${product.price.toLocaleString()}</div>
+                    <button onclick="buyProduct('hifi-air', '${product.name}', ${product.price})" 
+                            class="bg-white text-blue-500 px-4 py-2 rounded hover:bg-gray-100">Beli</button>
+                `;
+                hifiAirList.appendChild(div);
+            });
+        }
+
+        // Show paket data
+        function showPaketData(provider) {
+            const content = document.getElementById('paketDataContent');
+            const list = document.getElementById('paketDataList');
+            
+            content.classList.remove('hidden');
+            list.innerHTML = '';
+
+            const packages = {
+                telkomsel: [
                     { name: '1GB 7 Hari', price: 15000 },
                     { name: '3GB 30 Hari', price: 35000 },
                     { name: '8GB 30 Hari', price: 65000 },
                     { name: '17GB 30 Hari', price: 95000 }
                 ],
-                triData: [
+                tri: [
                     { name: '2GB 7 Hari', price: 12000 },
                     { name: '6GB 30 Hari', price: 28000 },
                     { name: '12GB 30 Hari', price: 48000 },
-                    { name: '25GB 30 Hari', price: 75000 }
+                    { name: '24GB 30 Hari', price: 78000 }
                 ],
-                axisData: [
+                axis: [
                     { name: '1GB 7 Hari', price: 10000 },
                     { name: '3GB 30 Hari', price: 25000 },
                     { name: '8GB 30 Hari', price: 45000 },
-                    { name: '16GB 30 Hari', price: 70000 }
+                    { name: '16GB 30 Hari', price: 75000 }
                 ],
-                smartfrenData: [
-                    { name: '2GB 7 Hari', price: 15000 },
-                    { name: '5GB 30 Hari', price: 35000 },
+                smartfren: [
+                    { name: '2GB 7 Hari', price: 13000 },
+                    { name: '5GB 30 Hari', price: 30000 },
                     { name: '10GB 30 Hari', price: 55000 },
                     { name: '20GB 30 Hari', price: 85000 }
                 ],
-                indosatData: [
-                    { name: '1GB 7 Hari', price: 12000 },
-                    { name: '4GB 30 Hari', price: 30000 },
-                    { name: '9GB 30 Hari', price: 50000 },
-                    { name: '18GB 30 Hari', price: 80000 }
-                ],
-                byuData: [
-                    { name: '1GB 7 Hari', price: 8000 },
-                    { name: '3GB 30 Hari', price: 20000 },
-                    { name: '7GB 30 Hari', price: 35000 },
-                    { name: '15GB 30 Hari', price: 60000 }
+                indosat: [
+                    { name: '1GB 7 Hari', price: 14000 },
+                    { name: '4GB 30 Hari', price: 32000 },
+                    { name: '9GB 30 Hari', price: 58000 },
+                    { name: '18GB 30 Hari', price: 88000 }
                 ]
             };
 
-            Object.keys(dataPackages).forEach(containerId => {
-                const container = document.getElementById(containerId);
-                dataPackages[containerId].forEach(pkg => {
-                    const button = createProductButton(pkg.name, `Rp ${formatRupiah(pkg.price)}`, 'paket-data');
-                    container.appendChild(button);
-                });
-            });
-
-            // HiFi Air
-            const hifiPackages = {
-                indosatHifi: [
-                    { name: '500GB Aktif 30H', price: 250000 },
-                    { name: '200GB Aktif 30H', price: 150000 },
-                    { name: '125GB Aktif 30H', price: 100000 },
-                    { name: '75GB Aktif 30H', price: 75000 },
-                    { name: 'Promo 150GB Nasional + 150 JAM 01/06 + 10GB Bonus TikTok 30H', price: 300000 }
-                ],
-                triHifi: [
-                    { name: '500GB Aktif 30H', price: 240000 },
-                    { name: '200GB Aktif 30H', price: 140000 },
-                    { name: '125GB Aktif 30H', price: 95000 },
-                    { name: '75GB Aktif 30H', price: 70000 }
-                ]
+            const providerColors = {
+                telkomsel: 'from-red-400 to-red-600',
+                tri: 'from-orange-400 to-orange-600',
+                axis: 'from-purple-400 to-purple-600',
+                smartfren: 'from-pink-400 to-pink-600',
+                indosat: 'from-yellow-400 to-yellow-600'
             };
 
-            Object.keys(hifiPackages).forEach(containerId => {
-                const container = document.getElementById(containerId);
-                hifiPackages[containerId].forEach(pkg => {
-                    const button = createProductButton(pkg.name, `Rp ${formatRupiah(pkg.price)}`, 'hifi-air');
-                    container.appendChild(button);
-                });
-            });
-
-            // Coin Seller
-            const coinSellerContainer = document.getElementById('coinSeller');
-            const coinPackages = [
-                { name: 'COIN 5.881', price: 5000 },
-                { name: 'COIN 11.763', price: 10000 },
-                { name: 'COIN 17.645', price: 15000 },
-                { name: 'COIN 23.528', price: 20000 },
-                { name: 'COIN 29.410', price: 25000 }
-            ];
-
-            coinPackages.forEach(coin => {
-                const button = createProductButton(coin.name, `Rp ${formatRupiah(coin.price)}`, 'coin-seller');
-                coinSellerContainer.appendChild(button);
+            packages[provider].forEach(pkg => {
+                const div = document.createElement('div');
+                div.className = `bg-gradient-to-r ${providerColors[provider]} p-4 rounded-lg text-white`;
+                div.innerHTML = `
+                    <div class="text-sm font-medium mb-2">${pkg.name}</div>
+                    <div class="text-lg font-bold mb-2">Rp ${pkg.price.toLocaleString()}</div>
+                    <button onclick="buyProduct('paket-data', '${provider.toUpperCase()} ${pkg.name}', ${pkg.price})" 
+                            class="bg-white text-gray-800 px-4 py-2 rounded hover:bg-gray-100">Beli</button>
+                `;
+                list.appendChild(div);
             });
         }
 
-        function createProductButton(name, price, type) {
-            const button = document.createElement('button');
-            button.className = 'w-full text-left p-3 border rounded-lg hover:bg-blue-50 transition-colors';
-            button.innerHTML = `
-                <div class="flex justify-between items-center">
-                    <span class="font-medium">${name}</span>
-                    <span class="text-blue-600 font-bold">${price}</span>
-                </div>
-            `;
-            button.onclick = () => openPurchaseModal(name, price, type);
-            return button;
-        }
-
-        function formatRupiah(number) {
-            return new Intl.NumberFormat('id-ID').format(number);
-        }
-
-        // Navigation
-        function showSection(section) {
-            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-blue-600');
-                btn.classList.add('text-gray-600');
-            });
-
-            document.getElementById(section + 'Section').classList.remove('hidden');
+        // Buy product
+        function buyProduct(type, name, price) {
+            currentProductType = type;
+            currentProductName = name;
+            currentProductPrice = price;
             
-            // Update active nav button
-            const activeBtn = document.querySelector(`[onclick="showSection('${section}')"]`);
-            if (activeBtn) {
-                activeBtn.classList.remove('text-gray-600');
-                activeBtn.classList.add('text-blue-600');
-            }
-
-            if (section === 'coins') {
-                document.getElementById('userPoints').textContent = userPoints;
-            } else if (section === 'data') {
-                updatePurchaseHistory();
-            }
-        }
-
-        // Category Navigation
-        function showCategory(category) {
-            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(category + 'Category').classList.remove('hidden');
-        }
-
-        // Contact dropdown
-        document.getElementById('contactBtn').addEventListener('click', function(e) {
-            e.stopPropagation();
-            const dropdown = document.getElementById('contactDropdown');
-            dropdown.classList.toggle('show');
-        });
-
-        document.addEventListener('click', function() {
-            document.getElementById('contactDropdown').classList.remove('show');
-        });
-
-        // Purchase Modal
-        function openPurchaseModal(name, price, type) {
-            currentPurchase = { name, price, type };
-            document.getElementById('modalTitle').textContent = `Beli ${name}`;
-            document.getElementById('selectedProduct').value = `${name} - ${price}`;
+            document.getElementById('selectedProduct').value = name;
+            document.getElementById('productPrice').value = `Rp ${price.toLocaleString()}`;
             document.getElementById('purchaseModal').classList.remove('hidden');
-            document.getElementById('purchaseModal').classList.add('flex');
         }
 
-        function closeModal() {
+        // Close purchase modal
+        function closePurchaseModal() {
             document.getElementById('purchaseModal').classList.add('hidden');
-            document.getElementById('purchaseModal').classList.remove('flex');
             document.getElementById('purchaseForm').reset();
-            document.getElementById('paymentDetails').classList.add('hidden');
         }
 
-        // Payment method change
-        document.getElementById('paymentMethod').addEventListener('change', function() {
-            const method = this.value;
-            const paymentDetails = document.getElementById('paymentDetails');
-            const accountDetails = document.getElementById('accountDetails');
-
-            paymentDetails.classList.add('hidden');
-
-            if (method === 'seabank') {
-                accountDetails.textContent = 'SEABANK - 901711939465';
-                paymentDetails.classList.remove('hidden');
-            } else if (method === 'aladin') {
-                accountDetails.textContent = 'ALADIN - 50682991909';
-                paymentDetails.classList.remove('hidden');
-            } else if (method === 'jago') {
-                accountDetails.textContent = 'JAGO - 102850087054';
-                paymentDetails.classList.remove('hidden');
-            } else if (method === 'dana') {
-                accountDetails.textContent = 'DANA - 089646775883';
-                paymentDetails.classList.remove('hidden');
-            } else if (method === 'gopay') {
-                accountDetails.textContent = 'GOPAY - 089646775883';
-                paymentDetails.classList.remove('hidden');
-            } else if (method === 'shoppy') {
-                accountDetails.textContent = 'SHOPPY - 089646775883';
-                paymentDetails.classList.remove('hidden');
-            }
-        });
-
-        // Purchase form submit
-        document.getElementById('purchaseForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            closeModal();
-            document.getElementById('confirmationModal').classList.remove('hidden');
-            document.getElementById('confirmationModal').classList.add('flex');
-        });
-
-        // Confirmation method change
-        document.querySelectorAll('input[name="confirmMethod"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const transactionIdSection = document.getElementById('transactionIdSection');
-                const imageUploadSection = document.getElementById('imageUploadSection');
-                
-                if (this.value === 'id') {
-                    transactionIdSection.classList.remove('hidden');
-                    imageUploadSection.classList.add('hidden');
-                } else {
-                    transactionIdSection.classList.add('hidden');
-                    imageUploadSection.classList.remove('hidden');
-                }
-            });
-        });
-
-        function closeConfirmationModal() {
-            document.getElementById('confirmationModal').classList.add('hidden');
-            document.getElementById('confirmationModal').classList.remove('flex');
-        }
-
-        function submitConfirmation() {
+        // Process purchase
+        function processPurchase() {
             const phoneNumber = document.getElementById('phoneNumber').value;
             const paymentMethod = document.getElementById('paymentMethod').value;
-            const confirmMethod = document.querySelector('input[name="confirmMethod"]:checked').value;
+            const proofType = document.querySelector('input[name="proofType"]:checked').value;
             const transactionId = document.getElementById('transactionId').value;
-            const paymentProof = document.getElementById('paymentProof').files[0];
-            
-            // Generate RS ID based on product type
-            let rsId = 'RS';
-            if (currentPurchase.type === 'pulsa-masa-aktif' || currentPurchase.type === 'pulsa-tanpa-masa-aktif') {
-                rsId += Math.floor(Math.random() * 900000) + 100000; // RS + 6 digit
-            } else if (currentPurchase.type === 'paket-data') {
-                rsId += 'PD' + Math.floor(Math.random() * 90000) + 10000; // RSPD + 5 digit
-            } else if (currentPurchase.type === 'hifi-air') {
-                rsId += 'HF' + Math.floor(Math.random() * 90000) + 10000; // RSHF + 5 digit
-            } else {
-                rsId += 'CS' + Math.floor(Math.random() * 90000) + 10000; // RSCS + 5 digit
-            }
-            
-            // Get payment method details
-            const paymentSelect = document.getElementById('paymentMethod');
-            const selectedOption = paymentSelect.options[paymentSelect.selectedIndex];
-            const paymentText = selectedOption.text;
-            
-            // Add to purchase history
-            const purchase = {
-                id: Date.now(),
-                rsId: rsId,
-                date: new Date().toLocaleDateString('id-ID'),
-                time: new Date().toLocaleTimeString('id-ID'),
-                product: currentPurchase.name,
-                price: currentPurchase.price,
-                phone: phoneNumber,
-                payment: paymentText,
-                ownerName: 'WINORO HADI MUKTI',
-                confirmMethod: confirmMethod,
-                transactionId: transactionId || 'Bukti Gambar',
-                paymentProof: paymentProof ? paymentProof.name : null,
-                status: 'Menunggu Konfirmasi'
-            };
-            
-            purchaseHistory.push(purchase);
-            
-            // Add points (only for non-coin products)
-            if (currentPurchase.type !== 'coin-seller') {
-                userPoints += 3;
-            }
-            
-            // Send to Telegram Bot
-            sendToTelegram(purchase);
-            
-            closeConfirmationModal();
-            alert('Terima kasih! Pesanan Anda sedang diproses. Data telah dikirim ke sistem kami. Anda mendapat 3 poin!');
-        }
+            const proofImage = document.getElementById('proofImage').files[0];
 
-        // Send data to Telegram Bot
-        async function sendToTelegram(purchase) {
-            const botToken = '8397986161:AAEPRy85hQJh8bJOZTXdGba1dYNubh0RiIs';
-            const chatId = '-1002345678901'; // Replace with actual group ID
-            
-            const message = `🛒 *PEMBELIAN BARU - HADI PONSEL*
-
-📋 *ID Produk:* ${purchase.rsId}
-📱 *Nomor HP:* ${purchase.phone}
-🛍️ *Produk:* ${purchase.product}
-💰 *Harga:* ${purchase.price}
-💳 *Metode Pembayaran:* ${purchase.payment}
-👤 *Nama Pemilik:* ${purchase.ownerName}
-🔢 *ID/Bukti Transaksi:* ${purchase.transactionId}
-📅 *Tanggal:* ${purchase.date} ${purchase.time}
-⏳ *Status:* ${purchase.status}`;
-
-            try {
-                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: message,
-                        parse_mode: 'Markdown'
-                    })
-                });
-                
-                if (response.ok) {
-                    console.log('Data berhasil dikirim ke Telegram');
-                } else {
-                    console.log('Gagal mengirim ke Telegram');
-                }
-            } catch (error) {
-                console.log('Error mengirim ke Telegram:', error);
-            }
-        }
-
-        function updatePurchaseHistory() {
-            const container = document.getElementById('purchaseHistory');
-            if (purchaseHistory.length === 0) {
-                container.innerHTML = '<p class="text-center text-gray-500">Belum ada data pembelian</p>';
+            if (!phoneNumber || !paymentMethod) {
+                alert('Mohon lengkapi semua data!');
                 return;
             }
 
-            container.innerHTML = purchaseHistory.map(purchase => `
-                <div class="border rounded-lg p-4 bg-white shadow-sm">
-                    <div class="flex justify-between items-start mb-3">
-                        <div class="flex-1">
-                            <div class="flex items-center gap-2 mb-2">
-                                <h4 class="font-bold text-blue-600">${purchase.rsId}</h4>
-                                <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded">${purchase.status}</span>
-                            </div>
-                            <h5 class="font-semibold text-gray-800 mb-1">${purchase.product}</h5>
-                            <div class="text-sm text-gray-600 space-y-1">
-                                <p>📱 No. HP: ${purchase.phone}</p>
-                                <p>💳 ${purchase.payment}</p>
-                                <p>👤 ${purchase.ownerName}</p>
-                                <p>🔢 ${purchase.transactionId}</p>
-                                <p>📅 ${purchase.date} ${purchase.time}</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-bold text-green-600 text-lg">${purchase.price}</p>
-                            <button onclick="downloadPurchaseData('${purchase.id}')" class="mt-2 bg-blue-500 text-white px-3 py-1 rounded text-xs hover:bg-blue-600">
-                                📥 Download
-                            </button>
-                        </div>
+            if (proofType === 'id' && !transactionId) {
+                alert('Mohon masukkan ID Transaksi!');
+                return;
+            }
+
+            if (proofType === 'image' && !proofImage) {
+                alert('Mohon upload bukti pembayaran!');
+                return;
+            }
+
+            // Generate random ID
+            const productId = 'RS' + Math.random().toString(36).substr(2, 8).toUpperCase();
+            
+            // Create purchase record
+            const purchase = {
+                id: productId,
+                phone: phoneNumber,
+                product: currentProductName,
+                price: currentProductPrice,
+                paymentMethod: paymentMethod,
+                proof: proofType === 'id' ? transactionId : 'Gambar terupload',
+                date: new Date().toLocaleString('id-ID'),
+                type: currentProductType
+            };
+
+            // Add to history
+            purchaseHistory.push(purchase);
+            
+            // Add points (3 points per purchase)
+            userPoints += 3;
+            
+            // Save to localStorage
+            saveUserData();
+            
+            // Send to Telegram (simulated)
+            sendToTelegram(purchase);
+            
+            // Show success message
+            alert(`Pembelian berhasil!\nID Produk: ${productId}\nAnda mendapat 3 poin!`);
+            
+            // Close modal and refresh data
+            closePurchaseModal();
+            updatePointsDisplay();
+            updatePurchaseHistory();
+        }
+
+        // Send to Telegram (simulated)
+        function sendToTelegram(purchase) {
+            const message = `
+🛒 PEMBELIAN BARU - HADI PONSEL
+
+📱 ID Produk: ${purchase.id}
+📞 Nomor HP: ${purchase.phone}
+🛍️ Produk: ${purchase.product}
+💰 Harga: Rp ${purchase.price.toLocaleString()}
+💳 Pembayaran: ${purchase.paymentMethod}
+📄 Bukti: ${purchase.proof}
+📅 Tanggal: ${purchase.date}
+            `;
+            
+            // In real implementation, you would send this to Telegram Bot API
+            console.log('Telegram message:', message);
+        }
+
+        // Show section
+        function showSection(section) {
+            // Hide all sections
+            document.getElementById('homeSection').classList.add('hidden');
+            document.getElementById('dataSection').classList.add('hidden');
+            document.getElementById('coinsSection').classList.add('hidden');
+            
+            // Reset button colors
+            document.getElementById('homeBtn').className = 'flex flex-col items-center p-2 text-gray-500';
+            document.getElementById('dataBtn').className = 'flex flex-col items-center p-2 text-gray-500';
+            document.getElementById('coinsBtn').className = 'flex flex-col items-center p-2 text-gray-500';
+            
+            // Show selected section and highlight button
+            if (section === 'home') {
+                document.getElementById('homeSection').classList.remove('hidden');
+                document.getElementById('homeBtn').className = 'flex flex-col items-center p-2 text-blue-500';
+            } else if (section === 'data') {
+                document.getElementById('dataSection').classList.remove('hidden');
+                document.getElementById('dataBtn').className = 'flex flex-col items-center p-2 text-blue-500';
+                updatePurchaseHistory();
+            } else if (section === 'coins') {
+                document.getElementById('coinsSection').classList.remove('hidden');
+                document.getElementById('coinsBtn').className = 'flex flex-col items-center p-2 text-blue-500';
+                updatePointsDisplay();
+            }
+        }
+
+        // Update purchase history
+        function updatePurchaseHistory() {
+            const historyDiv = document.getElementById('purchaseHistory');
+            
+            if (purchaseHistory.length === 0) {
+                historyDiv.innerHTML = '<p class="text-gray-500 text-center">Belum ada data pembelian</p>';
+                return;
+            }
+            
+            historyDiv.innerHTML = purchaseHistory.map(purchase => `
+                <div class="bg-gray-50 p-4 rounded-lg border">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="font-bold text-blue-600">${purchase.id}</div>
+                        <div class="text-sm text-gray-500">${purchase.date}</div>
+                    </div>
+                    <div class="space-y-1 text-sm">
+                        <div><strong>Nomor HP:</strong> ${purchase.phone}</div>
+                        <div><strong>Produk:</strong> ${purchase.product}</div>
+                        <div><strong>Harga:</strong> Rp ${purchase.price.toLocaleString()}</div>
+                        <div><strong>Pembayaran:</strong> ${purchase.paymentMethod}</div>
+                        <div><strong>Bukti:</strong> ${purchase.proof}</div>
+                    </div>
+                    <div class="mt-3 flex gap-2">
+                        <button onclick="downloadPurchaseData('${purchase.id}')" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">
+                            📥 Download
+                        </button>
+                        <button onclick="sendPurchaseToTelegram('${purchase.id}')" class="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">
+                            📤 Kirim ke Telegram
+                        </button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Download purchase data as image
+        // Download purchase data
         function downloadPurchaseData(purchaseId) {
-            const purchase = purchaseHistory.find(p => p.id == purchaseId);
+            const purchase = purchaseHistory.find(p => p.id === purchaseId);
             if (!purchase) return;
+            
+            const data = `
+HADI PONSEL - DATA PEMBELIAN
 
-            // Create canvas for image generation
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
+ID Produk: ${purchase.id}
+Nomor HP: ${purchase.phone}
+Produk: ${purchase.product}
+Harga: Rp ${purchase.price.toLocaleString()}
+Metode Pembayaran: ${purchase.paymentMethod}
+Bukti Pembayaran: ${purchase.proof}
+Tanggal: ${purchase.date}
+
+Terima kasih telah berbelanja di Hadi Ponsel!
+            `;
             
-            // Set canvas size
-            canvas.width = 400;
-            canvas.height = 500;
-            
-            // Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Header
-            ctx.fillStyle = '#2563eb';
-            ctx.fillRect(0, 0, canvas.width, 80);
-            
-            // Title
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 20px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('HADI PONSEL', canvas.width / 2, 30);
-            ctx.font = '14px Arial';
-            ctx.fillText('Bukti Pembelian', canvas.width / 2, 55);
-            
-            // Content
-            ctx.fillStyle = '#000000';
-            ctx.textAlign = 'left';
-            ctx.font = '14px Arial';
-            
-            let y = 120;
-            const lineHeight = 25;
-            
-            const data = [
-                `ID Produk: ${purchase.rsId}`,
-                `Produk: ${purchase.product}`,
-                `Harga: ${purchase.price}`,
-                `No. HP: ${purchase.phone}`,
-                `Pembayaran: ${purchase.payment}`,
-                `Nama Pemilik: ${purchase.ownerName}`,
-                `ID Transaksi: ${purchase.transactionId}`,
-                `Tanggal: ${purchase.date}`,
-                `Waktu: ${purchase.time}`,
-                `Status: ${purchase.status}`
-            ];
-            
-            data.forEach(text => {
-                ctx.fillText(text, 20, y);
-                y += lineHeight;
-            });
-            
-            // Footer
-            ctx.fillStyle = '#6b7280';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Terima kasih telah berbelanja di Hadi Ponsel', canvas.width / 2, canvas.height - 30);
-            ctx.fillText('Hubungi kami: @massboy1922 (Telegram)', canvas.width / 2, canvas.height - 10);
-            
-            // Download
-            const link = document.createElement('a');
-            link.download = `HadiPonsel_${purchase.rsId}.png`;
-            link.href = canvas.toDataURL();
-            link.click();
+            const blob = new Blob([data], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `HadiPonsel_${purchaseId}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
         }
 
+        // Send purchase to Telegram
+        function sendPurchaseToTelegram(purchaseId) {
+            const purchase = purchaseHistory.find(p => p.id === purchaseId);
+            if (!purchase) return;
+            
+            sendToTelegram(purchase);
+            alert('Data pembelian telah dikirim ke Telegram!');
+        }
+
+        // Update points display
+        function updatePointsDisplay() {
+            document.getElementById('userPoints').textContent = userPoints.toLocaleString();
+        }
+
+        // Redeem points
         function redeemPoints(requiredPoints, reward) {
-            if (userPoints >= requiredPoints) {
+            if (userPoints < requiredPoints) {
+                alert(`Poin Anda tidak cukup! Dibutuhkan ${requiredPoints.toLocaleString()} poin.`);
+                return;
+            }
+            
+            if (confirm(`Tukar ${requiredPoints.toLocaleString()} poin dengan ${reward}?`)) {
                 userPoints -= requiredPoints;
-                document.getElementById('userPoints').textContent = userPoints;
-                alert(`Selamat! Anda berhasil menukar ${requiredPoints} poin dengan ${reward}!`);
-            } else {
-                alert(`Poin Anda tidak cukup. Anda membutuhkan ${requiredPoints} poin.`);
+                
+                // Create redemption record
+                const redemption = {
+                    id: 'RD' + Math.random().toString(36).substr(2, 8).toUpperCase(),
+                    phone: 'Penukaran Poin',
+                    product: reward,
+                    price: 0,
+                    paymentMethod: 'Penukaran Poin',
+                    proof: `${requiredPoints.toLocaleString()} Poin`,
+                    date: new Date().toLocaleString('id-ID'),
+                    type: 'redemption'
+                };
+                
+                purchaseHistory.push(redemption);
+                saveUserData();
+                updatePointsDisplay();
+                
+                alert(`Berhasil menukar ${requiredPoints.toLocaleString()} poin dengan ${reward}!`);
             }
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeProducts();
-        });
+        // Save user data
+        function saveUserData() {
+            localStorage.setItem('hadiPonselPoints', userPoints.toString());
+            localStorage.setItem('hadiPonselHistory', JSON.stringify(purchaseHistory));
+        }
+
+        // Load user data
+        function loadUserData() {
+            const savedPoints = localStorage.getItem('hadiPonselPoints');
+            const savedHistory = localStorage.getItem('hadiPonselHistory');
+            
+            if (savedPoints) {
+                userPoints = parseInt(savedPoints);
+            }
+            
+            if (savedHistory) {
+                purchaseHistory = JSON.parse(savedHistory);
+            }
+            
+            updatePointsDisplay();
+        }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a12659b312ce3d',t:'MTc1OTcxMTY3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a14189b37087a7',t:'MTc1OTcxMjc4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
