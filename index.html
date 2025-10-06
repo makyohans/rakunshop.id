@@ -313,11 +313,9 @@
                             <option value="jago">JAGO - 102850087054</option>
                         </optgroup>
                         <optgroup label="E-Wallet">
-                            <option value="dana">DANA</option>
-                            <option value="gopay">GOPAY</option>
-                        </optgroup>
-                        <optgroup label="QRIS">
-                            <option value="qris">QRIS PAY</option>
+                            <option value="dana">DANA - 089646775883</option>
+                            <option value="gopay">GOPAY - 089646775883</option>
+                            <option value="shoppy">SHOPPY - 089646775883</option>
                         </optgroup>
                     </select>
                 </div>
@@ -328,9 +326,7 @@
                         <p class="text-sm">a.n. WINORO HADI MUKTI</p>
                     </div>
                 </div>
-                <div id="qrisSection" class="mb-4 hidden">
-                    <img src="https://i.ibb.co.com/8Lx2nrw4/IMG-20251005-WA0000.jpg" alt="QRIS Code" class="w-full max-w-xs mx-auto">
-                </div>
+
                 <div class="flex gap-2">
                     <button type="button" onclick="closeModal()" class="flex-1 bg-gray-500 text-white py-2 rounded-lg">Batal</button>
                     <button type="submit" class="flex-1 bg-blue-500 text-white py-2 rounded-lg">Lanjut</button>
@@ -476,12 +472,11 @@
             // Coin Seller
             const coinSellerContainer = document.getElementById('coinSeller');
             const coinPackages = [
-                { name: '100 Diamonds', price: 15000 },
-                { name: '500 Diamonds', price: 70000 },
-                { name: '1000 Diamonds', price: 140000 },
-                { name: '2000 Diamonds', price: 280000 },
-                { name: '5000 Diamonds', price: 700000 },
-                { name: '10000 Diamonds', price: 1400000 }
+                { name: 'COIN 5.881', price: 5000 },
+                { name: 'COIN 11.763', price: 10000 },
+                { name: 'COIN 17.645', price: 15000 },
+                { name: 'COIN 23.528', price: 20000 },
+                { name: 'COIN 29.410', price: 25000 }
             ];
 
             coinPackages.forEach(coin => {
@@ -562,18 +557,15 @@
             document.getElementById('purchaseModal').classList.remove('flex');
             document.getElementById('purchaseForm').reset();
             document.getElementById('paymentDetails').classList.add('hidden');
-            document.getElementById('qrisSection').classList.add('hidden');
         }
 
         // Payment method change
         document.getElementById('paymentMethod').addEventListener('change', function() {
             const method = this.value;
             const paymentDetails = document.getElementById('paymentDetails');
-            const qrisSection = document.getElementById('qrisSection');
             const accountDetails = document.getElementById('accountDetails');
 
             paymentDetails.classList.add('hidden');
-            qrisSection.classList.add('hidden');
 
             if (method === 'seabank') {
                 accountDetails.textContent = 'SEABANK - 901711939465';
@@ -585,13 +577,14 @@
                 accountDetails.textContent = 'JAGO - 102850087054';
                 paymentDetails.classList.remove('hidden');
             } else if (method === 'dana') {
-                accountDetails.textContent = 'DANA - WINORO HADI MUKTI';
+                accountDetails.textContent = 'DANA - 089646775883';
                 paymentDetails.classList.remove('hidden');
             } else if (method === 'gopay') {
-                accountDetails.textContent = 'GOPAY - WINORO HADI MUKTI';
+                accountDetails.textContent = 'GOPAY - 089646775883';
                 paymentDetails.classList.remove('hidden');
-            } else if (method === 'qris') {
-                qrisSection.classList.remove('hidden');
+            } else if (method === 'shoppy') {
+                accountDetails.textContent = 'SHOPPY - 089646775883';
+                paymentDetails.classList.remove('hidden');
             }
         });
 
@@ -627,25 +620,96 @@
         function submitConfirmation() {
             const phoneNumber = document.getElementById('phoneNumber').value;
             const paymentMethod = document.getElementById('paymentMethod').value;
+            const confirmMethod = document.querySelector('input[name="confirmMethod"]:checked').value;
+            const transactionId = document.getElementById('transactionId').value;
+            const paymentProof = document.getElementById('paymentProof').files[0];
+            
+            // Generate RS ID based on product type
+            let rsId = 'RS';
+            if (currentPurchase.type === 'pulsa-masa-aktif' || currentPurchase.type === 'pulsa-tanpa-masa-aktif') {
+                rsId += Math.floor(Math.random() * 900000) + 100000; // RS + 6 digit
+            } else if (currentPurchase.type === 'paket-data') {
+                rsId += 'PD' + Math.floor(Math.random() * 90000) + 10000; // RSPD + 5 digit
+            } else if (currentPurchase.type === 'hifi-air') {
+                rsId += 'HF' + Math.floor(Math.random() * 90000) + 10000; // RSHF + 5 digit
+            } else {
+                rsId += 'CS' + Math.floor(Math.random() * 90000) + 10000; // RSCS + 5 digit
+            }
+            
+            // Get payment method details
+            const paymentSelect = document.getElementById('paymentMethod');
+            const selectedOption = paymentSelect.options[paymentSelect.selectedIndex];
+            const paymentText = selectedOption.text;
             
             // Add to purchase history
             const purchase = {
                 id: Date.now(),
+                rsId: rsId,
                 date: new Date().toLocaleDateString('id-ID'),
+                time: new Date().toLocaleTimeString('id-ID'),
                 product: currentPurchase.name,
                 price: currentPurchase.price,
                 phone: phoneNumber,
-                payment: paymentMethod,
+                payment: paymentText,
+                ownerName: 'WINORO HADI MUKTI',
+                confirmMethod: confirmMethod,
+                transactionId: transactionId || 'Bukti Gambar',
+                paymentProof: paymentProof ? paymentProof.name : null,
                 status: 'Menunggu Konfirmasi'
             };
             
             purchaseHistory.push(purchase);
             
-            // Add points
-            userPoints += 3;
+            // Add points (only for non-coin products)
+            if (currentPurchase.type !== 'coin-seller') {
+                userPoints += 3;
+            }
+            
+            // Send to Telegram Bot
+            sendToTelegram(purchase);
             
             closeConfirmationModal();
-            alert('Terima kasih! Pesanan Anda sedang diproses. Anda mendapat 3 poin!');
+            alert('Terima kasih! Pesanan Anda sedang diproses. Data telah dikirim ke sistem kami. Anda mendapat 3 poin!');
+        }
+
+        // Send data to Telegram Bot
+        async function sendToTelegram(purchase) {
+            const botToken = '8397986161:AAEPRy85hQJh8bJOZTXdGba1dYNubh0RiIs';
+            const chatId = '-1002345678901'; // Replace with actual group ID
+            
+            const message = `🛒 *PEMBELIAN BARU - HADI PONSEL*
+
+📋 *ID Produk:* ${purchase.rsId}
+📱 *Nomor HP:* ${purchase.phone}
+🛍️ *Produk:* ${purchase.product}
+💰 *Harga:* ${purchase.price}
+💳 *Metode Pembayaran:* ${purchase.payment}
+👤 *Nama Pemilik:* ${purchase.ownerName}
+🔢 *ID/Bukti Transaksi:* ${purchase.transactionId}
+📅 *Tanggal:* ${purchase.date} ${purchase.time}
+⏳ *Status:* ${purchase.status}`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                
+                if (response.ok) {
+                    console.log('Data berhasil dikirim ke Telegram');
+                } else {
+                    console.log('Gagal mengirim ke Telegram');
+                }
+            } catch (error) {
+                console.log('Error mengirim ke Telegram:', error);
+            }
         }
 
         function updatePurchaseHistory() {
@@ -656,20 +720,100 @@
             }
 
             container.innerHTML = purchaseHistory.map(purchase => `
-                <div class="border rounded-lg p-4">
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <h4 class="font-semibold">${purchase.product}</h4>
-                            <p class="text-sm text-gray-600">No. HP: ${purchase.phone}</p>
-                            <p class="text-sm text-gray-600">Tanggal: ${purchase.date}</p>
+                <div class="border rounded-lg p-4 bg-white shadow-sm">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-2">
+                                <h4 class="font-bold text-blue-600">${purchase.rsId}</h4>
+                                <span class="text-xs bg-orange-100 text-orange-600 px-2 py-1 rounded">${purchase.status}</span>
+                            </div>
+                            <h5 class="font-semibold text-gray-800 mb-1">${purchase.product}</h5>
+                            <div class="text-sm text-gray-600 space-y-1">
+                                <p>📱 No. HP: ${purchase.phone}</p>
+                                <p>💳 ${purchase.payment}</p>
+                                <p>👤 ${purchase.ownerName}</p>
+                                <p>🔢 ${purchase.transactionId}</p>
+                                <p>📅 ${purchase.date} ${purchase.time}</p>
+                            </div>
                         </div>
                         <div class="text-right">
-                            <p class="font-bold text-blue-600">${purchase.price}</p>
-                            <p class="text-sm text-orange-600">${purchase.status}</p>
+                            <p class="font-bold text-green-600 text-lg">${purchase.price}</p>
+                            <button onclick="downloadPurchaseData('${purchase.id}')" class="mt-2 bg-blue-500 text-white px-3 py-1 rounded text-xs hover:bg-blue-600">
+                                📥 Download
+                            </button>
                         </div>
                     </div>
                 </div>
             `).join('');
+        }
+
+        // Download purchase data as image
+        function downloadPurchaseData(purchaseId) {
+            const purchase = purchaseHistory.find(p => p.id == purchaseId);
+            if (!purchase) return;
+
+            // Create canvas for image generation
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = 400;
+            canvas.height = 500;
+            
+            // Background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Header
+            ctx.fillStyle = '#2563eb';
+            ctx.fillRect(0, 0, canvas.width, 80);
+            
+            // Title
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('HADI PONSEL', canvas.width / 2, 30);
+            ctx.font = '14px Arial';
+            ctx.fillText('Bukti Pembelian', canvas.width / 2, 55);
+            
+            // Content
+            ctx.fillStyle = '#000000';
+            ctx.textAlign = 'left';
+            ctx.font = '14px Arial';
+            
+            let y = 120;
+            const lineHeight = 25;
+            
+            const data = [
+                `ID Produk: ${purchase.rsId}`,
+                `Produk: ${purchase.product}`,
+                `Harga: ${purchase.price}`,
+                `No. HP: ${purchase.phone}`,
+                `Pembayaran: ${purchase.payment}`,
+                `Nama Pemilik: ${purchase.ownerName}`,
+                `ID Transaksi: ${purchase.transactionId}`,
+                `Tanggal: ${purchase.date}`,
+                `Waktu: ${purchase.time}`,
+                `Status: ${purchase.status}`
+            ];
+            
+            data.forEach(text => {
+                ctx.fillText(text, 20, y);
+                y += lineHeight;
+            });
+            
+            // Footer
+            ctx.fillStyle = '#6b7280';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Terima kasih telah berbelanja di Hadi Ponsel', canvas.width / 2, canvas.height - 30);
+            ctx.fillText('Hubungi kami: @massboy1922 (Telegram)', canvas.width / 2, canvas.height - 10);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = `HadiPonsel_${purchase.rsId}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
         }
 
         function redeemPoints(requiredPoints, reward) {
@@ -687,5 +831,5 @@
             initializeProducts();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a1020d97ffcb36',t:'MTc1OTcxMDE4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a12659b312ce3d',t:'MTc1OTcxMTY3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
