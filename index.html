@@ -835,89 +835,30 @@
             updatePurchaseHistory();
         }
 
-        // Send to Telegram (improved implementation)
-        async function sendToTelegram(purchase) {
-            const botToken = '8397986161:AAF9zfvsS1XX3PwuGChpJ6TZ5cJf2CrugX8';
-            const chatId = '1087968824'; // Group ID
-            
-            const message = `🛒 PESANAN - HADI PONSEL
+        // Share purchase data (HANYA WhatsApp)
+function sharePurchaseData(purchaseId) {
+    const purchase = purchaseHistory.find(p => p.id === purchaseId);
+    if (!purchase) return;
+    
+    const shareText = `🛒 HADI PONSEL - Data Pembelian
 
-═══════════════════════════════════
-📱 ID PRODUK: ${purchase.id}
-📞 NOMOR HP: ${purchase.phone}
-🛍️ PRODUK: ${purchase.product}
-💰 HARGA: Rp ${purchase.price.toLocaleString()}
-💳 PEMBAYARAN: ${purchase.paymentMethod}
-📄 BUKTI: ${purchase.proof}
-📅 TANGGAL: ${purchase.date}
-═══════════════════════════════════
+📱 ID: ${purchase.id}
+📞 HP: ${purchase.phone}
+🛍️ Produk: ${purchase.product}
+💰 Harga: Rp ${purchase.price.toLocaleString()}
+💳 Pembayaran: ${purchase.paymentMethod}
+📅 Tanggal: ${purchase.date}
 
-✅ Status: Menunggu Konfirmasi
-⏰ Estimasi Proses: 1-5 Menit
+✅ Status: Berhasil
+🏪 Toko: HADI PONSEL - Terpercaya Sejak 2020`;
 
-#HadiPonsel #Pembelian #${purchase.id}`;
+    // Kirim ke WhatsApp nomor 6289646775883
+    const phoneNumber = '6289646775883';
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(shareText)}`;
+    window.open(url, '_blank');
+}
 
-            try {
-                // Show loading indicator
-                const loadingAlert = document.createElement('div');
-                loadingAlert.className = 'fixed top-4 right-4 bg-blue-500 text-white p-4 rounded-xl shadow-2xl z-50 notification glass backdrop-blur-md';
-                loadingAlert.innerHTML = '📤 Mengirim ke Telegram...';
-                document.body.appendChild(loadingAlert);
 
-                const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: chatId,
-                        text: message
-                    })
-                });
-
-                // Remove loading indicator
-                if (document.body.contains(loadingAlert)) {
-                    document.body.removeChild(loadingAlert);
-                }
-
-                if (response.ok) {
-                    // Show success notification
-                    const successAlert = document.createElement('div');
-                    successAlert.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 rounded-xl shadow-2xl z-50 notification neon-glow';
-                    successAlert.innerHTML = '✅ Berhasil dikirim ke Telegram!';
-                    document.body.appendChild(successAlert);
-                    
-                    setTimeout(() => {
-                        if (document.body.contains(successAlert)) {
-                            document.body.removeChild(successAlert);
-                        }
-                    }, 3000);
-                    
-                    console.log('Message sent to Telegram successfully');
-                } else {
-                    throw new Error('Failed to send message');
-                }
-            } catch (error) {
-                // Remove loading indicator if still present
-                if (document.body.contains(loadingAlert)) {
-                    document.body.removeChild(loadingAlert);
-                }
-                
-                // Show error notification
-                const errorAlert = document.createElement('div');
-                errorAlert.className = 'fixed top-4 right-4 bg-red-500 text-white p-4 rounded-xl shadow-2xl z-50 notification neon-glow';
-                errorAlert.innerHTML = '❌ Gagal mengirim ke Telegram';
-                document.body.appendChild(errorAlert);
-                
-                setTimeout(() => {
-                    if (document.body.contains(errorAlert)) {
-                        document.body.removeChild(errorAlert);
-                    }
-                }, 3000);
-                
-                console.error('Error sending to Telegram:', error);
-            }
-        }
 
         // Show product page
         function showProductPage(productType) {
