@@ -32,14 +32,13 @@
         }
         
         .contact-menu {
-            transform: translateY(-100%);
-            opacity: 0;
-            transition: all 0.3s ease;
+          transform: translateY(-100%);
+          opacity: 0;
+          transition: all 0.3s ease;
         }
-        
         .contact-menu.show {
-            transform: translateY(0);
-            opacity: 1;
+          transform: translateY(0);
+          opacity: 1;
         }
         
         .nav-fixed {
@@ -152,21 +151,21 @@
     <!-- Header -->
     <header class="glass shadow-lg p-4 flex justify-between items-center backdrop-blur-md">
         <h1 class="text-2xl font-bold gradient-text float">📱 HADI PONSEL</h1>
-        <div class="relative">
-            <button id="contactBtn" class="rainbow-border bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white p-3 rounded-full transition-all duration-300 btn-pulse neon-glow">
-                💬
-            </button>
-            <div id="contactMenu" class="contact-menu absolute right-0 top-16 glass shadow-xl rounded-lg p-4 w-48 backdrop-blur-md">
-                <a href="https://wa.me/6289646775883" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-green-100 hover:bg-opacity-50 rounded mb-2 transition-all duration-300">
-                    <span class="text-green-500 text-xl">📱</span> 
-                    <span class="font-medium">WhatsApp</span>
-                </a>
-                <a href="https://t.me/massboy1922" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-blue-100 hover:bg-opacity-50 rounded transition-all duration-300">
-                    <span class="text-blue-500 text-xl">✈️</span> 
-                    <span class="font-medium">Telegram</span>
-                </a>
-            </div>
-        </div>
+<div class="relative">
+    <button id="contactBtn" type="button" class="rainbow-border bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white p-3 rounded-full transition-all duration-300 btn-pulse neon-glow">
+        💬
+    </button>
+    <div id="contactMenu" class="contact-menu absolute right-0 top-16 glass shadow-xl rounded-lg p-4 w-48 backdrop-blur-md">
+        <a href="https://wa.me/6289646775883" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-green-100 hover:bg-opacity-50 rounded mb-2 transition-all duration-300">
+            <span class="text-green-500 text-xl">📱</span> 
+            <span class="font-medium">WhatsApp</span>
+        </a>
+        <a href="https://t.me/massboy1922" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-blue-100 hover:bg-opacity-50 rounded transition-all duration-300">
+            <span class="text-blue-500 text-xl">✈️</span> 
+            <span class="font-medium">Telegram</span>
+        </a>
+    </div>
+</div>
     </header>
 
     <!-- Image Slider -->
@@ -504,6 +503,23 @@
     </div>
 
     <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('contactBtn');
+    const menu = document.getElementById('contactMenu');
+
+    btn.addEventListener('click', function(e) {
+        menu.classList.toggle('show');
+        e.stopPropagation();
+    });
+    // Tutup menu jika klik di luar
+    document.addEventListener('click', function(e) {
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            menu.classList.remove('show');
+        }
+    });
+});
+        
         // Global variables
         let userPoints = 0;
         let purchaseHistory = [];
