@@ -614,11 +614,13 @@ closePaymentModal.addEventListener('click', () => {
 
 function processTransactionConfirmation(transactionId, proofImageFile) {
     
+    // URL Vercel Serverless Function Anda (Endpoint)
+    const TELEGRAM_SERVERLESS_ENDPOINT = '/api/send_telegram'; // Relatif ke domain Vercel Anda
+
     // Fungsi untuk melanjutkan setelah mendapatkan Base64
     const sendAndSave = (confirmationImageSrc, fileName) => {
         
-        // 1. Buat pesan Telegram (Menggunakan format Markdown untuk PHP)
-        // Gunakan \` untuk backtick agar teks bold tidak bercampur dengan ID
+        // 1. Buat pesan Telegram
         const messageCaption = `
 *--- 🔔 PESANAN BARU (RAKUNSHOP) 🔔 ---*
 
@@ -633,98 +635,100 @@ ${transactionDetails.serverId ? `Server : \`${transactionDetails.serverId}\`` : 
 
 *Konfirmasi:*
 ${transactionId ? `ID Transaksi: \`${transactionId}\`` : 'Tidak Ada ID Transaksi'}
-${proofImageFile ? `Bukti Gambar: ${fileName}` : 'Tidak Ada Bukti Gambar'}
+${proofImageFile ? `Bukti Gambar: ${fileName} (Lihat Riwayat Lokal)` : 'Tidak Ada Bukti Gambar'}
 `;
 
-        // 2. Siapkan Data untuk Dikirim ke PHP
-        // confirmationImageSrc berisi Base64 DATA (TANPA prefix 'data:image/jpeg;base64,')
+        // 2. Siapkan Data untuk Dikirim ke Vercel Serverless Function
         const dataToSend = {
             message_caption: messageCaption,
+            // Kita tetap kirimkan data file, tapi Serverless Function mungkin mengabaikannya
+            // karena kompleksitas pengiriman file via JSON body.
             file_content: confirmationImageSrc, // Base64 data atau null
             file_name: fileName
         };
 
-        // 3. Kirim ke PHP (Server) menggunakan fetch
-        fetch('send_telegram.php', {
+        // 3. Kirim ke Vercel Serverless Function
+        fetch(TELEGRAM_SERVERLESS_ENDPOINT, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(dataToSend),
         })
-        .then(response => {
-            if (!response.ok) {
-                // Tangani status HTTP error
-                throw new Error(`Server merespon dengan status: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(result => {
-            if (result.status === 'success') {
-                
-                // 4. Jika sukses dari server, baru simpan lokal
-                const newTransaction = {
-                    id: Date.now(),
-                    date: new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
-                    timestamp: Date.now(), 
-                    productTitle: transactionDetails.product,
-                    type: currentGameState.isPulsa ? 'Pulsa' : 'Game', 
-                    uniqueDetail: currentGameState.isPulsa
-                        ? `No. HP: ${transactionDetails.gameId}`
-                        : transactionDetails.serverId 
-                        ? `ID: ${transactionDetails.gameId} | Server: ${transactionDetails.serverId}`
-                        : `ID: ${transactionDetails.gameId}`, 
-                    amount: transactionDetails.nominal,
-                    paymentMethod: transactionDetails.method,
-                    price: `Rp ${transactionDetails.price.toLocaleString('id-ID')}`,
-                    confirmationProof: transactionId ? `ID Transaksi: ${transactionId}` : proofImageFile ? `Bukti Gambar: ${fileName}` : 'Tidak Ada Bukti Yang Diberikan',
-                    confirmationImageSrc: confirmationImageSrc ? `data:${proofImageFile.type};base64,${confirmationImageSrc}` : null, // Tambahkan kembali prefix data URL untuk localStorage
-                    status: 'Menunggu Konfirmasi', 
-                    statusClass: 'pending' 
-                };
-                
-                saveTransaction(newTransaction);
-                
-                // Bersihkan input dan tutup modal
-                const modalContent = paymentModal.querySelector('.modal-content');
-                if (modalContent) {
-                    const idInput = modalContent.querySelector('#transaction-id-input');
-                    const fileInput = modalContent.querySelector('#proof-image-upload');
-                    if(idInput) idInput.value = '';
-                    if(fileInput) fileInput.value = '';
-                }
-                paymentModal.style.display = 'none';
-                alert("✅ Konfirmasi pembayaran berhasil dan notifikasi telah terkirim ke Telegram!");
-                navigate('data');
+            let status = 'Menunggu Konfirmasi';
+            let statusClass = 'pending';
+            let alertMessage = "";
 
+            if (result.status === 'success') {
+                alertMessage = "✅ Konfirmasi pembayaran berhasil dikirim ke Telegram (via Vercel)!";
             } else {
-                // Gagal di sisi server PHP/Telegram
-                alert(`❌ GAGAL mengirim notifikasi ke Telegram: ${result.message}`);
+                status = 'Gagal Notifikasi';
+                statusClass = 'error';
+                alertMessage = `❌ GAGAL mengirim notifikasi ke Telegram: ${result.message}. Data disimpan lokal.`;
             }
+
+            // 4. SELALU simpan lokal setelah respon dari server
+            const newTransaction = {
+                id: Date.now(),
+                date: new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
+                timestamp: Date.now(), 
+                productTitle: transactionDetails.product,
+                type: currentGameState.isPulsa ? 'Pulsa' : 'Game', 
+                uniqueDetail: currentGameState.isPulsa
+                    ? `No. HP: ${transactionDetails.gameId}`
+                    : transactionDetails.serverId 
+                    ? `ID: ${transactionDetails.gameId} | Server: ${transactionDetails.serverId}`
+                    : `ID: ${transactionDetails.gameId}`, 
+                amount: transactionDetails.nominal,
+                paymentMethod: transactionDetails.method,
+                price: `Rp ${transactionDetails.price.toLocaleString('id-ID')}`,
+                confirmationProof: transactionId ? `ID Transaksi: ${transactionId}` : proofImageFile ? `Bukti Gambar: ${fileName}` : 'Tidak Ada Bukti Yang Diberikan',
+                confirmationImageSrc: confirmationImageSrc, // Base64 Data URL
+                status: status, 
+                statusClass: statusClass 
+            };
+            
+            saveTransaction(newTransaction);
+            
+            // Bersihkan input dan tutup modal
+            const modalContent = paymentModal.querySelector('.modal-content');
+            if (modalContent) {
+                const idInput = modalContent.querySelector('#transaction-id-input');
+                const fileInput = modalContent.querySelector('#proof-image-upload');
+                if(idInput) idInput.value = '';
+                if(fileInput) fileInput.value = '';
+            }
+            paymentModal.style.display = 'none';
+            alert(alertMessage);
+            navigate('data');
         })
         .catch(error => {
-            // Gagal di sisi jaringan/JS
-            alert(`⚠️ Terjadi kesalahan jaringan saat mengirim data: ${error.message}. Pastikan file 'send_telegram.php' sudah online.`);
+            // Gagal di sisi jaringan
+            alert(`⚠️ Terjadi kesalahan jaringan: ${error.message}. Transaksi gagal. Data disimpan lokal dengan status Gagal Notifikasi.`);
+            // Simpan lokal sebagai gagal notifikasi
+            saveTransactionLocally('Gagal Notifikasi', 'error', confirmationImageSrc);
+            paymentModal.style.display = 'none';
+            navigate('data');
         });
     };
 
-    // Logika pembacaan file proof (untuk mendapatkan Base64)
+    // Logika pembacaan file proof (untuk mendapatkan Base64 untuk penyimpanan lokal)
     if (proofImageFile) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            // e.target.result adalah Data URL (Base64), kita hapus prefix-nya
-            const base64Data = e.target.result.split(',')[1];
-            sendAndSave(base64Data, proofImageFile.name); 
+            sendAndSave(e.target.result); 
         };
         reader.onerror = function() {
-            alert("Gagal membaca file gambar. Silakan coba lagi tanpa gambar.");
-            sendAndSave(null, null); // Coba kirim tanpa gambar jika gagal baca
+            alert("Gagal membaca file gambar. Mengirim data tanpa gambar.");
+            sendAndSave(null); 
         };
         reader.readAsDataURL(proofImageFile);
     } else {
-        sendAndSave(null, null); // Kirim tanpa gambar
+        sendAndSave(null); // Kirim tanpa gambar
     }
-};
+}
 // *********************************************************
 
 // =========================================================
