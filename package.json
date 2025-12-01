@@ -1,0 +1,17 @@
+{
+  "name": "rakunshop-telegram-bot",
+  "version": "1.0.0",
+  "description": "A simple static site with a Vercel Serverless Function for Telegram.",
+  "main": "index.html",
+  "type": "module", 
+  "scripts": {
+    "start": "echo 'Run this with a local web server to test frontend'"
+  },
+  "keywords": [
+    "vercel",
+    "telegram",
+    "serverless"
+  ],
+  "author": "",
+  "license": "ISC"
+}
