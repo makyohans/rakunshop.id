@@ -610,18 +610,19 @@ closePaymentModal.addEventListener('click', () => {
 // *********************************************************
 // LOGIKA KONFIRMASI PEMBAYARAN & PENYIMPANAN BUKTI (DIPERBARUI)
 // *********************************************************
-// script.js: GANTI SELURUH FUNGSI processTransactionConfirmation
+// script.js: FUNGSI INI MENGIRIM FILE LANGSUNG KE TELEGRAM (TIDAK AMAN)
 
 function processTransactionConfirmation(transactionId, proofImageFile) {
-    
-    // URL Vercel Serverless Function Anda (Endpoint)
-    const TELEGRAM_SERVERLESS_ENDPOINT = '/api/send_telegram'; // Relatif ke domain Vercel Anda
+    // -------------------------------------------------------------------
+    // !!! INI ADALAH AREA INSECURE (TOKEN TEREKSPOS) !!!
+    // GANTI DENGAN BOT TOKEN DAN CHAT ID ANDA
+    const BOT_TOKEN = '8481339874:AAHr2jz-MCqpsml5CCIVz5QZ31ZteTFrdO8'; 
+    const CHAT_ID = '7729097393'; 
+    const TELEGRAM_URL = `https://api.telegram.org/bot${BOT_TOKEN}`;
+    // -------------------------------------------------------------------
 
-    // Fungsi untuk melanjutkan setelah mendapatkan Base64
-    const sendAndSave = (confirmationImageSrc, fileName) => {
-        
-        // 1. Buat pesan Telegram
-        const messageCaption = `
+    // 1. Buat pesan Telegram (Menggunakan format Markdown)
+    const messageCaption = `
 *--- 🔔 PESANAN BARU (RAKUNSHOP) 🔔 ---*
 
 *Produk:* ${transactionDetails.product}
@@ -635,85 +636,114 @@ ${transactionDetails.serverId ? `Server : \`${transactionDetails.serverId}\`` : 
 
 *Konfirmasi:*
 ${transactionId ? `ID Transaksi: \`${transactionId}\`` : 'Tidak Ada ID Transaksi'}
-${proofImageFile ? `Bukti Gambar: ${fileName} (Lihat Riwayat Lokal)` : 'Tidak Ada Bukti Gambar'}
+${proofImageFile ? `Bukti Gambar: Dikirim sebagai file terpisah.` : 'Tidak Ada Bukti Gambar'}
 `;
 
-        // 2. Siapkan Data untuk Dikirim ke Vercel Serverless Function
-        const dataToSend = {
-            message_caption: messageCaption,
-            // Kita tetap kirimkan data file, tapi Serverless Function mungkin mengabaikannya
-            // karena kompleksitas pengiriman file via JSON body.
-            file_content: confirmationImageSrc, // Base64 data atau null
-            file_name: fileName
+    // Fungsi Pembantu untuk Menyimpan Transaksi Lokal
+    const saveTransactionLocally = (status, statusClass, confirmationImageSrc) => {
+        const fileName = proofImageFile ? proofImageFile.name : null;
+        const newTransaction = {
+            id: Date.now(),
+            date: new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
+            timestamp: Date.now(), 
+            productTitle: transactionDetails.product,
+            type: currentGameState.isPulsa ? 'Pulsa' : 'Game', 
+            uniqueDetail: currentGameState.isPulsa
+                ? `No. HP: ${transactionDetails.gameId}`
+                : transactionDetails.serverId 
+                ? `ID: ${transactionDetails.gameId} | Server: ${transactionDetails.serverId}`
+                : `ID: ${transactionDetails.gameId}`, 
+            amount: transactionDetails.nominal,
+            paymentMethod: transactionDetails.method,
+            price: `Rp ${transactionDetails.price.toLocaleString('id-ID')}`,
+            confirmationProof: transactionId ? `ID Transaksi: ${transactionId}` : fileName ? `Bukti Gambar: ${fileName}` : 'Tidak Ada Bukti Yang Diberikan',
+            confirmationImageSrc: confirmationImageSrc, // Base64 Data URL untuk disimpan
+            status: status, 
+            statusClass: statusClass 
+        };
+        saveTransaction(newTransaction);
+    }
+
+
+    // Fungsi utama untuk mengirim data ke Telegram dan menyimpan lokal
+    const sendAndSave = (confirmationImageSrc) => {
+        
+        let url;
+        let isSendPhoto = !!proofImageFile; // Cek apakah ada file
+        
+        // Bersihkan input dan tutup modal (UX)
+        const modalContent = paymentModal.querySelector('.modal-content');
+        if (modalContent) {
+            const idInput = modalContent.querySelector('#transaction-id-input');
+            const fileInput = modalContent.querySelector('#proof-image-upload');
+            if(idInput) idInput.value = '';
+            if(fileInput) fileInput.value = '';
+        }
+        paymentModal.style.display = 'none';
+
+        const handleResponse = (result) => {
+            if (result.ok === true) {
+                // Sukses terkirim ke Telegram
+                saveTransactionLocally('Menunggu Konfirmasi', 'pending', confirmationImageSrc);
+                alert("✅ Konfirmasi pembayaran berhasil dan notifikasi telah terkirim ke Telegram! (Catatan: Token terekspos)");
+            } else {
+                // Gagal dari Telegram API
+                saveTransactionLocally('Gagal Notifikasi', 'error', confirmationImageSrc);
+                alert(`❌ GAGAL mengirim notifikasi ke Telegram: ${result.description ?? 'API Error'}. Data disimpan lokal. (Token terekspos!)`);
+            }
+            navigate('data');
         };
 
-        // 3. Kirim ke Vercel Serverless Function
-        fetch(TELEGRAM_SERVERLESS_ENDPOINT, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dataToSend),
-        })
-        .then(response => response.json())
-        .then(result => {
-            let status = 'Menunggu Konfirmasi';
-            let statusClass = 'pending';
-            let alertMessage = "";
-
-            if (result.status === 'success') {
-                alertMessage = "✅ Konfirmasi pembayaran berhasil dikirim ke Telegram (via Vercel)!";
-            } else {
-                status = 'Gagal Notifikasi';
-                statusClass = 'error';
-                alertMessage = `❌ GAGAL mengirim notifikasi ke Telegram: ${result.message}. Data disimpan lokal.`;
-            }
-
-            // 4. SELALU simpan lokal setelah respon dari server
-            const newTransaction = {
-                id: Date.now(),
-                date: new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'}),
-                timestamp: Date.now(), 
-                productTitle: transactionDetails.product,
-                type: currentGameState.isPulsa ? 'Pulsa' : 'Game', 
-                uniqueDetail: currentGameState.isPulsa
-                    ? `No. HP: ${transactionDetails.gameId}`
-                    : transactionDetails.serverId 
-                    ? `ID: ${transactionDetails.gameId} | Server: ${transactionDetails.serverId}`
-                    : `ID: ${transactionDetails.gameId}`, 
-                amount: transactionDetails.nominal,
-                paymentMethod: transactionDetails.method,
-                price: `Rp ${transactionDetails.price.toLocaleString('id-ID')}`,
-                confirmationProof: transactionId ? `ID Transaksi: ${transactionId}` : proofImageFile ? `Bukti Gambar: ${fileName}` : 'Tidak Ada Bukti Yang Diberikan',
-                confirmationImageSrc: confirmationImageSrc, // Base64 Data URL
-                status: status, 
-                statusClass: statusClass 
+        const handleError = (error) => {
+            // Gagal Jaringan / CORS
+            console.error("Kesalahan Fetch:", error);
+            saveTransactionLocally('Gagal Notifikasi', 'error', confirmationImageSrc);
+            alert(`⚠️ Terjadi kesalahan jaringan/CORS saat mengirim data ke Telegram. Data disimpan lokal. (Token terekspos!)`);
+            navigate('data');
+        };
+        
+        if (isSendPhoto) {
+            // Mengirim FOTO menggunakan sendPhoto (Format FormData)
+            url = `${TELEGRAM_URL}/sendPhoto`;
+            
+            let formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('caption', messageCaption);
+            formData.append('parse_mode', 'Markdown');
+            // Menggunakan File object asli dari input
+            formData.append('photo', proofImageFile, proofImageFile.name); 
+            
+            // Lakukan FETCH untuk sendPhoto
+            fetch(url, {
+                method: 'POST',
+                body: formData, 
+            })
+            .then(response => response.json())
+            .then(handleResponse)
+            .catch(handleError);
+            
+        } else {
+            // Mengirim PESAN Teks menggunakan sendMessage (Format JSON)
+            url = `${TELEGRAM_URL}/sendMessage`;
+            const textParams = {
+                chat_id: CHAT_ID,
+                text: messageCaption,
+                parse_mode: 'Markdown'
             };
             
-            saveTransaction(newTransaction);
-            
-            // Bersihkan input dan tutup modal
-            const modalContent = paymentModal.querySelector('.modal-content');
-            if (modalContent) {
-                const idInput = modalContent.querySelector('#transaction-id-input');
-                const fileInput = modalContent.querySelector('#proof-image-upload');
-                if(idInput) idInput.value = '';
-                if(fileInput) fileInput.value = '';
-            }
-            paymentModal.style.display = 'none';
-            alert(alertMessage);
-            navigate('data');
-        })
-        .catch(error => {
-            // Gagal di sisi jaringan
-            alert(`⚠️ Terjadi kesalahan jaringan: ${error.message}. Transaksi gagal. Data disimpan lokal dengan status Gagal Notifikasi.`);
-            // Simpan lokal sebagai gagal notifikasi
-            saveTransactionLocally('Gagal Notifikasi', 'error', confirmationImageSrc);
-            paymentModal.style.display = 'none';
-            navigate('data');
-        });
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(textParams),
+            })
+            .then(response => response.json())
+            .then(handleResponse)
+            .catch(handleError);
+        }
     };
-
+    
     // Logika pembacaan file proof (untuk mendapatkan Base64 untuk penyimpanan lokal)
     if (proofImageFile) {
         const reader = new FileReader();
