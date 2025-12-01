@@ -3,1274 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadi Ponsel - Toko Pulsa & Paket Data</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            box-sizing: border-box;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        
-        .slider {
-            animation: slide 15s infinite;
-        }
-        
-        @keyframes slide {
-            0%, 33% { transform: translateX(0); }
-            33.33%, 66% { transform: translateX(-100%); }
-            66.66%, 100% { transform: translateX(-200%); }
-        }
-        
-        .marquee {
-            animation: marquee 20s linear infinite;
-        }
-        
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        
-        .contact-menu {
-          transform: translateY(-100%);
-          opacity: 0;
-          transition: all 0.3s ease;
-        }
-        .contact-menu.show {
-          transform: translateY(0);
-          opacity: 1;
-        }
-        
-        .nav-fixed {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 50;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-        
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-        }
-        
-        .hidden { display: none; }
-        
-        /* Animasi untuk card */
-        .card-hover {
-            transition: all 0.3s ease;
-            transform: translateY(0);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        /* Animasi untuk button */
-        .btn-pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        /* Gradient text */
-        .gradient-text {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Glassmorphism effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        
-        /* Shimmer effect */
-        .shimmer {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
-        /* Floating animation */
-        .float {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        /* Notification styles */
-        .notification {
-            animation: slideInRight 0.3s ease-out;
-        }
-        
-        @keyframes slideInRight {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        /* Rainbow border */
-        .rainbow-border {
-            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400%;
-            animation: rainbow 3s linear infinite;
-            padding: 2px;
-            border-radius: 12px;
-        }
-        
-        @keyframes rainbow {
-            0%, 100% { background-position: 0 0; }
-            50% { background-position: 100% 0; }
-        }
-        
-        /* Neon glow effect */
-        .neon-glow {
-            box-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
-        }
-    </style>
+    <title>Rakunshop.id - Top Up Game & Voucher</title>
+    <link rel="stylesheet" href="style.css"> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen">
-    <!-- Header -->
-    <header class="glass shadow-lg p-4 flex justify-between items-center backdrop-blur-md">
-        <h1 class="text-2xl font-bold gradient-text float">📱 HADI PONSEL</h1>
-<div class="relative">
-    <button id="contactBtn" type="button" class="rainbow-border bg-gradient-to-r from-green-400 to-blue-500 hover:from-green-500 hover:to-blue-600 text-white p-3 rounded-full transition-all duration-300 btn-pulse neon-glow">
-        💬
-    </button>
-    <div id="contactMenu" class="contact-menu absolute right-0 top-16 glass shadow-xl rounded-lg p-4 w-48 backdrop-blur-md">
-        <a href="https://wa.me/6289646775883" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-green-100 hover:bg-opacity-50 rounded mb-2 transition-all duration-300">
-            <span class="text-green-500 text-xl">📱</span> 
-            <span class="font-medium">WhatsApp</span>
-        </a>
-        <a href="https://t.me/massboy1922" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 p-2 hover:bg-blue-100 hover:bg-opacity-50 rounded transition-all duration-300">
-            <span class="text-blue-500 text-xl">✈️</span> 
-            <span class="font-medium">Telegram</span>
-        </a>
-    </div>
+<body>
+
+    <header class="header">
+        <div class="container nav-bar">
+<div class="logo">
+    <img src="assets/logotoko/toko.png" alt="🦝" style="height: 50px; vertical-align: middle; margin-right: 5px;"> 
+    RAKUN<span style="color: #cc00ff;">SHOP</span>
+    <span style="color: #ffffff;">.ID</span>
 </div>
+            
+            <div class="user-actions">
+                <button id="search-button" class="icon-button"><i class="fas fa-search"></i></button>
+                <button id="info-button" class="icon-button"><i class="fas fa-info-circle"></i></button>
+            </div>
+            </div>
     </header>
 
-    <!-- Image Slider -->
-    <div class="relative overflow-hidden h-48 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 mx-4 mt-4 rounded-xl shadow-2xl">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-90"></div>
-        <div class="slider flex w-[300%] h-full relative z-10">
-            <div class="w-1/3 flex items-center justify-center text-white text-center">
-                <div class="transform hover:scale-105 transition-transform duration-300">
-                    <h2 class="text-3xl font-bold mb-2 neon-glow">🏪 HADI PONSEL</h2>
-                    <p class="text-lg font-medium">Terpercaya Sejak 2020</p>
-                    <div class="mt-2 w-16 h-1 bg-white mx-auto rounded-full"></div>
+    <main class="main-content container">
+
+        <section class="banner-slider">
+            <div class="banner-slide active" data-index="0">
+                <div class="slide-content">
+                    <p class="version-tag">Version 10.4</p>
+                    <h2>TOP UP GAME MLBB</h2>
+                    <p class="agent-tag">Agent Baru!</p>
+                    <button class="top-up-button">TOP UP SEKARANG ❯</button>
                 </div>
             </div>
-            <div class="w-1/3 flex items-center justify-center text-white text-center">
-                <div class="transform hover:scale-105 transition-transform duration-300">
-                    <h2 class="text-3xl font-bold mb-2 neon-glow">⚡ PROSES CEPAT</h2>
-                    <p class="text-lg font-medium">Transaksi Dalam Hitungan Detik</p>
-                    <div class="mt-2 w-16 h-1 bg-white mx-auto rounded-full"></div>
+            
+            <div class="banner-slide" data-index="1">
+                <div class="slide-content">
+                    <p class="version-tag">Version 12.4</p>
+                    <h2>PROMO WEEKEND!</h2>
+                    <p class="agent-tag">Diskon 50% untuk Voucher Game X!</p>
+                    <button class="top-up-button">CEK DISKON ❯</button>
                 </div>
             </div>
-            <div class="w-1/3 flex items-center justify-center text-white text-center">
-                <div class="transform hover:scale-105 transition-transform duration-300">
-                    <h2 class="text-3xl font-bold mb-2 neon-glow">💰 HARGA TERBAIK</h2>
-                    <p class="text-lg font-medium">Dapatkan Harga Termurah</p>
-                    <div class="mt-2 w-16 h-1 bg-white mx-auto rounded-full"></div>
+            
+            <div class="banner-slide" data-index="2">
+                <div class="slide-content">
+                    <p class="version-tag">Version 20.4</p>
+                    <h2>DOWNLOD SEKARANG</h2>
+                    <p class="agent-tag">Tersedia untuk Steam dan Google Play!</p>
+                    <button class="top-up-button">BELI SEKARANG ❯</button>
                 </div>
             </div>
-        </div>
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            <div class="w-2 h-2 bg-white rounded-full opacity-50"></div>
-            <div class="w-2 h-2 bg-white rounded-full opacity-50"></div>
-            <div class="w-2 h-2 bg-white rounded-full opacity-50"></div>
-        </div>
+            
+            <div class="banner-slide" data-index="3">
+                <div class="slide-content">
+                    <p class="version-tag">Version 5.7</p>
+                    <h2>PEMBAYARAN OTOMATIS</h2>
+                    <p class="agent-tag">Teransasi Kamu Bisa Semakin Aman</p>
+                </div>
+            </div>
+            
+            <div class="dots-indicator">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+            </div>
+        </section>
+
+        <section id="mlbb-page" class="top-up-page hidden-page">
+            <h2 class="section-title">MOBILE LEGENDS: BANG BANG</h2>
+
+            <div class="step-card">
+                <h3>1. Masukkan ID Akun Anda</h3>
+                <div class="id-server-input-group">
+                    <input type="number" id="mlbb-game-id" required placeholder="Masukkan ID User (12345678)">
+                    <input type="number" id="mlbb-server-id" required placeholder="Server ID (1234)">
+                </div>
+                <p class="small-info">Contoh: ID User Anda adalah 12345678(1234). Pastikan ID sudah benar.</p>
+            </div>
+
+            <div class="step-card">
+                <h3>2. Pilih Nominal</h3>
+                <div class="nominal-grid mlbb-nominal-grid">
+                    </div>
+            </div>
+
+            <div class="step-card">
+                <h3>3. Pilih Pembayaran</h3>
+
+                <div class="payment-category-buttons">
+                    <button class="category-btn" data-type="Bank">🏦 TRANSFER BANK</button>
+                    <button class="category-btn" data-type="EWALLET">📱 E-WALLET</button>
+                    <button class="category-btn" data-type="QRIS">📷 QRIS</button>
+                </div>
+
+                <div class="payment-detail-view mlbb-payment-methods">
+                    <div class="back-to-categories"><i class="fas fa-arrow-left"></i> Kembali ke Kategori</div>
+                    
+                    <div class="bank-methods-group method-group" data-group="Bank"></div>
+                    
+                    <div class="ewallet-methods-group method-group" data-group="EWALLET"></div>
+                    
+                    <div class="qris-methods-group method-group" data-group="QRIS"></div>
+                </div>
+
+            </div>
+            
+            <div class="step-card summary-card mlbb-summary">
+                <h3>Ringkasan Pembelian</h3>
+                <p id="mlbb-summary-nominal">Diamond: -</p>
+                <p id="mlbb-summary-price">Harga: -</p>
+                <p id="mlbb-summary-method">Metode: -</p>
+                <button id="final-checkout-button-mlbb" class="top-up-button" disabled>Lengkapi Data di Atas</button>
+            </div>
+        </section>
+
+        <section id="generic-page" class="top-up-page hidden-page">
+            <h2 class="section-title" id="generic-game-title"></h2>
+
+            <div class="step-card">
+                <h3>1. Masukkan ID Akun Anda</h3>
+                <div class="id-input-group">
+                    <input type="number" id="generic-game-id" class="game-id-input" required placeholder="Contoh: 123456789">
+                </div>
+                <p class="small-info" id="generic-info-text">
+                    <i class="fas fa-info-circle"></i> Harap masukkan **ID Pengguna (User ID/UID)** Anda di sini. ID ini **tidak** memerlukan Server ID.
+                </p>
+            </div>
+
+            <div class="step-card">
+                <h3>2. Pilih Nominal</h3>
+                <div class="nominal-grid generic-nominal-grid">
+                    </div>
+            </div>
+
+<div class="step-card">
+    <h3>3. Pilih Pembayaran</h3>
+
+    <div class="payment-category-buttons">
+        <button class="category-btn" data-type="Bank">🏦 TRANSFER BANK</button>
+        <button class="category-btn" data-type="EWALLET">📱 E-WALLET</button>
+        <button class="category-btn" data-type="QRIS">📷 QRIS</button>
     </div>
 
-    <!-- Running Text -->
-    <div class="rainbow-border mx-4 mt-4 rounded-lg overflow-hidden">
-        <div class="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white py-3 font-bold">
-            <div class="marquee whitespace-nowrap text-lg">
-                🌟 WEBSITE ABSENSI HADI PONSEL - Kelola Karyawan Dengan Mudah - Sistem Terintegrasi - Promo Spesial Hari Ini! 🌟
-            </div>
-        </div>
+    <div class="payment-detail-view generic-payment-methods">
+        <div class="back-to-categories"><i class="fas fa-arrow-left"></i> Kembali ke Kategori</div>
+        
+        <div class="bank-methods-group method-group" data-group="Bank"></div>
+        
+        <div class="ewallet-methods-group method-group" data-group="EWALLET"></div>
+        
+        <div class="qris-methods-group method-group" data-group="QRIS"></div>
     </div>
 
-    <!-- Main Content -->
-    <main class="p-4 pb-20">
-        <!-- Home Section -->
-        <div id="homeSection" class="space-y-6">
-            <!-- Menu Kategori -->
-            <div class="glass rounded-xl shadow-2xl p-6 card-hover backdrop-blur-md">
-                <h3 class="text-2xl font-bold gradient-text mb-6 flex items-center gap-3 text-center justify-center">
-                    🛍️ KATEGORI PRODUK
-                </h3>
-                <div class="grid grid-cols-2 gap-4">
-                    <button onclick="showProductPage('pulsa')" class="bg-gradient-to-br from-green-400 via-green-500 to-emerald-600 text-white p-6 rounded-xl hover:from-green-500 hover:via-green-600 hover:to-emerald-700 flex flex-col items-center card-hover transform transition-all duration-300 shadow-lg neon-glow">
-                        <span class="text-4xl mb-3 float">📞</span>
-                        <span class="font-bold text-lg">PULSA</span>
-                        <span class="text-sm opacity-90">Masa Aktif & Tanpa Masa Aktif</span>
-                    </button>
-                    <button onclick="showProductPage('paket-data')" class="bg-gradient-to-br from-blue-400 via-blue-500 to-indigo-600 text-white p-6 rounded-xl hover:from-blue-500 hover:via-blue-600 hover:to-indigo-700 flex flex-col items-center card-hover transform transition-all duration-300 shadow-lg neon-glow">
-                        <span class="text-4xl mb-3 float">📶</span>
-                        <span class="font-bold text-lg">PAKET DATA</span>
-                        <span class="text-sm opacity-90">Semua Provider</span>
-                    </button>
-                    <button onclick="showProductPage('hifi-air')" class="bg-gradient-to-br from-cyan-400 via-cyan-500 to-teal-600 text-white p-6 rounded-xl hover:from-cyan-500 hover:via-cyan-600 hover:to-teal-700 flex flex-col items-center card-hover transform transition-all duration-300 shadow-lg neon-glow">
-                        <span class="text-4xl mb-3 float">🌐</span>
-                        <span class="font-bold text-lg">HIFI AIR</span>
-                        <span class="text-sm opacity-90">Indosat/Tri</span>
-                    </button>
-                    <button onclick="showProductPage('coin-faya')" class="bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 text-white p-6 rounded-xl hover:from-yellow-500 hover:via-orange-600 hover:to-red-600 flex flex-col items-center card-hover transform transition-all duration-300 shadow-lg neon-glow">
-                        <span class="text-4xl mb-3 float">⭐</span>
-                        <span class="font-bold text-lg">COIN FAYA</span>
-                        <span class="text-sm opacity-90">Seller Star</span>
-                    </button>
-                </div>
-            </div>
+</div>
 
-            <!-- Info Section -->
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    ℹ️ INFORMASI TOKO
-                </h3>
-                <div class="space-y-3 text-sm text-gray-600">
-                    <div class="flex items-center gap-2">
-                        <span class="text-green-500">✅</span>
-                        <span>Proses cepat dalam hitungan detik</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-blue-500">💰</span>
-                        <span>Harga terjangkau dan kompetitif</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-purple-500">🔒</span>
-                        <span>Transaksi aman dan terpercaya</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-orange-500">⭐</span>
-                        <span>Dapatkan poin setiap pembelian</span>
-                    </div>
-                </div>
+            <div class="step-card summary-card generic-summary">
+                <h3>Ringkasan Pembelian</h3>
+                <p id="generic-summary-nominal">Nominal: -</p>
+                <p id="generic-summary-price">Harga: -</p>
+                <p id="generic-summary-method">Metode: -</p>
+                <button id="final-checkout-button-generic" class="top-up-button" disabled>Lengkapi Data di Atas</button>
             </div>
+        </section>
 
-            <!-- Cara Pembelian -->
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                    📋 CARA PEMBELIAN
-                </h3>
-                <div class="space-y-3">
-                    <div class="flex gap-3">
-                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">1</div>
-                        <span class="text-sm text-gray-700">Pilih kategori produk yang diinginkan</span>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">2</div>
-                        <span class="text-sm text-gray-700">Klik tombol "Beli" pada produk pilihan</span>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">3</div>
-                        <span class="text-sm text-gray-700">Isi form pembelian dengan lengkap</span>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">4</div>
-                        <span class="text-sm text-gray-700">Lakukan pembayaran dan kirim bukti</span>
-                    </div>
-                    <div class="flex gap-3">
-                        <div class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">5</div>
-                        <span class="text-sm text-gray-700">Produk akan diproses otomatis</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <section class="product-grid-section">
+            
+            <a href="#top-up-game" class="category-button">TOP UP GAME KU ID ❯</a>
+            
+            <div class="product-grid">
 
-        <!-- Pulsa Page -->
-        <div id="pulsaPage" class="hidden space-y-6">
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                        📞 PULSA & PULSA TANPA MASA AKTIF
-                    </h3>
-                    <button onclick="showSection('home')" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">← Kembali</button>
+                <div class="product-card" data-id="pubg" data-page="generic-page">
+                  <div class="product-image-placeholder pubg-bg"></div>
+                  <p class="product-title">PUBG Mobile</p>
+                  <p class="product-subtitle">Tencent Games</p></div>
+                
+                <div class="product-card" data-id="mlbb" data-page="mlbb-page">
+                    <div class="product-image-placeholder mlbb-bg"></div>
+                    <p class="product-title">Mobile Legends: Bang Bang</p>
+                    <p class="product-subtitle">Moonton</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-semibold text-green-600 mb-3">Pulsa Masa Aktif</h4>
-                        <div class="space-y-2" id="pulsaMasaAktifPage"></div>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-blue-600 mb-3">Pulsa Tanpa Masa Aktif</h4>
-                        <div class="space-y-2" id="pulsaTanpaMasaAktifPage"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Paket Data Page -->
-        <div id="paketDataPage" class="hidden space-y-6">
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                        📶 PAKET DATA
-                    </h3>
-                    <button onclick="showSection('home')" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">← Kembali</button>
+                <div class="product-card" data-id="supersus" data-page="generic-page">
+                  <div class="product-image-placeholder Supersus-bg"></div>
+                  <p class="product-title">Supersus</p>
+                  <p class="product-subtitle">play game</p></div>
+                
+                <div class="product-card" data-id="genshin" data-page="generic-page">
+                  <div class="product-image-placeholder genshin-bg"></div>
+                  <p class="product-title">Genshin Impact</p>
+                  <p class="product-subtitle">HoYoverse</p></div>
+                
+                <div class="product-card" data-id="freefire" data-page="generic-page">
+                  <div class="product-image-placeholder freefire-bg"></div>
+                  <p class="product-title">Garena Free Fire</p>
+                  <p class="product-subtitle">Garena</p></div>
+                
+                <div class="product-card" data-id="aov" data-page="generic-page">
+                  <div class="product-image-placeholder aov-bg"></div>
+                  <p class="product-title">Arena of Valor</p>
+                  <p class="product-subtitle">Garena</p></div>
+                  
+                <div class="product-card" data-id="faya" data-external-url="https://fayatopup.vercel.app">
+                  <div class="product-image-placeholder faya-bg"></div>
+                  <p class="product-title">FAYA TOP UP</p>
+                  <p class="product-subtitle">RESELER FAYA / SAHABAT KITA</p></div>
+                  
+                
+                <div class="hidden-products">
+                    
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 mb-4">
-                    <button onclick="showPaketDataPage('telkomsel')" class="bg-red-500 text-white p-3 rounded-lg hover:bg-red-600">Telkomsel</button>
-                    <button onclick="showPaketDataPage('tri')" class="bg-orange-500 text-white p-3 rounded-lg hover:bg-orange-600">Tri</button>
-                    <button onclick="showPaketDataPage('axis')" class="bg-purple-500 text-white p-3 rounded-lg hover:bg-purple-600">Axis</button>
-                    <button onclick="showPaketDataPage('smartfren')" class="bg-pink-500 text-white p-3 rounded-lg hover:bg-pink-600">Smartfren</button>
-                    <button onclick="showPaketDataPage('indosat')" class="bg-yellow-500 text-white p-3 rounded-lg hover:bg-yellow-600">Indosat</button>
+            </div> 
+            
+            <a href="#pulsaku" class="category-button">PULSAKU KU ID ❯</a>
+            
+            <a href="#" class="see-all" id="toggle-products">Tampilkan semua</a> 
+            <br>
+                
+            <div class="product-grid">
+                <div class="hidden-products active-on-toggle"> 
+                    <div class="product-card" data-id="telkomsel" data-page="generic-page">
+                      <div class="product-image-placeholder telkomsel-bg"></div>
+                      <p class="product-title">TELKOMSEL</p>
+                      <p class="product-subtitle">PULSA MULAI DARI 5.000 / 100.000</p></div>
+                      
+                    <div class="product-card" data-id="indosat" data-page="generic-page">
+                      <div class="product-image-placeholder indosat-bg"></div>
+                      <p class="product-title">INDOSAT</p>
+                      <p class="product-subtitle">PULSA MULAI DARI 5.000 / 100.000</p></div>
+                      
+                    <div class="product-card" data-id="xl" data-page="generic-page">
+                      <div class="product-image-placeholder xl-bg"></div>
+                      <p class="product-title">XL</p>
+                      <p class="product-subtitle">PULSA MULAI DARI 5.000 / 100.000</p></div>
+                      
+                    <div class="product-card" data-id="smartfren" data-page="generic-page">
+                      <div class="product-image-placeholder smartfren-bg"></div>
+                      <p class="product-title">SMARTFREN</p>
+                      <p class="product-subtitle">PULSA MULAI DARI 5.000 / 100.000</p></div>
+                      
+                    <div class="product-card" data-id="axis" data-page="generic-page">
+                      <div class="product-image-placeholder axis-bg"></div>
+                      <p class="product-title">AXIS</p>
+                      <p class="product-subtitle">PULSA MULAI DARI 5.000 / 100.000</p></div>
+                      
+                    <div class="product-card" data-id="tri" data-page="generic-page">
+                      <div class="product-image-placeholder tri-bg"></div>
+                      <p class="product-title">TRI</p>
+                      <p class="product-subtitle">PULSA MULAI DARI 5.000 / 100.000</p></div>
+                      
                 </div>
-                <div id="paketDataPageContent" class="product-grid"></div>
             </div>
-        </div>
+        </section>
+        
+        <section id="data-page" class="data-history-section hidden-page">
+            <h2 class="section-title">Riwayat Transaksi</h2>
+            
+            <div class="history-tabs">
+                <button class="tab-button active" data-tab="berhasil">Transaksi Berhasil</button>
+                <button class="tab-button" data-tab="menunggu">Transaksi Diproses / Menunggu</button>
+            </div>
+            
+            <div class="tab-content active" id="berhasil">
+                </div>
+            
+            <div class="tab-content" id="menunggu">
+                </div>
+            
+        </section>
 
-        <!-- HiFi Air Page -->
-        <div id="hifiAirPage" class="hidden space-y-6">
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                        🌐 PAKET HIFI AIR INDOSAT/TRI
-                    </h3>
-                    <button onclick="showSection('home')" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">← Kembali</button>
-                </div>
-                <div class="product-grid" id="hifiAirPageList"></div>
-            </div>
-        </div>
-
-        <!-- Coin Faya Page -->
-        <div id="coinFayaPage" class="hidden space-y-6">
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                        ⭐ COIN SELLER FAYA STAR
-                    </h3>
-                    <button onclick="showSection('home')" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">← Kembali</button>
-                </div>
-                <div class="product-grid" id="coinFayaPageList"></div>
-            </div>
-        </div>
-
-        <!-- Data Section -->
-        <div id="dataSection" class="hidden">
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <h3 class="text-xl font-bold text-gray-800 mb-4">📊 DATA PEMBELIAN</h3>
-                <div id="purchaseHistory" class="space-y-4">
-                    <p class="text-gray-500 text-center">Belum ada data pembelian</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Coins Section -->
-        <div id="coinsSection" class="hidden">
-            <div class="bg-white rounded-lg shadow-lg p-4">
-                <h3 class="text-xl font-bold text-gray-800 mb-4">🪙 SISTEM POIN</h3>
-                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg text-white mb-4">
-                    <div class="text-center">
-                        <div class="text-3xl font-bold" id="userPoints">0</div>
-                        <div class="text-sm">Total Poin Anda</div>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <h4 class="font-bold text-gray-800 mb-2">📋 Cara Mendapat Poin:</h4>
-                        <p class="text-sm text-gray-600">• Setiap pembelian produk = 3 poin</p>
-                        <p class="text-sm text-gray-600">• Minimal penukaran 10.000 poin</p>
-                    </div>
-                    <div class="bg-green-50 p-4 rounded-lg">
-                        <h4 class="font-bold text-green-800 mb-2">🎁 Tukar Poin:</h4>
-                        <div class="space-y-2">
-                            <button onclick="redeemPoints(10000, 'Paket Data 5GB')" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
-                                10.000 Poin → Paket Data 5GB
-                            </button>
-                            <button onclick="redeemPoints(10000, 'Pulsa 10.000')" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-                                10.000 Poin → Pulsa Rp 10.000
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
-
-    <!-- Bottom Navigation -->
-    <nav class="nav-fixed glass shadow-2xl border-t border-white border-opacity-20">
-        <div class="flex justify-around py-3">
-            <button onclick="showSection('home')" id="homeBtn" class="flex flex-col items-center p-3 text-blue-500 transition-all duration-300 rounded-lg hover:bg-blue-100 hover:bg-opacity-30">
-                <span class="text-2xl mb-1">🏠</span>
-                <span class="text-xs font-bold">HOME</span>
-            </button>
-            <button onclick="showSection('data')" id="dataBtn" class="flex flex-col items-center p-3 text-gray-600 transition-all duration-300 rounded-lg hover:bg-purple-100 hover:bg-opacity-30">
-                <span class="text-2xl mb-1">📊</span>
-                <span class="text-xs font-bold">DATA</span>
-            </button>
-            <button onclick="showSection('coins')" id="coinsBtn" class="flex flex-col items-center p-3 text-gray-600 transition-all duration-300 rounded-lg hover:bg-yellow-100 hover:bg-opacity-30">
-                <span class="text-2xl mb-1">🪙</span>
-                <span class="text-xs font-bold">COINS</span>
-            </button>
+    
+<div id="payment-details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-payment-modal">&times;</span>
+            <h3 id="payment-modal-title">Detail Pembayaran</h3>
+            
+            <div id="payment-content">
+                </div>
         </div>
+    </div>
+<div id="transaction-detail-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-detail-modal" class="close-button">&times;</span>
+        <h2 id="detail-modal-title">Detail Transaksi</h2>
+        
+        <div id="transaction-details-content" class="transaction-details-view">
+            <p><strong>Produk:</strong> <span id="detail-product"></span></p>
+            <p><strong>ID/Server:</strong> <span id="detail-unique-id"></span></p>
+            <p><strong>Nominal:</strong> <span id="detail-nominal"></span></p>
+            <p><strong>Harga:</strong> <span id="detail-price"></span></p>
+            <p><strong>Pembayaran:</strong> <span id="detail-method"></span></p>
+            <p><strong>Status:</strong> <span id="detail-status"></span></p>
+            <hr>
+            
+            <h3>Bukti Pembayaran</h3>
+            <div id="detail-proof-section" style="text-align: center; margin-top: 10px;">
+                <p id="detail-proof-text" style="color: #ccc; font-style: italic;">Tidak ada bukti gambar.</p>
+                <img id="detail-proof-image" src="" alt="Bukti Pembayaran" style="max-width: 100%; height: auto; border-radius: 8px; display: none;">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="search-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-search-modal" class="close-button">&times;</span>
+        <h2><i class="fas fa-search"></i> Cari Produk</h2>
+        <input type="text" id="search-input" placeholder="Cari Game, Pulsa, atau lainnya..." autofocus>
+        
+        <div id="search-results-container" class="product-grid-compact">
+            <p style="text-align: center; color: #aaa;">Ketikkan kata kunci untuk mencari produk.</p>
+        </div>
+    </div>
+</div>
+<div id="info-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-info-modal" class="close-button">&times;</span>
+        <h2><i class="fas fa-info-circle"></i> Info Aplikasi v1.0</h2>
+        <div id="app-info-content">
+            <h3>Pembaruan Terbaru (1.0)</h3>
+            <ul>
+                <li>✅ **Fitur Top-Up Game Lengkap:** MLBB, PUBG, FF, Genshin, AOV, Supersus.</li>
+                <li>✅ **Pilihan Pembayaran:** Bank, E-Wallet, QRIS.</li>
+                <li>✅ **Riwayat Transaksi:** Cek status pembayaran dan riwayat.</li>
+                <li>🌟 **Fitur Baru (Pencarian):** Tombol pencarian produk (diaktifkan).</li>
+                <li>🌟 **Fitur Baru (Info):** Detail info dan pembaruan aplikasi (diaktifkan).</li>
+            </ul>
+            <p style="margin-top: 15px; font-size: 0.9em; color: #ffc107;">Aplikasi ini disimulasikan sebagai Progressive Web App (PWA) untuk menunjukkan fungsionalitas *front-end*.</p>
+        </div>
+    </div>
+</div>
+<nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <span class="nav-icon"><i class="fas fa-home"></i></span> 
+            <span class="nav-text">Home</span>
+        </a>
+        <a href="#data" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-history"></i></span> 
+            <span class="nav-text">Data</span>
+        </a>
     </nav>
 
-    <!-- Purchase Modal -->
-    <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-4 border-b">
-                <h3 class="text-lg font-bold">Form Pembelian</h3>
-                <button onclick="closePurchaseModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">✕</button>
-            </div>
-            <form id="purchaseForm" class="p-4 space-y-4">
-                <div>
-                    <label class="block text-sm font-medium mb-1">Nomor HP</label>
-                    <input type="tel" id="phoneNumber" class="w-full p-2 border rounded-lg" placeholder="08xxxxxxxxxx" required>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Produk</label>
-                    <input type="text" id="selectedProduct" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Harga</label>
-                    <input type="text" id="productPrice" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Metode Pembayaran</label>
-                    <select id="paymentMethod" class="w-full p-2 border rounded-lg" required>
-                        <option value="">Pilih Metode</option>
-                        <optgroup label="Bank">
-                            <option value="SEABANK - 901711939465">SEABANK - 901711939465</option>
-                            <option value="ALADIN - 50682991909">ALADIN - 50682991909</option>
-                            <option value="JAGO - 102850087054">JAGO - 102850087054</option>
-                        </optgroup>
-                        <optgroup label="E-Wallet">
-                            <option value="DANA - 089646775883">DANA - 089646775883</option>
-                            <option value="GOPAY - 089646775883">GOPAY - 089646775883</option>
-                            <option value="SHOPEE PAY - 089646775883">SHOPEE PAY - 089646775883</option>
-                        </optgroup>
-                        <option value="QRIS">QRIS</option>
-                    </select>
-                </div>
-                <div id="qrisSection" class="hidden">
-                    <div class="text-center p-4 bg-gray-50 rounded-lg">
-                        <div class="text-lg font-bold mb-2">📱 QRIS Payment</div>
-                        <div class="w-48 h-48 bg-white border-2 border-gray-300 rounded-lg mx-auto flex items-center justify-center mb-2 overflow-hidden">
-                            <img src="https://i.ibb.co/H6GJMzN/IMG-20251005-WA0000-2.jpg" 
-                                 alt="QRIS Code" 
-                                 class="w-full h-full object-cover"
-                                 onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
-                        </div>
-                        <div class="text-xs text-gray-500 mt-1">a.n RAKUNSHOP ID</div>
-                        <p class="text-sm text-gray-600">Scan kode QR di atas untuk pembayaran</p>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Nama Pemilik Bank</label>
-                    <input type="text" value="RAKUNSHOP ID" class="w-full p-2 border rounded-lg bg-gray-100" readonly>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Bukti Pembayaran</label>
-                    <div class="space-y-2">
-                        <div>
-                            <input type="radio" id="useTransactionId" name="proofType" value="id" checked>
-                            <label for="useTransactionId" class="ml-2">ID Transaksi</label>
-                        </div>
-                        <input type="text" id="transactionId" class="w-full p-2 border rounded-lg" placeholder="Masukkan ID Transaksi">
-                        <div>
-                            <input type="radio" id="useImage" name="proofType" value="image">
-                            <label for="useImage" class="ml-2">Upload Gambar</label>
-                        </div>
-                        <input type="file" id="proofImage" class="w-full p-2 border rounded-lg" accept="image/*" capture="environment" disabled>
-                    </div>
-                </div>
-                <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600">
-                    Konfirmasi Pembelian
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('contactBtn');
-    const menu = document.getElementById('contactMenu');
-
-    btn.addEventListener('click', function(e) {
-        menu.classList.toggle('show');
-        e.stopPropagation();
-    });
-    // Tutup menu jika klik di luar
-    document.addEventListener('click', function(e) {
-        if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            menu.classList.remove('show');
-        }
-    });
-});
-        
-        // Global variables
-        let userPoints = 0;
-        let purchaseHistory = [];
-        let currentProductType = '';
-        let currentProductName = '';
-        let currentProductPrice = 0;
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            generatePulsaPageProducts();
-            generateHifiAirPageProducts();
-            generateCoinFayaPageProducts();
-            loadUserData();
-            
-            // Contact menu toggle
-            document.getElementById('contactBtn').addEventListener('click', function() {
-                const menu = document.getElementById('contactMenu');
-                menu.classList.toggle('show');
-            });
-
-            // Close contact menu when clicking outside
-            document.addEventListener('click', function(e) {
-                const btn = document.getElementById('contactBtn');
-                const menu = document.getElementById('contactMenu');
-                if (!btn.contains(e.target) && !menu.contains(e.target)) {
-                    menu.classList.remove('show');
-                }
-            });
-
-            // Payment method change
-            document.getElementById('paymentMethod').addEventListener('change', function() {
-                const qrisSection = document.getElementById('qrisSection');
-                if (this.value === 'QRIS') {
-                    qrisSection.classList.remove('hidden');
-                } else {
-                    qrisSection.classList.add('hidden');
-                }
-            });
-
-            // Proof type change
-            document.querySelectorAll('input[name="proofType"]').forEach(radio => {
-                radio.addEventListener('change', function() {
-                    const transactionId = document.getElementById('transactionId');
-                    const proofImage = document.getElementById('proofImage');
-                    
-                    if (this.value === 'id') {
-                        transactionId.disabled = false;
-                        proofImage.disabled = true;
-                        proofImage.value = '';
-                    } else {
-                        transactionId.disabled = true;
-                        transactionId.value = '';
-                        proofImage.disabled = false;
-                    }
-                });
-            });
-
-            // Purchase form submit
-            document.getElementById('purchaseForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                processPurchase();
-            });
-        });
-
-
-
-        // Generate Pulsa Page products
-        function generatePulsaPageProducts() {
-            const pulsaMasaAktifPage = document.getElementById('pulsaMasaAktifPage');
-            const pulsaTanpaMasaAktifPage = document.getElementById('pulsaTanpaMasaAktifPage');
-            
-            // Pulsa Masa Aktif
-            const denomsMasaAktif = [5000, 10000, 15000, 20000, 25000, 50000, 100000, 200000, 500000, 1000000];
-            denomsMasaAktif.forEach(denom => {
-                const price = denom + 1000;
-                const div = document.createElement('div');
-                div.className = 'bg-green-50 p-3 rounded-lg border flex justify-between items-center';
-                div.innerHTML = `
-                    <div>
-                        <div class="font-medium text-green-800">Rp ${denom.toLocaleString()}</div>
-                        <div class="text-sm text-gray-600">Harga: Rp ${price.toLocaleString()}</div>
-                    </div>
-                    <button onclick="buyProduct('pulsa-masa-aktif', 'Pulsa ${denom.toLocaleString()}', ${price})" 
-                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Beli</button>
-                `;
-                pulsaMasaAktifPage.appendChild(div);
-            });
-
-            // Pulsa Tanpa Masa Aktif
-            const denomsTanpaMasaAktif = [5000, 10000, 15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 60000, 70000, 80000, 90000, 100000];
-            denomsTanpaMasaAktif.forEach(denom => {
-                let price;
-                if (denom < 50000) {
-                    price = denom - 1000;
-                } else {
-                    price = denom - 2000;
-                }
-                
-                const div = document.createElement('div');
-                div.className = 'bg-blue-50 p-3 rounded-lg border flex justify-between items-center';
-                div.innerHTML = `
-                    <div>
-                        <div class="font-medium text-blue-800">Rp ${denom.toLocaleString()}</div>
-                        <div class="text-sm text-gray-600">Harga: Rp ${price.toLocaleString()}</div>
-                    </div>
-                    <button onclick="buyProduct('pulsa-tanpa-masa-aktif', 'Pulsa ${denom.toLocaleString()}', ${price})" 
-                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Beli</button>
-                `;
-                pulsaTanpaMasaAktifPage.appendChild(div);
-            });
-        }
-
-        // Generate HiFi Air Page products
-        function generateHifiAirPageProducts() {
-            const hifiAirPageList = document.getElementById('hifiAirPageList');
-            const products = [
-                { name: '500GB Aktif 30H', price: 250000 },
-                { name: '200GB Aktif 30H', price: 150000 },
-                { name: '125GB Aktif 30H', price: 100000 },
-                { name: '75GB Aktif 30H', price: 75000 },
-                { name: 'Promo 150GB Nasional + 150 JAM 01/06 + 10GB Bonus TikTok 30H', price: 300000 },
-                { name: '50GB Aktif 30H', price: 50000 },
-                { name: '25GB Aktif 30H', price: 35000 },
-                { name: '15GB Aktif 30H', price: 25000 },
-                { name: '10GB Aktif 30H', price: 20000 },
-                { name: '5GB Aktif 30H', price: 15000 }
-            ];
-
-            products.forEach(product => {
-                const div = document.createElement('div');
-                div.className = 'bg-gradient-to-r from-cyan-400 to-blue-500 p-4 rounded-lg text-white text-center';
-                div.innerHTML = `
-                    <div class="text-sm font-medium mb-2">${product.name}</div>
-                    <div class="text-lg font-bold mb-3">Rp ${product.price.toLocaleString()}</div>
-                    <button onclick="buyProduct('hifi-air', '${product.name}', ${product.price})" 
-                            class="bg-white text-blue-500 px-4 py-2 rounded hover:bg-gray-100 w-full">Beli</button>
-                `;
-                hifiAirPageList.appendChild(div);
-            });
-        }
-
-        // Generate Coin Faya Page products
-        function generateCoinFayaPageProducts() {
-            const coinFayaPageList = document.getElementById('coinFayaPageList');
-            const products = [
-                { name: '1000 Coins', price: 50000 },
-                { name: '2000 Coins', price: 95000 },
-                { name: '5000 Coins', price: 225000 },
-                { name: '10000 Coins', price: 450000 },
-                { name: '20000 Coins', price: 850000 },
-                { name: '50000 Coins', price: 2000000 }
-            ];
-
-            products.forEach(product => {
-                const div = document.createElement('div');
-                div.className = 'bg-gradient-to-r from-yellow-400 to-orange-500 p-4 rounded-lg text-white text-center';
-                div.innerHTML = `
-                    <div class="text-2xl mb-2">🌟</div>
-                    <div class="font-bold mb-1">${product.name}</div>
-                    <div class="text-lg font-bold mb-3">Rp ${product.price.toLocaleString()}</div>
-                    <button onclick="buyProduct('coin', '${product.name}', ${product.price})" 
-                            class="bg-white text-orange-500 px-4 py-2 rounded hover:bg-gray-100 w-full">Beli</button>
-                `;
-                coinFayaPageList.appendChild(div);
-            });
-        }
-
-
-
-        // Show paket data page
-        function showPaketDataPage(provider) {
-            const content = document.getElementById('paketDataPageContent');
-            content.innerHTML = '';
-
-            const packages = {
-                telkomsel: [
-                    { name: '1GB 7 Hari', price: 15000 },
-                    { name: '3GB 30 Hari', price: 35000 },
-                    { name: '8GB 30 Hari', price: 65000 },
-                    { name: '17GB 30 Hari', price: 95000 },
-                    { name: '25GB 30 Hari', price: 125000 },
-                    { name: '40GB 30 Hari', price: 175000 }
-                ],
-                tri: [
-                    { name: '2GB 7 Hari', price: 12000 },
-                    { name: '6GB 30 Hari', price: 28000 },
-                    { name: '12GB 30 Hari', price: 48000 },
-                    { name: '24GB 30 Hari', price: 78000 },
-                    { name: '36GB 30 Hari', price: 108000 },
-                    { name: '50GB 30 Hari', price: 138000 }
-                ],
-                axis: [
-                    { name: '1GB 7 Hari', price: 10000 },
-                    { name: '3GB 30 Hari', price: 25000 },
-                    { name: '8GB 30 Hari', price: 45000 },
-                    { name: '16GB 30 Hari', price: 75000 },
-                    { name: '30GB 30 Hari', price: 105000 },
-                    { name: '45GB 30 Hari', price: 135000 }
-                ],
-                smartfren: [
-                    { name: '2GB 7 Hari', price: 13000 },
-                    { name: '5GB 30 Hari', price: 30000 },
-                    { name: '10GB 30 Hari', price: 55000 },
-                    { name: '20GB 30 Hari', price: 85000 },
-                    { name: '35GB 30 Hari', price: 115000 },
-                    { name: '60GB 30 Hari', price: 155000 }
-                ],
-                indosat: [
-                    { name: '1GB 7 Hari', price: 14000 },
-                    { name: '4GB 30 Hari', price: 32000 },
-                    { name: '9GB 30 Hari', price: 58000 },
-                    { name: '18GB 30 Hari', price: 88000 },
-                    { name: '30GB 30 Hari', price: 118000 },
-                    { name: '50GB 30 Hari', price: 158000 }
-                ]
-            };
-
-            const providerColors = {
-                telkomsel: 'from-red-400 to-red-600',
-                tri: 'from-orange-400 to-orange-600',
-                axis: 'from-purple-400 to-purple-600',
-                smartfren: 'from-pink-400 to-pink-600',
-                indosat: 'from-yellow-400 to-yellow-600'
-            };
-
-            packages[provider].forEach(pkg => {
-                const div = document.createElement('div');
-                div.className = `bg-gradient-to-r ${providerColors[provider]} p-4 rounded-lg text-white text-center`;
-                div.innerHTML = `
-                    <div class="text-sm font-medium mb-2">${provider.toUpperCase()}</div>
-                    <div class="text-lg font-bold mb-1">${pkg.name}</div>
-                    <div class="text-xl font-bold mb-3">Rp ${pkg.price.toLocaleString()}</div>
-                    <button onclick="buyProduct('paket-data', '${provider.toUpperCase()} ${pkg.name}', ${pkg.price})" 
-                            class="bg-white text-gray-800 px-4 py-2 rounded hover:bg-gray-100 w-full">Beli</button>
-                `;
-                content.appendChild(div);
-            });
-        }
-
-        // Buy product
-        function buyProduct(type, name, price) {
-            currentProductType = type;
-            currentProductName = name;
-            currentProductPrice = price;
-            
-            document.getElementById('selectedProduct').value = name;
-            document.getElementById('productPrice').value = `Rp ${price.toLocaleString()}`;
-            document.getElementById('purchaseModal').classList.remove('hidden');
-        }
-
-        // Close purchase modal
-        function closePurchaseModal() {
-            document.getElementById('purchaseModal').classList.add('hidden');
-            document.getElementById('purchaseForm').reset();
-        }
-
-        // Process purchase
-        function processPurchase() {
-            const phoneNumber = document.getElementById('phoneNumber').value;
-            const paymentMethod = document.getElementById('paymentMethod').value;
-            const proofType = document.querySelector('input[name="proofType"]:checked').value;
-            const transactionId = document.getElementById('transactionId').value;
-            const proofImage = document.getElementById('proofImage').files[0];
-
-            if (!phoneNumber || !paymentMethod) {
-                alert('Mohon lengkapi semua data!');
-                return;
-            }
-
-            if (proofType === 'id' && !transactionId) {
-                alert('Mohon masukkan ID Transaksi!');
-                return;
-            }
-
-            if (proofType === 'image' && !proofImage) {
-                alert('Mohon upload bukti pembayaran!');
-                return;
-            }
-
-            // Generate random ID
-            const productId = 'RS' + Math.random().toString(36).substr(2, 8).toUpperCase();
-            
-            // Create purchase record
-            const purchase = {
-                id: productId,
-                phone: phoneNumber,
-                product: currentProductName,
-                price: currentProductPrice,
-                paymentMethod: paymentMethod,
-                proof: proofType === 'id' ? transactionId : 'Gambar terupload',
-                date: new Date().toLocaleString('id-ID'),
-                type: currentProductType
-            };
-
-            // Add to history
-            purchaseHistory.push(purchase);
-            
-            // Add points (3 points per purchase)
-            userPoints += 3;
-            
-            // Save to localStorage
-            saveUserData();
-            
-            // Send to Telegram (simulated)
-            sendToTelegram(purchase);
-            
-            // Show success message
-            alert(`Pembelian berhasil!\nID Produk: ${productId}\nAnda mendapat 3 poin!`);
-            
-            // Close modal and refresh data
-            closePurchaseModal();
-            updatePointsDisplay();
-            updatePurchaseHistory();
-        }
-
-        // Share purchase data (HANYA WhatsApp)
-function sharePurchaseData(purchaseId) {
-    const purchase = purchaseHistory.find(p => p.id === purchaseId);
-    if (!purchase) return;
-    
-    const shareText = `🛒 HADI PONSEL - Data Pembelian
-
-📱 ID: ${purchase.id}
-📞 HP: ${purchase.phone}
-🛍️ Produk: ${purchase.product}
-💰 Harga: Rp ${purchase.price.toLocaleString()}
-💳 Pembayaran: ${purchase.paymentMethod}
-📅 Tanggal: ${purchase.date}
-
-✅ Status: Berhasil
-🏪 Toko: HADI PONSEL - Terpercaya Sejak 2020`;
-
-    // Kirim ke WhatsApp nomor 6289646775883
-    const phoneNumber = '6289646775883';
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(shareText)}`;
-    window.open(url, '_blank');
-}
-
-
-
-        // Show product page
-        function showProductPage(productType) {
-            // Hide all sections and pages
-            hideAllSections();
-            
-            // Show specific product page
-            if (productType === 'pulsa') {
-                document.getElementById('pulsaPage').classList.remove('hidden');
-            } else if (productType === 'paket-data') {
-                document.getElementById('paketDataPage').classList.remove('hidden');
-            } else if (productType === 'hifi-air') {
-                document.getElementById('hifiAirPage').classList.remove('hidden');
-            } else if (productType === 'coin-faya') {
-                document.getElementById('coinFayaPage').classList.remove('hidden');
-            }
-        }
-
-        // Hide all sections and pages
-        function hideAllSections() {
-            document.getElementById('homeSection').classList.add('hidden');
-            document.getElementById('dataSection').classList.add('hidden');
-            document.getElementById('coinsSection').classList.add('hidden');
-            document.getElementById('pulsaPage').classList.add('hidden');
-            document.getElementById('paketDataPage').classList.add('hidden');
-            document.getElementById('hifiAirPage').classList.add('hidden');
-            document.getElementById('coinFayaPage').classList.add('hidden');
-        }
-
-        // Show section
-        function showSection(section) {
-            // Hide all sections and pages
-            hideAllSections();
-            
-            // Reset button colors
-            document.getElementById('homeBtn').className = 'flex flex-col items-center p-2 text-gray-500';
-            document.getElementById('dataBtn').className = 'flex flex-col items-center p-2 text-gray-500';
-            document.getElementById('coinsBtn').className = 'flex flex-col items-center p-2 text-gray-500';
-            
-            // Show selected section and highlight button
-            if (section === 'home') {
-                document.getElementById('homeSection').classList.remove('hidden');
-                document.getElementById('homeBtn').className = 'flex flex-col items-center p-2 text-blue-500';
-            } else if (section === 'data') {
-                document.getElementById('dataSection').classList.remove('hidden');
-                document.getElementById('dataBtn').className = 'flex flex-col items-center p-2 text-blue-500';
-                updatePurchaseHistory();
-            } else if (section === 'coins') {
-                document.getElementById('coinsSection').classList.remove('hidden');
-                document.getElementById('coinsBtn').className = 'flex flex-col items-center p-2 text-blue-500';
-                updatePointsDisplay();
-            }
-        }
-
-        // Update purchase history
-        function updatePurchaseHistory() {
-            const historyDiv = document.getElementById('purchaseHistory');
-            
-            if (purchaseHistory.length === 0) {
-                historyDiv.innerHTML = '<p class="text-gray-500 text-center py-8">Belum ada data pembelian</p>';
-                return;
-            }
-            
-            // Sort by date (newest first)
-            const sortedHistory = [...purchaseHistory].sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            historyDiv.innerHTML = `
-                <div class="mb-4 p-3 bg-blue-50 rounded-lg">
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-blue-600">${purchaseHistory.length}</div>
-                        <div class="text-sm text-gray-600">Total Transaksi</div>
-                    </div>
-                </div>
-                ${sortedHistory.map((purchase, index) => `
-                    <div class="bg-white border-2 border-gray-200 p-4 rounded-xl shadow-lg mb-4 hover:shadow-xl transition-all duration-300">
-                        <div class="flex justify-between items-start mb-3">
-                            <div class="flex items-center gap-2">
-                                <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">#${index + 1}</span>
-                                <div class="font-bold text-lg text-blue-600">${purchase.id}</div>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-sm text-gray-500">${purchase.date}</div>
-                                <div class="text-xs px-2 py-1 rounded-full ${purchase.type === 'redemption' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}">
-                                    ${purchase.type === 'redemption' ? '🎁 Penukaran' : '🛒 Pembelian'}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm mb-4">
-                            <div class="space-y-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="text-blue-500">📱</span>
-                                    <span class="font-medium">Nomor HP:</span>
-                                    <span class="text-gray-700">${purchase.phone}</span>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-green-500">🛍️</span>
-                                    <span class="font-medium">Produk:</span>
-                                    <span class="text-gray-700">${purchase.product}</span>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-yellow-500">💰</span>
-                                    <span class="font-medium">Harga:</span>
-                                    <span class="font-bold text-green-600">Rp ${purchase.price.toLocaleString()}</span>
-                                </div>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="flex items-center gap-2">
-                                    <span class="text-purple-500">💳</span>
-                                    <span class="font-medium">Pembayaran:</span>
-                                    <span class="text-gray-700">${purchase.paymentMethod}</span>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-orange-500">📄</span>
-                                    <span class="font-medium">Bukti:</span>
-                                    <span class="text-gray-700">${purchase.proof}</span>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-red-500">📊</span>
-                                    <span class="font-medium">Status:</span>
-                                    <span class="text-green-600 font-medium">✅ Berhasil</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex gap-2 pt-3 border-t border-gray-200">
-                            <button onclick="downloadPurchaseData('${purchase.id}')" class="flex-1 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center gap-2">
-                                📥 Download Data
-                            </button>
-                            <button onclick="sharePurchaseData('${purchase.id}')" class="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition-colors duration-300 flex items-center justify-center gap-2">
-                                📤 Share
-                            </button>
-                        </div>
-                    </div>
-                `).join('')}
-            `;
-        }
-
-        // Download purchase data as image with QRIS
-        function downloadPurchaseData(purchaseId) {
-            const purchase = purchaseHistory.find(p => p.id === purchaseId);
-            if (!purchase) return;
-            
-            // Create canvas for image generation
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Set canvas size (increased height for QRIS)
-            canvas.width = 400;
-            canvas.height = 700;
-            
-            // Background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Header background
-            ctx.fillStyle = '#3B82F6';
-            ctx.fillRect(0, 0, canvas.width, 80);
-            
-            // Header text
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 20px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('📱 HADI PONSEL', canvas.width / 2, 30);
-            ctx.font = '14px Arial';
-            ctx.fillText('Data Pembelian', canvas.width / 2, 55);
-            
-            // Content
-            ctx.fillStyle = '#000000';
-            ctx.font = '14px Arial';
-            ctx.textAlign = 'left';
-            
-            let y = 120;
-            const lineHeight = 25;
-            
-            const data = [
-                `ID Produk: ${purchase.id}`,
-                `Nomor HP: ${purchase.phone}`,
-                `Produk: ${purchase.product}`,
-                `Harga: Rp ${purchase.price.toLocaleString()}`,
-                `Pembayaran: ${purchase.paymentMethod}`,
-                `Bukti: ${purchase.proof}`,
-                `Tanggal: ${purchase.date}`
-            ];
-            
-            data.forEach(line => {
-                // Wrap long text
-                const words = line.split(' ');
-                let currentLine = '';
-                
-                words.forEach(word => {
-                    const testLine = currentLine + word + ' ';
-                    const metrics = ctx.measureText(testLine);
-                    
-                    if (metrics.width > 360 && currentLine !== '') {
-                        ctx.fillText(currentLine, 20, y);
-                        currentLine = word + ' ';
-                        y += lineHeight;
-                    } else {
-                        currentLine = testLine;
-                    }
-                });
-                
-                ctx.fillText(currentLine, 20, y);
-                y += lineHeight + 5;
-            });
-            
-            // Add separator line
-            y += 20;
-            ctx.strokeStyle = '#E5E7EB';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(20, y);
-            ctx.lineTo(380, y);
-            ctx.stroke();
-            
-            // QRIS Section
-            y += 30;
-            ctx.fillStyle = '#000000';
-            ctx.font = 'bold 16px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('🔲 QRIS DETAIL PRODUK', canvas.width / 2, y);
-            
-            // QRIS Box
-            y += 20;
-            const qrisSize = 120;
-            const qrisX = (canvas.width - qrisSize) / 2;
-            
-            // QRIS background
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(qrisX - 10, y - 10, qrisSize + 20, qrisSize + 20);
-            ctx.strokeStyle = '#000000';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(qrisX - 10, y - 10, qrisSize + 20, qrisSize + 20);
-            
-            // Generate simple QR pattern with product ID
-            ctx.fillStyle = '#000000';
-            const cellSize = 4;
-            const qrData = purchase.id; // Use product ID as QR data
-            
-            // Create a simple pattern based on product ID
-            for (let i = 0; i < qrisSize / cellSize; i++) {
-                for (let j = 0; j < qrisSize / cellSize; j++) {
-                    // Create pattern based on product ID hash
-                    const hash = (qrData.charCodeAt((i + j) % qrData.length) + i * j) % 4;
-                    if (hash > 1) {
-                        ctx.fillRect(qrisX + i * cellSize, y + j * cellSize, cellSize, cellSize);
-                    }
-                }
-            }
-            
-            // Add corner squares (typical QR code markers)
-            const cornerSize = 20;
-            // Top-left corner
-            ctx.fillRect(qrisX, y, cornerSize, cornerSize);
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(qrisX + 4, y + 4, cornerSize - 8, cornerSize - 8);
-            ctx.fillStyle = '#000000';
-            ctx.fillRect(qrisX + 8, y + 8, cornerSize - 16, cornerSize - 16);
-            
-            // Top-right corner
-            ctx.fillStyle = '#000000';
-            ctx.fillRect(qrisX + qrisSize - cornerSize, y, cornerSize, cornerSize);
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(qrisX + qrisSize - cornerSize + 4, y + 4, cornerSize - 8, cornerSize - 8);
-            ctx.fillStyle = '#000000';
-            ctx.fillRect(qrisX + qrisSize - cornerSize + 8, y + 8, cornerSize - 16, cornerSize - 16);
-            
-            // Bottom-left corner
-            ctx.fillStyle = '#000000';
-            ctx.fillRect(qrisX, y + qrisSize - cornerSize, cornerSize, cornerSize);
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(qrisX + 4, y + qrisSize - cornerSize + 4, cornerSize - 8, cornerSize - 8);
-            ctx.fillStyle = '#000000';
-            ctx.fillRect(qrisX + 8, y + qrisSize - cornerSize + 8, cornerSize - 16, cornerSize - 16);
-            
-            // QRIS Info
-            y += qrisSize + 30;
-            ctx.fillStyle = '#374151';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(`ID Produk: ${purchase.id}`, canvas.width / 2, y);
-            ctx.fillText('Scan untuk detail produk', canvas.width / 2, y + 15);
-            ctx.fillText('a.n RAKUNSHOP ID', canvas.width / 2, y + 30);
-            
-            // Footer
-            y += 60;
-            ctx.fillStyle = '#6B7280';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText('Terima kasih telah berbelanja di Hadi Ponsel!', canvas.width / 2, y);
-            
-            // Download image
-            canvas.toBlob(function(blob) {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `HadiPonsel_${purchaseId}.png`;
-                a.click();
-                URL.revokeObjectURL(url);
-            });
-        }
-
-
-
-        // Update points display
-        function updatePointsDisplay() {
-            document.getElementById('userPoints').textContent = userPoints.toLocaleString();
-        }
-
-        // Redeem points
-        function redeemPoints(requiredPoints, reward) {
-            if (userPoints < requiredPoints) {
-                alert(`Poin Anda tidak cukup! Dibutuhkan ${requiredPoints.toLocaleString()} poin.`);
-                return;
-            }
-            
-            if (confirm(`Tukar ${requiredPoints.toLocaleString()} poin dengan ${reward}?`)) {
-                userPoints -= requiredPoints;
-                
-                // Create redemption record
-                const redemption = {
-                    id: 'RD' + Math.random().toString(36).substr(2, 8).toUpperCase(),
-                    phone: 'Penukaran Poin',
-                    product: reward,
-                    price: 0,
-                    paymentMethod: 'Penukaran Poin',
-                    proof: `${requiredPoints.toLocaleString()} Poin`,
-                    date: new Date().toLocaleString('id-ID'),
-                    type: 'redemption'
-                };
-                
-                purchaseHistory.push(redemption);
-                saveUserData();
-                updatePointsDisplay();
-                
-                alert(`Berhasil menukar ${requiredPoints.toLocaleString()} poin dengan ${reward}!`);
-            }
-        }
-
-        // Save user data
-        function saveUserData() {
-            localStorage.setItem('hadiPonselPoints', userPoints.toString());
-            localStorage.setItem('hadiPonselHistory', JSON.stringify(purchaseHistory));
-        }
-
-        // Share purchase data
-        function sharePurchaseData(purchaseId) {
-            const purchase = purchaseHistory.find(p => p.id === purchaseId);
-            if (!purchase) return;
-            
-            const shareText = `🛒 HADI PONSEL - Data Pembelian
-
-📱 ID: ${purchase.id}
-📞 HP: ${purchase.phone}
-🛍️ Produk: ${purchase.product}
-💰 Harga: Rp ${purchase.price.toLocaleString()}
-💳 Pembayaran: ${purchase.paymentMethod}
-📅 Tanggal: ${purchase.date}
-
-✅ Status: Berhasil
-🏪 Toko: HADI PONSEL - Terpercaya Sejak 2020`;
-
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Data Pembelian Hadi Ponsel',
-                    text: shareText
-                });
-            } else {
-                // Fallback: copy to clipboard
-                navigator.clipboard.writeText(shareText).then(() => {
-                    alert('Data berhasil disalin ke clipboard!');
-                }).catch(() => {
-                    // Show modal with text to copy manually
-                    const modal = document.createElement('div');
-                    modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4';
-                    modal.innerHTML = `
-                        <div class="bg-white rounded-lg max-w-md w-full p-4">
-                            <h3 class="font-bold mb-2">Salin Data Pembelian</h3>
-                            <textarea class="w-full h-40 p-2 border rounded text-sm" readonly>${shareText}</textarea>
-                            <button onclick="this.parentElement.parentElement.remove()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">Tutup</button>
-                        </div>
-                    `;
-                    document.body.appendChild(modal);
-                });
-            }
-        }
-
-        // Load user data
-        function loadUserData() {
-            const savedPoints = localStorage.getItem('hadiPonselPoints');
-            const savedHistory = localStorage.getItem('hadiPonselHistory');
-            
-            if (savedPoints) {
-                userPoints = parseInt(savedPoints);
-            }
-            
-            if (savedHistory) {
-                try {
-                    purchaseHistory = JSON.parse(savedHistory);
-                    // Ensure purchaseHistory is an array
-                    if (!Array.isArray(purchaseHistory)) {
-                        purchaseHistory = [];
-                    }
-                } catch (error) {
-                    console.error('Error parsing purchase history:', error);
-                    purchaseHistory = [];
-                }
-            }
-            
-            updatePointsDisplay();
-        }
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98a1c36cd742ff8b',t:'MTc1OTcxODEwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script src="script.js"></script>
+</body>
 </html>

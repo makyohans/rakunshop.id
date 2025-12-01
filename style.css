@@ -1,0 +1,1288 @@
+/* RESET DASAR */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #121212; /* Background Hitam Gelap */
+    color: #ffffff;
+}
+
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- HEADER STYLING --- */
+.header {
+    background-color: #1a1a1a;
+    padding: 10px 0;
+    border-bottom: 2px solid #5a148c; /* Garis ungu bawah header */
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    color: #cccccc;
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* --- SLIDER BANNER (SLIDE GAMBAR BERGANTI) --- */
+.banner-slider {
+    position: relative;
+    margin-top: 20px;
+    height: 195px; /* Tinggi slider ditetapkan */
+    border-radius: 5px 5px 0px 0px;
+    overflow: hidden; 
+    box-shadow: 0 9px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Setelan untuk setiap slide (banner-slide) */
+.banner-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Semua slide tersembunyi secara default */
+    transition: opacity 0.8s ease-in-out; /* Transisi untuk efek fade */
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+}
+
+/* Slide yang AKTIF (terlihat) */
+.banner-slide.active {
+    opacity: 1; 
+}
+
+/* Konten teks di dalam slide */
+.slide-content {
+    position: relative;
+    z-index: 10;
+    color: white;
+}
+/* Efek teks pada banner */
+.version-tag, .agent-tag, .top-up-button, .banner-slider h2 {
+    /* Pastikan warna teks terlihat jelas di atas gambar */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.version-tag {
+    background-color: rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.banner-slider h2 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.agent-tag {
+    background-color: #cc00ff;
+    color: #121212;
+    padding: 3px 8px;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.top-up-button {
+    background-color: #f7f7f7;
+    color: #121212;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Dots Indicator (Perbaikan posisi agar di dalam banner) */
+.dots-indicator {
+    position: absolute;
+    bottom: 10px; /* Di bawah banner */
+    left: 50%; /* Di tengah horizontal */
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.dot {
+    height: 8px;
+    width: 8px;
+    margin: 0 4px;
+    background-color: #999999;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #ffffff;
+}
+
+/* --- PRODUK GRID (KOTAK-KOTAK PRODUK) --- */
+.product-grid-section {
+    margin-top: 40px;
+    padding-bottom: 50px;
+}
+
+.section-title {
+    color: #f7f7f7;
+    margin-bottom: 20px;
+    font-size: 24px;
+    padding-left: 5px;
+}
+
+.product-grid {
+    display: grid;
+    /* Fleksibel: 6 kolom di desktop besar, menyesuaikan di layar kecil */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 15px; 
+}
+
+/* Styling Card Produk yang Ditingkatkan */
+.product-card {
+    background-color: #1f1f1f;
+    border-radius: 10px; 
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
+}
+
+.product-card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 8px 20px rgba(171, 71, 188, 0.4); /* Bayangan ungu */
+}
+
+.product-image-placeholder {
+    height: 180px; 
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.95); /* Sedikit lebih cerah dari sebelumnya */
+    border-bottom: 1px solid #333;
+}
+
+.product-title {
+    padding: 8px 10px 0px 10px;
+    font-size: 15px;
+    font-weight: 700; 
+    color: #ffffff;
+}
+
+.product-subtitle {
+    padding: 0 10px 10px 10px;
+    font-size: 11px;
+    color: #b0b0b0; 
+}
+
+/* --- LOGIKA PRODUK TERSEMBUNYI --- */
+.hidden-products {
+    display: none; 
+    /* Penting: Agar item di dalamnya mengikuti layout grid */
+    display: contents; 
+}
+
+.hidden-products.active {
+    display: contents; 
+}
+
+
+/* --- PLACEHOLDER GAMBAR SLIDER (SLIDE 1-3) --- */
+
+.banner-slide[data-index="0"] {
+    background-image: url('https://i.ibb.co/dLkBZXL/20220814-160502.jpg'); 
+}
+.banner-slide[data-index="1"] {
+    background-image: url('https://i.ibb.co/PD7sJ0B/20220814-161250.jpg'); 
+}
+.banner-slide[data-index="2"] {
+    background-image: url('https://i.ibb.co/LpXRQ18/20220814-162602.jpg'); 
+}
+.banner-slide[data-index="3"] {
+    background-image: url('assets/iklan/iklan4.png'); 
+}
+
+/* --- PLACEHOLDER GAMBAR PRODUK (TOTAL 18 PRODUK) --- */
+
+/* Produk 7-12 */
+.pubg-bg { background-image: url('https://cdn.unipin.com/images/icon_product_pages/1592228250-icon-pubgm.jpg'); }
+.mlbb-bg { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfENxquZxyAPIYBa_VPn05JFcsdbFUAR6mOQ&usqp=CAU'); }
+.Supersus-bg { background-image: url('https://cdn1.codashop.com/S/content/mobile/images/product-tiles/supersus_tile.png'); }
+.genshin-bg { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLyGBTVmuvfLLNOrnvhkl3vq8gl7mvGzgfBg&usqp=CAU'); }
+.freefire-bg { background-image: url('https://cdn.unipin.com/images/icon_product_pages/1635831739-icon-appicon_ob30.jpg'); }
+.aov-bg { background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Fay9olWtT5JF9LgN9WmzUyZ3HbYAl-xjWA&usqp=CAU'); }
+
+/* style.css: Tambahkan style untuk background FAYA (opsional) */
+.faya-bg {
+    /* Ganti kode warna atau URL gambar placeholder di sini */
+    background: linear-gradient(135deg, #f72cff, #8210ff); 
+    background-image: url('assets/peroduk/fayatopup.png'); /* Ganti dengan ikon FAYA */
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Produk 13-18 (Tersembunyi) */
+.telkomsel-bg { background-image: url('https://i.ibb.co/30JVcVq/94.png'); }
+.indosat-bg { background-image: url('https://i.ibb.co/6Y488rD/97.png'); }
+.xl-bg { background-image: url('https://i.ibb.co/41c76Gx/96.png'); }
+.smartfren-bg { background-image: url('https://i.ibb.co/QD6bf6T/99.png'); }
+.axis-bg { background-image: url('https://i.ibb.co/C0ZX9P6/95.png'); }
+.tri-bg { background-image: url('https://i.ibb.co/khH6P3H/100.png'); }
+
+.see-all {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+    color: #cc00ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* css/style.css (Tambahkan/Ganti di bagian ini) */
+
+/* Ganti styling section-title lama */
+.section-title {
+    /* Hapus jika masih ada, karena kita akan menggunakan category-button */
+    display: none; 
+}
+
+/* STYLING TOMBOL KATEGORI BARU */
+.category-button {
+    /* Agar tombol memenuhi lebar penuh */
+    display: block; 
+    width: 100%;
+    
+    /* Styling tampilan */
+    background-color: #333333; /* Background abu-abu gelap */
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0;
+    margin: 25px 0 15px 0; /* Jarak atas/bawah */
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.category-button:hover {
+    background-color: #5a148c; /* Beri efek ungu saat di-hover */
+}
+
+
+/* Perubahan pada Produk Grid Section (agar button kategori memiliki ruang) */
+.product-grid-section {
+    /* Hapus padding-bottom dan margin jika diperlukan, tetapi margin di category-button sudah cukup */
+    margin-top: 40px;
+    padding-bottom: 50px;
+}
+
+/* LOGIKA PRODUK TERSEMBUNYI (Perlu disinkronkan dengan HTML baru) */
+/* Karena kita sekarang menggunakan dua kontainer product-grid, kita harus memastikan logika toggle produk tersembunyi tetap berjalan. */
+.hidden-products {
+    display: none; 
+    /* Penting: Agar item di dalamnya mengikuti layout grid */
+    display: contents; 
+}
+
+.hidden-products.active {
+    display: contents; 
+}
+
+/* --- Tambahan CSS untuk Halaman Top-Up MLBB dan Data/Riwayat --- */
+
+/* --- GLOBAL UTILITY --- */
+.hidden-page {
+    display: none; 
+}
+.top-up-button[disabled] {
+    background-color: #555555;
+    cursor: not-allowed;
+}
+a {
+    color: #cc00ff;
+    text-decoration: none;
+}
+.top-up-button {
+    background-color: #cc00ff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.top-up-button:hover:not([disabled]) {
+    background-color: #9900cc;
+}
+
+
+/* --- 1. LAYOUT HALAMAN TOP UP KHUSUS (MLBB PAGE) --- */
+.top-up-page {
+    padding-top: 20px;
+}
+
+.step-card {
+    background-color: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.step-card h3 {
+    color: #cc00ff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+}
+
+/* Input ID & Server (Kiri Kanan) */
+.id-server-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.id-server-input-group input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+
+/* Input ID & Server (Kiri Kanan) */
+.id-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.id-input-group input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #2a2a2a;
+    color: #fff;
+}
+
+.small-info {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* Nominal Grid */
+.nominal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.nominal-item {
+    background-color: #2a2a2a;
+    padding: 15px 5px;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.nominal-item:hover {
+    border-color: #6a1b9a;
+}
+
+.nominal-item.selected {
+    border-color: #cc00ff;
+    background-color: #3e0d4d;
+    font-weight: bold;
+}
+
+/* Metode Pembayaran */
+.payment-methods-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-method-card {
+    display: flex;
+    align-items: center;
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.payment-method-card:hover {
+    border-color: #6a1b9a;
+}
+
+.payment-method-card.selected {
+    border-color: #cc00ff;
+    background-color: #3e0d4d;
+}
+
+.method-icon {
+    font-size: 1.5em;
+    margin-right: 15px;
+}
+
+.method-name {
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.method-arrow {
+    color: #cc00ff;
+}
+
+/* Summary Card */
+.summary-card {
+    text-align: center;
+    background-color: #161616;
+    border: 1px solid #333;
+}
+.summary-card p {
+    margin: 5px 0;
+    color: #bbb;
+}
+.summary-card #summary-price {
+    font-size: 1.5em;
+    color: #cc00ff;
+    font-weight: bold;
+}
+.summary-card #final-checkout-button {
+    margin-top: 15px;
+    width: 100%;
+}
+
+
+/* --- 2. MODAL PEMBAYARAN BARU --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.8); 
+    padding-top: 50px;
+}
+
+#payment-details-modal .modal-content {
+    background-color: #1a1a1a;
+    margin: 5% auto; 
+    padding: 30px;
+    border: 1px solid #333;
+    width: 90%; 
+    max-width: 350px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #cc00ff;
+}
+
+#payment-content {
+    padding: 10px 0;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.payment-info p {
+    background-color: #2a2a2a;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.payment-info .bank-name, .payment-info .wallet-name {
+    font-weight: bold;
+    color: #cc00ff;
+}
+.payment-info img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 10px auto; 
+    display: block;
+    border: 1px solid #444;
+}
+.copied-message {
+    font-size: 0.8em;
+    color: #3cb371;
+    font-weight: bold;
+    margin-top: -5px;
+    margin-bottom: 5px;
+    display: none;
+}
+#confirm-payment {
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+/* --- 3. BOTTOM NAVIGATION BAR --- */
+.bottom-nav {
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1a1a1a; 
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.7); 
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0; 
+    z-index: 1000; 
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #888888; 
+    font-size: 11px; 
+    padding: 5px 15px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: #ffffff; 
+}
+
+.nav-icon {
+    margin-bottom: 3px;
+    line-height: 1;
+    font-size: 24px; 
+}
+
+.nav-item.active .nav-icon {
+    color: #cc00ff; 
+    text-shadow: 0 0 8px rgba(204, 0, 255, 0.8);
+}
+
+
+/* --- 4. HALAMAN DATA/HISTORY --- */
+.data-history-section {
+    padding-top: 20px;
+}
+
+/* Tab Navigasi Riwayat */
+.history-tabs {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid #333;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    color: #999;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    flex-grow: 1; 
+    transition: color 0.3s, border-bottom 0.3s;
+    text-transform: uppercase;
+}
+
+.tab-button.active {
+    color: #cc00ff; 
+    border-bottom: 3px solid #cc00ff;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Kartu Transaksi */
+.transaction-item {
+    display: flex;
+    align-items: center;
+    background-color: #1f1f1f; 
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 5px solid transparent;
+}
+
+.transaction-icon {
+    font-size: 24px;
+    margin-right: 15px;
+    color: #cc00ff;
+}
+
+.transaction-details {
+    flex-grow: 1;
+}
+
+.transaction-title {
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 2px;
+}
+
+.transaction-desc {
+    font-size: 0.75em;
+    color: #b0b0b0;
+    margin-bottom: 4px;
+}
+
+.transaction-status {
+    font-size: 0.7em;
+    font-weight: 600;
+}
+
+.transaction-price {
+    font-size: 1em;
+    font-weight: bold;
+    color: #cc00ff;
+}
+
+.transaction-item.success {
+    border-left-color: #3cb371; 
+}
+.transaction-item.success .transaction-status {
+    color: #3cb371;
+}
+
+.transaction-item.pending {
+    border-left-color: #ffd700; 
+}
+.transaction-item.pending .transaction-status {
+    color: #ffd700;
+}
+
+/* Tampilan Kosong */
+.empty-state {
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 20px;
+    border: 1px dashed #333;
+    border-radius: 10px;
+    background-color: #1a1a1a;
+}
+.empty-state .icon-large {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 10px;
+}
+.back-to-home-button {
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+/* --- Tambahan / Perbaikan CSS di style.css --- */
+
+/* 1. Atur HTML dan Body untuk Scrolling yang lebih baik */
+html {
+    scroll-behavior: smooth; /* Membuat scrolling lebih halus */
+}
+
+/* 2. Beri Padding ke Konten Utama (main-content) */
+/* BOTTOM NAV tingginya sekitar 50px (padding 10px atas/bawah + icon/text) */
+/* Kita beri padding-bottom sekitar 70px agar ada ruang bernapas */
+.main-content {
+    /* Menargetkan kontainer yang membungkus semua section */
+    padding-bottom: 60px; /* Tambahkan ruang di bawah untuk bottom-nav */
+}
+
+/* 3. Pastikan Section Produk Paling Bawah memiliki ruang yang cukup */
+/* Section ini sudah memiliki padding-bottom 50px di kode Anda, */
+/* kita akan memastikan padding-bottom totalnya cukup besar */
+.product-grid-section {
+    margin-top: 40px;
+    /* Ubah padding-bottom menjadi 80px agar aman dari bottom-nav */
+    padding-bottom: 30px; 
+}
+
+
+/* 4. PERBAIKAN LOGIKA PRODUK TERSEMBUNYI */
+/* Mengubah kelas dari 'active' menjadi 'show' dan menargetkan kontainer pulsa */
+/* Ini harus disinkronkan dengan HTML dan JS (JS sudah saya perbaiki di langkah sebelumnya) */
+
+/* Ganti .hidden-products.active menjadi .hidden-products.show */
+
+/* Kontainer pulsa: Tipe Produk yang tersembunyi secara default */
+.hidden-products.active-on-toggle {
+    display: none; /* Sembunyikan secara default */
+    /* Penting: Agar item di dalamnya mengikuti layout grid */
+    /* display: contents; /* Hapus ini jika menggunakan display: none */
+}
+
+/* Tampilkan ketika kelas 'show' ditambahkan oleh JS */
+.hidden-products.active-on-toggle.show {
+    display: contents; /* Biarkan itemnya muncul di dalam grid */
+}
+
+/* ======================================= */
+/* Tambahan CSS untuk Mempercantik Input ID Generik (Langkah 1) */
+/* ======================================= */
+
+/* Membuat input ID terlihat lebih besar dan fokus */
+.top-up-page .large-input {
+    width: 100%;
+    padding: 18px 20px; /* Padding sedikit lebih besar */
+    
+    /* PENTING: Mengatur ukuran font untuk teks di dalam input */
+    font-size: 1.4em; /* Ukuran font yang lebih besar (Misalnya 1.4x ukuran normal) */
+    font-weight: 600; /* Sedikit tebal (Semi-bold) */
+    
+    border: 2px solid #555;
+    border-radius: 12px;
+    background-color: #2b2b2b;
+    color: #ffffff; /* Warna teks yang diketik (putih) */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; 
+    margin-bottom: 10px;
+}
+
+/* Mengatur warna dan tampilan placeholder (tulisan contoh di dalam input) */
+.top-up-page .large-input::placeholder {
+    color: #888; /* Warna abu-abu agar tidak terlalu mencolok */
+    font-weight: 400; /* Tidak terlalu tebal */
+    font-size: 0.9em; /* Sedikit lebih kecil dari teks yang diketik */
+}
+
+/* Efek saat input difokuskan */
+.top-up-page .large-input:focus {
+    border-color: #cc00ff; /* Warna ungu yang menarik */
+    box-shadow: 0 0 10px rgba(204, 0, 255, 0.5);
+    outline: none;
+}
+
+/* Mempercantik teks info di bawah input (Dipertahankan) */
+.step-card .small-info {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+.step-card .small-info i {
+    color: #1affc1;
+    margin-right: 5px;
+}
+
+/* ======================================= */
+/* CSS untuk Modal Konfirmasi Pembayaran */
+/* ======================================= */
+
+.confirmation-input-group {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+}
+
+.confirmation-input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Menggunakan kembali style input besar untuk ID Transaksi */
+.confirmation-input-group .large-input {
+    width: 100%;
+    padding: 12px 15px; 
+    font-size: 1.1em; 
+    font-weight: normal; 
+    border: 1px solid #555;
+    border-radius: 8px;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    box-sizing: border-box; 
+    margin-bottom: 0;
+}
+
+/* Styling sederhana untuk input file (Bukti Gambar) */
+.file-input-style {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1em;
+    color: #aaa;
+    background-color: transparent;
+    border: none;
+}
+
+/* Styling Modal Detail Transaksi */
+#transaction-detail-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    padding-top: 60px;
+}
+
+#transaction-detail-modal .modal-content {
+    background-color: #222;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border: 1px solid #333;
+}
+
+.transaction-details-view p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+.transaction-details-view strong {
+    color: #1affc1;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Styling Tombol Aksi */
+.user-actions {
+    position: absolute; /* Atur posisi agar di pojok */
+    top: 15px; 
+    right: 15px; 
+    z-index: 50; /* Pastikan di atas elemen lain */
+}
+
+.icon-button {
+    background: rgba(0, 0, 0, 0.4); /* Background semi-transparan */
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.icon-button:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.icon-button:active {
+    transform: scale(0.95);
+}
+
+/* Styling Modal Umum (Jika belum ada) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+    background-color: #222;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: 1px solid #333;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Styling Khusus Modal Pencarian */
+#search-input {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0 20px 0;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background-color: #333;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.product-grid-compact {
+    max-height: 300px; /* Batasi tinggi hasil */
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Styling Hasil Pencarian (Product Card) */
+.product-grid-compact .product-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #1f1f1f;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.product-grid-compact .product-card:hover {
+    background-color: #2a2a2a;
+}
+
+.product-grid-compact .product-icon img {
+    width: 30px; 
+    height: 30px;
+    margin-right: 15px;
+}
+
+.product-grid-compact .product-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Styling Info Aplikasi */
+#app-info-content ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#app-info-content li {
+    padding: 5px 0;
+    border-bottom: 1px solid #333;
+    color: #ccc;
+    font-size: 0.95em;
+}
+
+/* ========================================================= */
+/* --- TAMBAHAN STYLING MODAL PENCARIAN (UNTUK ICON DAN UI BARU) --- */
+/* ========================================================= */
+
+/* Pastikan Modal Pencarian memiliki layout yang benar */
+#search-modal .modal-content {
+    background-color: #1a1a1a;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #333;
+    width: 90%;
+    max-width: 500px; 
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    height: 90%; /* Agar bisa di-scroll jika hasil banyak */
+    display: flex; 
+    flex-direction: column;
+}
+
+/* Styling Input Pencarian */
+#search-input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #2a2a2a;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+#search-input:focus {
+    border-color: #cc00ff;
+    box-shadow: 0 0 8px rgba(204, 0, 255, 0.3);
+    outline: none;
+}
+
+/* Kontainer Hasil Pencarian */
+#search-results-container {
+    flex-grow: 1; 
+    overflow-y: auto; 
+    padding-right: 5px; 
+}
+
+/* Styling untuk kartu hasil pencarian (menggunakan class search-result-card) */
+.search-result-card {
+    display: flex; 
+    align-items: center;
+    text-align: left; 
+    padding: 10px 15px; 
+    background-color: #2a2a2a; 
+    margin-bottom: 8px; 
+    border-radius: 8px;
+    transition: background-color 0.2s, transform 0.2s;
+    box-shadow: none; 
+    border: 1px solid transparent; 
+}
+
+.search-result-card:hover {
+    background-color: #333; 
+    border-color: #5a148c; 
+    transform: translateX(5px); 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); 
+}
+
+/* Styling Ikon Produk di Hasil Pencarian */
+.search-result-card .product-icon {
+    width: 40px; 
+    height: 40px;
+    min-width: 40px; 
+    min-height: 40px;
+    border-radius: 50%; 
+    overflow: hidden;
+    margin-right: 15px;
+    background-color: #1f1f1f; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-result-card .product-icon img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+}
+
+.search-result-card .product-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Styling untuk empty state atau pesan default di pencarian */
+.empty-state-search {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    color: #aaa;
+}
+
+.empty-state-search .icon-large {
+    font-size: 50px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.empty-state-search h3 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+/* style.css: TAMBAHAN STYLING UNTUK ICON PEMBAYARAN DI HALAMAN TOP-UP */
+
+/* Override Method Icon untuk mendukung Gambar */
+.payment-method-card .method-icon {
+    font-size: 0; /* Sembunyikan font awesome jika ada */
+    width: 40px; /* Ukuran kotak ikon */
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #ffffff; /* Background default putih untuk logo bank */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-method-card .method-icon img {
+    max-width: 85%; /* Gambar menyesuaikan ukuran ikon */
+    max-height: 85%;
+    object-fit: contain;
+    padding: 2px;
+}
+
+/* Penyesuaian untuk E-Wallet agar warna background defaultnya gelap */
+.payment-method-card[data-method-type="EWALLET"] .method-icon,
+.payment-method-card[data-method-type="QRIS"] .method-icon {
+    background-color: #2a2a2a; 
+}
+
+.payment-method-card .method-name {
+    flex-grow: 1;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+/* style.css: TAMBAHAN STYLING UNTUK KATEGORI DAN DETAIL PEMBAYARAN BARU */
+
+/* Styling untuk Container Tombol Kategori Utama */
+.payment-category-buttons {
+    display: flex;
+    flex-direction: column; /* Tombol bertumpuk vertikal */
+    gap: 10px;
+    padding-bottom: 10px; /* Jarak bawah */
+}
+
+/* Styling Tombol Kategori */
+.category-btn {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    text-align: left; /* Teks di kiri */
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.category-btn:hover {
+    background-color: #444;
+    border-color: #cc00ff; /* Border ungu saat hover */
+}
+
+/* Ikon panah di kanan tombol kategori */
+.category-btn::after {
+    content: '❯';
+    position: absolute;
+    right: 20px;
+    color: #fff;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+/* Manajemen Tampilan Detail Metode */
+.payment-detail-view {
+    display: none; /* Awalnya tersembunyi */
+}
+
+.payment-detail-view.active {
+    display: block; /* Tampilkan saat JavaScript mengaktifkannya */
+}
+
+/* Kontainer metode spesifik (Bank, Ewallet, QRIS) */
+.method-group {
+    display: none; /* Setiap grup spesifik awalnya tersembunyi, hanya satu yang ditampilkan oleh JS */
+    padding-top: 10px;
+}
+
+/* Tombol Kembali ke Kategori Utama */
+.back-to-categories {
+    cursor: pointer;
+    color: #cc00ff; /* Warna ungu yang menarik */
+    padding: 10px 0;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    font-weight: 600;
+    border-bottom: 1px solid #333; /* Garis pemisah */
+}
+
+.back-to-categories i {
+    margin-right: 5px;
+}
+
+/* Pastikan kartu metode spesifik (payment-method-card) memiliki gaya yang baik */
+.payment-method-card {
+    /* Gunakan dan override styling yang sudah Anda buat di jawaban sebelumnya */
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #1f1f1f;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.payment-method-card:hover {
+    background-color: #2a2a2a;
+    border-color: #cc00ff;
+}
